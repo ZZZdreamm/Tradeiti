@@ -3,7 +3,6 @@ stages:
   - deploy
 
 variables:
-  DOCKER_REGISTRY: docker.io 
   FRONTEND_IMAGE_NAME: front
   BACKEND_IMAGE_NAME: back
   SSH_HOST: arcziweb.com
@@ -11,7 +10,7 @@ variables:
   SSH_USER: pap
 
 before_script:
-  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin $DOCKER_REGISTRY
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
 
   - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
   - eval $(ssh-agent -s)
