@@ -25,6 +25,8 @@ before_script:
   - ssh-add "$SSH_PRIVATE_KEY"
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
+  - echo "HOST *" > ~/.ssh/config
+  - echo "StrictHostKeyChecking no" >> ~/.ssh/config
 
 build_frontend:
   stage: build
