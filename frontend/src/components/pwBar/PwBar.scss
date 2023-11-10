@@ -1,0 +1,40 @@
+.pwBar {
+  background-color: rgb(58, 65, 93);
+  height: 110px;
+  width: 100%;
+
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &-main {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    &-left {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      & > h2 {
+        margin-left: 10px;
+      }
+      & > img {
+        height: 90%;
+      }
+    }
+    & > img {
+      height: 90%;
+    }
+  }
+  &-under {
+    width: 100%;
+    height: 10px;
+    opacity: 0.1;
+    background-color: white;
+  }
+}

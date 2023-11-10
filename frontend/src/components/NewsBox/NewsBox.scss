@@ -1,0 +1,40 @@
+.newsBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+.newsTile{
+    width: 60%;
+    margin: 20px;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: -10px;
+    border-color: lightgray;
+    opacity: 0.5;
+}
+
+.newsTitle {
+    display: flex;
+    background-color: lightgray;
+    justify-content: space-evenly;
+    padding: 10px;
+    border-radius: 10px 10px 0px 0px;
+    border: 2px solid lightgray;
+}
+
+.newsTitle :nth-child(1){
+    text-align: right;
+}
+
+.newsContent {
+    border: 2px solid transparent;
+    padding: 20px;
+    text-align: left;
+    border-radius: 0px 0px 10px 10px;
+    background-color: rgb(246, 245, 245);
+}

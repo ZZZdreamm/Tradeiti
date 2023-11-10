@@ -1,0 +1,22 @@
+.navBar {
+    background-color: rgb(181, 188, 216);
+    width: 100%;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .menuTile {
+    font-weight: bolder;
+    flex: 1;
+    height: 100%;
+    border: 5px transparent solid;
+    padding: 4px;
+  }
+
+  .menuTile:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    border: 5px transparent solid;
+  }
