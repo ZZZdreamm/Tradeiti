@@ -10,7 +10,7 @@ variables:
   SSH_USER: pap
 
 services:
-  - docker:19-dind
+  - docker:24.0.5-dind
 
 
 before_script:
@@ -22,8 +22,6 @@ before_script:
   - ssh-add "$SSH_PRIVATE_KEY"
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
-
-  - export DOCKER_HOST=tcp://172.17.0.1:2375
 
 build_frontend:
   stage: build
