@@ -8,6 +8,9 @@ variables:
   SSH_HOST: arcziweb.com
   SSH_PORT: 22
   SSH_USER: pap
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_DRIVER: overlay2
 
 services:
   - docker:24.0.5-dind
