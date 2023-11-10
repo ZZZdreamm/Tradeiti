@@ -9,6 +9,9 @@ variables:
   SSH_PORT: 22
   SSH_USER: pap
 
+services:
+  - docker:dind
+
 before_script:
   - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
 
