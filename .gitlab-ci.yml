@@ -49,5 +49,5 @@ deploy_all:
     - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "docker pull $DOCKER_HUB_USERNAME/$BACKEND_IMAGE_NAME:$CI_COMMIT_SHORT_SHA"
     - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "sed -i 's|$DOCKER_HUB_USERNAME/$FRONTEND_IMAGE_NAME:.*|$DOCKER_HUB_USERNAME/$FRONTEND_IMAGE_NAME:$CI_COMMIT_SHORT_SHA|' usos/docker-compose.yml"
     - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "sed -i 's|$DOCKER_HUB_USERNAME/$BACKEND_IMAGE_NAME:.*|$DOCKER_HUB_USERNAME/$BACKEND_IMAGE_NAME:$CI_COMMIT_SHORT_SHA|' usos/docker-compose.yml"
-    - cd usos && docker compose stop && docker-compose build && docker-compose up -d
+    - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "cd usos && docker compose stop && docker-compose build && docker-compose up -d"
 
