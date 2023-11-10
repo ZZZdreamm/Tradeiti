@@ -23,7 +23,7 @@ before_script:
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
 
-  - export DOCKER_HOST=tcp://docker:2375
+  - export DOCKER_HOST=tcp://172.17.0.1:2375
 
 build_frontend:
   stage: build
