@@ -32,8 +32,8 @@ build_frontend:
   stage: build
   script:
     - cd frontend
-    - docker build -t $DOCKER_HUB_USERNAME/$FRONTEND_IMAGE_NAME:$CI_COMMIT_SHORT_SHAE .
-    - docker push $DOCKER_HUB_USERNAME/$FRONTEND_IMAGE_NAME:$CI_COMMIT_SHORT_SHAE
+    - docker build -t $DOCKER_HUB_USERNAME/$FRONTEND_IMAGE_NAME:$CI_COMMIT_SHORT_SHA .
+    - docker push $DOCKER_HUB_USERNAME/$FRONTEND_IMAGE_NAME:$CI_COMMIT_SHORT_SHA
 
 build_backend:
   stage: build
