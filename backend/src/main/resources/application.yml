@@ -1,0 +1,7 @@
+server:
+  port: 8090
+
+usos:
+    consumer:
+      key: "BvK4hkc6RfeRxnHHbmy6"
+      secret: "VxhuAFJrcakrXBamjtfafaZ44k8hnw7ZtZxxtYh3"
