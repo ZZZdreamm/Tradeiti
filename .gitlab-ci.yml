@@ -22,6 +22,8 @@ before_script:
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
 
+  - export DOCKER_HOST=tcp://localhost:2375
+
 build_frontend:
   stage: build_and_push
   script:
