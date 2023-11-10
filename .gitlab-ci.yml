@@ -13,29 +13,33 @@ variables:
 before_script:
   - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin $DOCKER_REGISTRY
 
+  - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - chmod 400 "$SSH_PRIVATE_KEY"
+  - ssh-add "$SSH_PRIVATE_KEY"
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+
 build_frontend:
   stage: build_and_push
   script:
     - cd frontend
     - docker build -t $DOCKER_HUB_USERNAME/$FRONTEND_IMAGE_NAME:$CI_COMMIT_REF_NAME .
-    - docker push $DOCKER_HUB_USERNAME/your-frontend-image-name:$CI_COMMIT_REF_NAME
+    - docker push $DOCKER_HUB_USERNAME/FRONTEND_IMAGE_NAME:$CI_COMMIT_REF_NAME
 
 build_backend:
   stage: build_and_push
   script:
     - cd backend
     - docker build -t $DOCKER_HUB_USERNAME/$BACKEND_IMAGE_NAME:$CI_COMMIT_REF_NAME .
-    - docker push $DOCKER_HUB_USERNAME/your-backend-image-name:$CI_COMMIT_REF_NAME
+    - docker push $DOCKER_HUB_USERNAME/BACKEND_IMAGE_NAME:$CI_COMMIT_REF_NAME
 
 deploy_all:
   stage: deploy
   script:
-    - sudo apt-get install -y ssh
-    - mkdir -p ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - echo -e "Host $SSH_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-    - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "docker pull $DOCKER_HUB_USERNAME/your-frontend-image-name:$CI_COMMIT_REF_NAME"
-    - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "docker pull $DOCKER_HUB_USERNAME/your-backend-image-name:$CI_COMMIT_REF_NAME"
-    - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "sed -i 's|$DOCKER_HUB_USERNAME/simplechat:.*|arcziweb.com:5000/simplechat:${{ github.sha }}|' simpleChat/docker-compose.yml"
+    - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "docker pull $DOCKER_HUB_USERNAME/$FRONTEND_IMAGE_NAME:$CI_COMMIT_REF_NAME"
+    - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "docker pull $DOCKER_HUB_USERNAME/BACKEND_IMAGE_NAME:$CI_COMMIT_REF_NAME"
+    - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "sed -i 's|$DOCKER_HUB_USERNAME/$FRONTEND_IMAGE_NAME:.*|$DOCKER_HUB_USERNAME/$FRONTEND_IMAGE_NAME:$CI_COMMIT_REF_NAME|' usos/docker-compose.yml"
+    - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "sed -i 's|$DOCKER_HUB_USERNAME/BACKEND_IMAGE_NAME:.*|$DOCKER_HUB_USERNAME/BACKEND_IMAGE_NAME:$CI_COMMIT_REF_NAME|' usos/docker-compose.yml"
+    - cd usos && docker compose stop && docker-compose build && docker-compose up -d
 
