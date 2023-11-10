@@ -1,49 +1,41 @@
-# This file is a template, and might need editing before it works on your project.
-# This is a sample GitLab CI/CD configuration file that should run without any modifications.
-# It demonstrates a basic 3 stage CI/CD pipeline. Instead of real tests or scripts,
-# it uses echo commands to simulate the pipeline execution.
-#
-# A pipeline is composed of independent jobs that run scripts, grouped into stages.
-# Stages run in sequential order, but jobs within stages run in parallel.
-#
-# For more information, see: https://docs.gitlab.com/ee/ci/yaml/index.html#stages
-#
-# You can copy and paste this template into a new `.gitlab-ci.yml` file.
-# You should not add this template to an existing `.gitlab-ci.yml` file by using the `include:` keyword.
-#
-# To contribute improvements to CI/CD templates, please follow the Development guide at:
-# https://docs.gitlab.com/ee/development/cicd/templates.html
-# This specific template is located at:
-# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
-
-stages:          # List of stages for jobs, and their order of execution
-  - build
-  - test
+stages:
+  - build_and_push
   - deploy
 
-build-job:       # This job runs in the build stage, which runs first.
-  stage: build
-  script:
-    - echo "Compiling the code..."
-    - echo "Compile complete."
+variables:
+  DOCKER_REGISTRY: docker.io 
+  FRONTEND_IMAGE_NAME: front
+  BACKEND_IMAGE_NAME: back
+  SSH_HOST: arcziweb.com
+  SSH_PORT: 22
+  SSH_USER: pap
 
-unit-test-job:   # This job runs in the test stage.
-  stage: test    # It only starts when the job in the build stage completes successfully.
-  script:
-    - echo "Running unit tests... This will take about 60 seconds."
-    - sleep 60
-    - echo "Code coverage is 90%"
+before_script:
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin $DOCKER_REGISTRY
 
-lint-test-job:   # This job also runs in the test stage.
-  stage: test    # It can run at the same time as unit-test-job (in parallel).
+build_frontend:
+  stage: build_and_push
   script:
-    - echo "Linting code... This will take about 10 seconds."
-    - sleep 10
-    - echo "No lint issues found."
+    - cd frontend
+    - docker build -t $DOCKER_HUB_USERNAME/$FRONTEND_IMAGE_NAME:$CI_COMMIT_REF_NAME .
+    - docker push $DOCKER_HUB_USERNAME/your-frontend-image-name:$CI_COMMIT_REF_NAME
 
-deploy-job:      # This job runs in the deploy stage.
-  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
-  environment: production
+build_backend:
+  stage: build_and_push
   script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
+    - cd backend
+    - docker build -t $DOCKER_HUB_USERNAME/$BACKEND_IMAGE_NAME:$CI_COMMIT_REF_NAME .
+    - docker push $DOCKER_HUB_USERNAME/your-backend-image-name:$CI_COMMIT_REF_NAME
+
+deploy_all:
+  stage: deploy
+  script:
+    - sudo apt-get install -y ssh
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - echo -e "Host $SSH_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+    - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "docker pull $DOCKER_HUB_USERNAME/your-frontend-image-name:$CI_COMMIT_REF_NAME"
+    - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "docker pull $DOCKER_HUB_USERNAME/your-backend-image-name:$CI_COMMIT_REF_NAME"
+    - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "sed -i 's|$DOCKER_HUB_USERNAME/simplechat:.*|arcziweb.com:5000/simplechat:${{ github.sha }}|' simpleChat/docker-compose.yml"
+
