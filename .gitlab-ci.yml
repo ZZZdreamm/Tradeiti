@@ -1,5 +1,5 @@
 stages:
-  - build_and_push
+  - build
   - deploy
 
 variables:
@@ -12,6 +12,7 @@ variables:
 services:
   - docker:19-dind
 
+
 before_script:
   - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
 
@@ -22,17 +23,17 @@ before_script:
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
 
-  - export DOCKER_HOST=tcp://localhost:2375
+  - export DOCKER_HOST=tcp://docker:2375
 
 build_frontend:
-  stage: build_and_push
+  stage: build
   script:
     - cd frontend
     - docker build -t $DOCKER_HUB_USERNAME/$FRONTEND_IMAGE_NAME:$CI_COMMIT_REF_NAME .
     - docker push $DOCKER_HUB_USERNAME/FRONTEND_IMAGE_NAME:$CI_COMMIT_REF_NAME
 
 build_backend:
-  stage: build_and_push
+  stage: build
   script:
     - cd backend
     - docker build -t $DOCKER_HUB_USERNAME/$BACKEND_IMAGE_NAME:$CI_COMMIT_REF_NAME .
