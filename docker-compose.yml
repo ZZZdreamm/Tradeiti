@@ -1,7 +1,7 @@
 version: '3'
 services:
   frontend:
-    build: usos_front/.
+    build: frontend/.
     depends_on:
       - backend
     container_name: frontend
@@ -12,7 +12,7 @@ services:
       - /etc/letsencrypt/archive/arcziweb.com:/etc/nginx/ssl
 
   backend:
-    build: usos_oauth/.
+    build: backend/.
     container_name: backend
     ports:
       - "8090:8090"

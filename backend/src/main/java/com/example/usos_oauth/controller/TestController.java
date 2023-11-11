@@ -13,7 +13,6 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.List;
 
 
-@CrossOrigin(origins = "http://localhost:5173")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/oauth")
@@ -24,7 +23,7 @@ public class TestController {
 
     @GetMapping("/request-token")
     public String getRequestToken(){
-        OAuthToken token = oAuth1Template.fetchRequestToken("http://localhost:8091/api/oauth/access-token", null);
+        OAuthToken token = oAuth1Template.fetchRequestToken("https://www.arcziweb.com/api/oauth/access-token", null);
         customRequestTokenRepository.save(new CustomRequestToken(null, token.getValue(), token.getSecret()));
         return oAuth1Template.buildAuthorizeUrl(token.getValue(), null);
     }
@@ -42,9 +41,8 @@ public class TestController {
       AuthorizedRequestToken authorizedRequestToken = new AuthorizedRequestToken(token, oauthVerifier);
       OAuthToken accessToken = oAuth1Template.exchangeForAccessToken(authorizedRequestToken, null);
       String params = "token=" + accessToken.getValue() + "&secret=" + accessToken.getSecret();
-      String baseFrontendUrl = "http://localhost:5173/#/redirect";
+      String baseFrontendUrl = "https://www.arcziweb.com/#/redirect";
       String url = baseFrontendUrl + "?" + params;
       return new RedirectView(url, true, true);
-
     }
 }
