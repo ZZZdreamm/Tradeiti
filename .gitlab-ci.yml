@@ -76,5 +76,9 @@ start_all:
   stage: deploy
   script:
     - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "cd usos && docker compose stop && docker compose build && docker compose up -d"
+  rules:
+    - changes:
+        - frontend/**/*
+        - backend/**/*
 
 
