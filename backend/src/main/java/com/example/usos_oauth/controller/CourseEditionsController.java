@@ -1,7 +1,7 @@
 package com.example.usos_oauth.controller;
 
 import com.example.usos_oauth.usos.api.Usos;
-import com.example.usos_oauth.usos.api.impl.CourseEdition;
+import com.example.usos_oauth.usos.api.impl.model.CourseEdition;
 import com.example.usos_oauth.usos.connect.UsosServiceProvider;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
