@@ -1,79 +1,76 @@
 import { Course } from "../models/Course";
 
 export const MockedCourses: Course[] = [
-  {
-    id: "1",
-    name: "Mathematics",
-    description: "Mathematics is the study of numbers, shapes and patterns.",
-    lecturer: "Prof. Dr. John Doe",
-    semester: 1,
-  },
-  {
-    id: "2",
-    name: "Physics",
-    description:
-      "Physics is the study of matter, energy, and the interaction between them.",
-    lecturer: "Prof. Dr. Jane Doe",
-    semester: 2,
-  },
-  {
-    id: "3",
-    name: "Computer Science",
-    description:
-      "Computer science is the study of algorithmic processes, computational machines and computation itself.",
-    lecturer: "Prof. Dr. John Doe",
-    semester: 3,
-  },
-  {
-    id: "4",
-    name: "Biology",
-    description: "Biology is the study of life.",
-    lecturer: "Prof. Dr. Jane Doe",
-    semester: 4,
-  },
-  {
-    id: "5",
-    name: "Chemistry",
-    description:
-      "Chemistry is the study of matter and the changes it undergoes.",
-    lecturer: "Prof. Dr. John Doe",
-    semester: 6,
-  },
-  {
-    id: "6",
-    name: "Geography",
-    description:
-      "Geography is the study of places and the relationships between people and their environments.",
-    lecturer: "Prof. Dr. Jane Doe",
-    semester: 3,
-  },
-  {
-    id: "7",
-    name: "History",
-    description: "History is the study of the past.",
-    lecturer: "Prof. Dr. John Doe",
-    semester: 1,
-  },
-  {
-    id: "8",
-    name: "Literature",
-    description: "Literature is the study of written works.",
-    lecturer: "Prof. Dr. Jane Doe",
-    semester: 5,
-  },
-  {
-    id: "9",
-    name: "Music",
-    description: "Music is the study of sound.",
-    lecturer: "Prof. Dr. John Doe",
-    semester: 4,
-  },
-  {
-    id: "10",
-    name: "Philosophy",
-    description:
-      "Philosophy is the study of the nature of existence, knowledge, truth and ethics.",
-    lecturer: "Prof. Dr. Jane Doe",
-    semester: 3,
-  },
+    {
+        "course_id": "103A-INxxx-ISP-BD1",
+        "course_name": {
+            "pl": "Bazy danych 1",
+            "en": "Data Bases 1"
+        },
+        "term_id": "2023Z"
+    },
+    {
+        "course_id": "103A-INxxx-ISP-PAP",
+        "course_name": {
+            "pl": "Programowanie aplikacyjne",
+            "en": "Application Programming"
+        },
+        "term_id": "2023Z"
+    },
+    {
+        "course_id": "103A-INxxx-ISP-PROB",
+        "course_name": {
+            "pl": "Probabilistyka",
+            "en": "Probability"
+        },
+        "term_id": "2023Z"
+    },
+    {
+        "course_id": "103A-INxxx-ISP-WSI",
+        "course_name": {
+            "pl": "Wprowadzenie do sztucznej inteligencji",
+            "en": "Introduction to Artificial Intelligence"
+        },
+        "term_id": "2023Z"
+    },
+    {
+        "course_id": "103A-xxxxx-ISP-PRAKT",
+        "course_name": {
+            "pl": "Praktyka zawodowa",
+            "en": "Professional Training"
+        },
+        "term_id": "2023Z"
+    },
+    {
+        "course_id": "103B-INxxx-ISP-SOI",
+        "course_name": {
+            "pl": "Systemy operacyjne",
+            "en": "Operating Systems"
+        },
+        "term_id": "2023Z"
+    },
+    {
+        "course_id": "6420-01H30-0SL-0001",
+        "course_name": {
+            "pl": "Język niderlandzki - poziom A1",
+            "en": "Dutch - level A1"
+        },
+        "term_id": "2023Z"
+    },
+    {
+        "course_id": "6420-06H30-0SF-0003",
+        "course_name": {
+            "pl": "Język francuski - poziom A2",
+            "en": "French - level A2"
+        },
+        "term_id": "2023Z"
+    },
+    {
+        "course_id": "6430-00000-000-0012",
+        "course_name": {
+            "pl": "Wychowanie fizyczne - Wspinaczka halowa",
+            "en": "Indoor climbing"
+        },
+        "term_id": "2023Z"
+    }
 ];
