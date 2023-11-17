@@ -1,4 +1,5 @@
 import { acceptOffer } from "../../apiFunctions/acceptOffer";
+import { Button } from "../../common/button/Button";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { Offer } from "../../models/Offer";
 import "./style.scss";
@@ -23,9 +24,7 @@ export function OfferComponent({ offer }: Props) {
         <span>{offer.start_time}</span>
       </div>
       <div className="offer-right">
-        <button className="" onClick={handleAcceptOffer}>
-          Accept offer
-        </button>
+        <Button onClick={handleAcceptOffer}>Accept offer</Button>
       </div>
     </div>
   );

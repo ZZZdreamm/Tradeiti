@@ -83,7 +83,6 @@ button:focus-visible {
 main {
   width: 100%;
   min-height: 70vh;
-
 }
 
 h1 {
@@ -148,4 +147,9 @@ h6 {
 
 .p-2 {
   padding: 2rem;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: 500;
 }
