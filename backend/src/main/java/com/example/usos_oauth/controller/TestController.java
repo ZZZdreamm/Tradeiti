@@ -1,5 +1,6 @@
 package com.example.usos_oauth.controller;
 
+import com.example.usos_oauth.config.AppConfig;
 import com.example.usos_oauth.model.CustomRequestToken;
 import com.example.usos_oauth.repository.CustomRequestTokenRepository;
 import lombok.AllArgsConstructor;
@@ -20,10 +21,11 @@ public class TestController {
 
     private OAuth1Template oAuth1Template;
     private CustomRequestTokenRepository customRequestTokenRepository;
+    private AppConfig appConfig;
 
     @GetMapping("/request-token")
     public String getRequestToken(){
-        OAuthToken token = oAuth1Template.fetchRequestToken("https://www.arcziweb.com/api/oauth/access-token", null);
+        OAuthToken token = oAuth1Template.fetchRequestToken(appConfig.getVariable("url") + "/api/oauth/access-token", null);
         customRequestTokenRepository.save(new CustomRequestToken(null, token.getValue(), token.getSecret()));
         return oAuth1Template.buildAuthorizeUrl(token.getValue(), null);
     }
@@ -41,7 +43,7 @@ public class TestController {
       AuthorizedRequestToken authorizedRequestToken = new AuthorizedRequestToken(token, oauthVerifier);
       OAuthToken accessToken = oAuth1Template.exchangeForAccessToken(authorizedRequestToken, null);
       String params = "token=" + accessToken.getValue() + "&secret=" + accessToken.getSecret();
-      String baseFrontendUrl = "https://www.arcziweb.com/#/redirect";
+      String baseFrontendUrl = appConfig.getVariable("url") + "/#/redirect";
       String url = baseFrontendUrl + "?" + params;
       return new RedirectView(url, true, true);
     }
