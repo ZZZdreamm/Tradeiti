@@ -29,7 +29,7 @@ export const mockedOffers: Offer[] = [
     status: "ongoing",
   },
   {
-    offer_id: "3",
+    offer_id: "4",
     course_name: "Offer 3",
     start_time: "2023-11-19T12:45:00",
     lecturer: "Lecturer 3",
@@ -38,7 +38,7 @@ export const mockedOffers: Offer[] = [
     status: "ongoing",
   },
   {
-    offer_id: "3",
+    offer_id: "5",
     course_name: "Offer 3",
     start_time: "2023-11-19T12:45:00",
     lecturer: "Lecturer 3",
@@ -47,7 +47,7 @@ export const mockedOffers: Offer[] = [
     status: "ongoing",
   },
   {
-    offer_id: "3",
+    offer_id: "6",
     course_name: "Offer 3",
     start_time: "2023-11-19T12:45:00",
     lecturer: "Lecturer 3",
@@ -56,7 +56,7 @@ export const mockedOffers: Offer[] = [
     status: "ongoing",
   },
   {
-    offer_id: "3",
+    offer_id: "7",
     course_name: "Offer 3",
     start_time: "2023-11-19T12:45:00",
     lecturer: "Lecturer 3",
@@ -65,7 +65,7 @@ export const mockedOffers: Offer[] = [
     status: "ongoing",
   },
   {
-    offer_id: "3",
+    offer_id: "8",
     course_name: "Offer 3",
     start_time: "2023-11-19T12:45:00",
     lecturer: "Lecturer 3",
@@ -74,7 +74,7 @@ export const mockedOffers: Offer[] = [
     status: "ongoing",
   },
   {
-    offer_id: "3",
+    offer_id: "9",
     course_name: "Offer 3",
     start_time: "2023-11-19T12:45:00",
     lecturer: "Lecturer 3",
@@ -83,7 +83,7 @@ export const mockedOffers: Offer[] = [
     status: "ongoing",
   },
   {
-    offer_id: "3",
+    offer_id: "10",
     course_name: "Offer 3",
     start_time: "2023-11-19T12:45:00",
     lecturer: "Lecturer 3",
@@ -92,7 +92,7 @@ export const mockedOffers: Offer[] = [
     status: "ongoing",
   },
   {
-    offer_id: "3",
+    offer_id: "11",
     course_name: "Offer 3",
     start_time: "2023-11-19T12:45:00",
     lecturer: "Lecturer 3",
@@ -101,7 +101,7 @@ export const mockedOffers: Offer[] = [
     status: "ongoing",
   },
   {
-    offer_id: "3",
+    offer_id: "13",
     course_name: "Offer 3",
     start_time: "2023-11-19T12:45:00",
     lecturer: "Lecturer 3",
@@ -110,7 +110,7 @@ export const mockedOffers: Offer[] = [
     status: "ongoing",
   },
   {
-    offer_id: "3",
+    offer_id: "14",
     course_name: "Offer 3",
     start_time: "2023-11-19T12:45:00",
     lecturer: "Lecturer 3",

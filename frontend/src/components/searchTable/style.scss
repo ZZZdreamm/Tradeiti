@@ -16,25 +16,31 @@
   }
   &-body {
     padding: 5px 10px;
-    & > label {
+    & > div {
       display: flex;
+      width: 100%;
       flex-direction: column;
       align-items: flex-start;
-      justify-content: flex-start;
-      width: 100%;
-      margin-bottom: 5px;
-      & > span {
+      & > label {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%;
         margin-bottom: 5px;
+        & > span {
+          margin-bottom: 5px;
+        }
       }
-    }
-    & > input {
-      width: 100%;
-      padding: 5px;
-      border-radius: 5px;
-      border: 1px solid var(--course-color);
-      &:focus {
-        outline: none;
-        border: 1px solid var(--bar-color);
+      & > input {
+        width: 100%;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid var(--course-color);
+        &:focus {
+          outline: none;
+          border: 1px solid var(--bar-color);
+        }
       }
     }
   }

@@ -2,7 +2,7 @@ import { Offer } from "../../models/Offer";
 import { OfferComponent } from "./Offer";
 
 interface Props {
-  offers: Offer[];
+  offers?: Offer[];
 }
 
 export function OffersList({ offers }: Props) {
