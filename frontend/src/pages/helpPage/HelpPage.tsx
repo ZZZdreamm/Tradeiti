@@ -1,12 +1,12 @@
 import { withPrivateRoute } from "../../common/withPrivateRoute/WithPrivateRoute";
 
-const ForLecturers = () => {
+const HelpPage = () => {
   return (
     <div>
-      <h1>Dla wykładowcy</h1>
+      <h1>Pomoc</h1>
       <br />
     </div>
   );
 };
 
-export const PrivateForLecturers = withPrivateRoute(ForLecturers);
+export const PrivateHelpPage = withPrivateRoute(HelpPage);

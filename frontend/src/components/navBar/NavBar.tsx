@@ -15,8 +15,8 @@ const titleAndNavigation = [
     navigation: "myOffers",
   },
   {
-    title: "DLA WYKŁADOWCY",
-    navigation: "forLecturers",
+    title: "POMOC",
+    navigation: "helpPage",
   },
   { title: "KURSY", navigation: "courses" },
 ];
