@@ -1,0 +1,21 @@
+.offerButton {
+    color: white;
+    margin: 15px;
+    background-color: rgb(87, 97, 135);
+    border-radius: 15px;
+    transition: background-color 1s ease;
+    font-size: 17px;
+    border: 3px solid white;
+}
+
+.offerButton:hover:nth-child(1){
+    background-color: rgb(42, 130, 42);
+    border: 3px solid rgb(20, 185, 20);
+    transition: border 1s ease, background-color 1s ease;
+}
+
+.offerButton:hover:nth-child(2) {
+    background-color: rgb(100, 21, 21);
+    border: 3px solid rgb(185, 20, 20);
+    transition: border 1s ease, background-color 1s ease;
+}
