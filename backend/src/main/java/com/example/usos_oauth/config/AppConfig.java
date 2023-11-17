@@ -1,3 +1,5 @@
+package com.example.usos_oauth.config;
+import org.springframework.stereotype.Component;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
@@ -44,7 +46,7 @@ public class AppConfig {
         return (String) config.get("environment");
     }
 
-    public String getVariable() {
-        return (String) config.get("variable");
+    public String getVariable(String variableName) {
+        return (String) config.get(variableName);
     }
 }
