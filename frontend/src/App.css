@@ -25,3 +25,10 @@
   background: rgb(16,88,180);
   background: linear-gradient(90deg, rgba(16,88,180,1) 30%, rgb(30, 163, 39) 70%);
 }
+
+
+#mainRoot{
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  text-align: center;
+}

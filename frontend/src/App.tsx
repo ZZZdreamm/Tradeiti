@@ -17,7 +17,7 @@ function App() {
           <Authorized isAuthorized={<TopBar />} />
           <Authorized isAuthorized={<PwBar />} />
           <Authorized isAuthorized={<NavBar />} />
-          <main>
+          <main id="mainRoot">
             <RoutesProvider />
           </main>
           <Authorized isAuthorized={<Footer />} />

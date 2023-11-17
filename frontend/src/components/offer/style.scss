@@ -1,0 +1,20 @@
+.offersList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.offer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
+  background-color: var(--course-color);
+  border-radius: 5px;
+  &-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
