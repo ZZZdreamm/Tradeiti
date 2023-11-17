@@ -1,4 +1,5 @@
 import { Course } from "../../models/Course";
+import "./Course.scss";
 
 interface Props {
   course: Course;
@@ -6,8 +7,9 @@ interface Props {
 
 export function CourseComponent({ course }: Props) {
   return (
-    <div>
-      <h1>{course.name}</h1>
+    <div className = {'course'}>
+      <h6>{course.course_name.pl}</h6>
+      <p>{course.course_id}</p>
     </div>
   );
 }

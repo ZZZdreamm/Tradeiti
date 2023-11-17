@@ -18,6 +18,7 @@
   --container-color: #efeff1;
   --text-color: #2f2f2f;
   --white-color: #ffffff;
+  --course-color: rgb(200, 204, 225);
 }
 
 * {
@@ -80,7 +81,7 @@ button:focus-visible {
 main {
   width: 100%;
   min-height: 70vh;
-  
+
 }
 
 h1 {

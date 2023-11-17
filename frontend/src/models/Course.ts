@@ -1,7 +1,8 @@
 export interface Course {
-  id: string;
-  name: string;
-  description: string;
-  lecturer: string;
-  semester: number;
+  course_id: string;
+  course_name: {
+    pl: string;
+    en: string;
+  };
+  term_id: string;
 }
