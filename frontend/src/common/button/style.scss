@@ -1,0 +1,18 @@
+.myButton {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-family: inherit;
+  background-color: #f9f9f9;
+  font-weight: bold;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+.myButton:hover {
+  border-color: #646cff;
+}
+.myButton:focus,
+.myButton:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
