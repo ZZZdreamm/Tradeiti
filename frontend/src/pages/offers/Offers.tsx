@@ -1,3 +1,4 @@
+import { useQuery } from "react-query";
 import { withPrivateRoute } from "../../common/withPrivateRoute/WithPrivateRoute";
 import { OffersList } from "../../components/offer/OffersList";
 import { SearchTable } from "../../components/searchTable/SearchTable";
@@ -12,9 +13,13 @@ const searchTableInputsLabels = [
 ];
 
 const Offers = () => {
+  const {} = useQuery("offers", () => {});
   return (
     <div className="offers">
-      <SearchTable inputsLabels={searchTableInputsLabels} />
+      <SearchTable
+        inputsLabels={searchTableInputsLabels}
+        handleOnSubmit={() => {}}
+      />
       <OffersList offers={mockedOffers} />
     </div>
   );
