@@ -21,6 +21,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=compose-postgres
       - SPRING_DATASOURCE_PASSWORD=compose-postgres
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - APP_URL=http://localhost:8090
 
   db:
     image: 'postgres:13.1-alpine'

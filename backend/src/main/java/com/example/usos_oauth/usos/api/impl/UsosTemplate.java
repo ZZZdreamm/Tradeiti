@@ -1,6 +1,7 @@
 package com.example.usos_oauth.usos.api.impl;
 
 import com.example.usos_oauth.usos.api.Usos;
+import com.example.usos_oauth.usos.api.impl.logic.Term;
 import com.example.usos_oauth.usos.api.impl.model.CourseEdition;
 import com.example.usos_oauth.usos.api.impl.model.CourseResponse;
 import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
@@ -20,6 +21,6 @@ public class UsosTemplate extends AbstractOAuth1ApiBinding implements Usos {
     public List<CourseEdition> getCourseEditions() {
         RestTemplate restTemplate = getRestTemplate();
         CourseResponse response = restTemplate.getForObject(courseEditionsUri, CourseResponse.class);
-        return response.getCourse_editions().get("2023Z");
+        return response.getCourse_editions().get(Term.getAcademicTerm());
     }
 }
