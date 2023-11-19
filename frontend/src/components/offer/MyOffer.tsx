@@ -1,6 +1,6 @@
 import { acceptOffer } from "../../apiFunctions/acceptOffer";
 import { discardOffer } from "../../apiFunctions/discardOffer";
-import { useCurrentUser } from "../../hooks/useCurrentUser";
+// import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { Offer } from "../../models/Offer";
 import "./style.scss";
 
@@ -9,14 +9,18 @@ interface Props {
 }
 
 export function MyOfferComponent({ offer }: Props) {
-  const { currentUser } = useCurrentUser();
+  // const { currentUser } = useCurrentUser();
   const handleApproveOffer = () => {
-    acceptOffer(offer.offer_id, currentUser?.id).then((res) => {
+    acceptOffer(
+      // offer.offer_id, currentUser?.id
+      ).then((res) => {
       console.log(res);
     });
   };
   const handleDiscardOffer = () => {
-    discardOffer(offer.offer_id, currentUser?.id).then((res) => {
+    discardOffer(
+      // offer.offer_id, currentUser?.id
+      ).then((res) => {
       console.log(res);
     });
   };

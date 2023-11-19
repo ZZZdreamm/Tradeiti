@@ -1,4 +1,6 @@
-export function acceptOffer(offer_id: string, requester_id: string) {
+export function acceptOffer(
+  // offer_id: string, requester_id: string
+  ) {
   return new Promise<{ data: any }>((res, _) => {
     res({ data: "mocked value" });
   });
