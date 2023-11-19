@@ -29,7 +29,7 @@ public class LoginUsosController {
     public RedirectView getRequestToken(){
         OAuth1Operations operations = usosServiceProvider.getOAuthOperations();
         User currentUser = userService.getCurrentUser();
-        String url = baseUrl + "/api/usos/access-token?user_id=" + currentUser.getId();
+        String url = baseUrl + "/api/usos/authorize-token?user_id=" + currentUser.getId();
         OAuthToken token = operations.fetchRequestToken(url, null);
         userService.updateUserToken(currentUser.getId(), token);
         String usosUrl = operations.buildAuthorizeUrl(token.getValue(), null);
