@@ -6,6 +6,5 @@ usos:
       key: "BvK4hkc6RfeRxnHHbmy6"
       secret: "VxhuAFJrcakrXBamjtfafaZ44k8hnw7ZtZxxtYh3"
 
-
 app:
-  url: "http://localhost:8090"
+  url: ${APP_URL}

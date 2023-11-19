@@ -7,6 +7,6 @@ RUN mvn wrapper:wrapper
 
 FROM amazoncorretto:21
 WORKDIR /app
-COPY --from=build /app/target/usosOauth.jar .
+COPY --from=build /app/target/TradEitiBackend.jar .
 EXPOSE 8090
-CMD ["java", "-jar", "usosOauth.jar"]
+CMD ["java", "-jar", "TradEitiBackend.jar"]
