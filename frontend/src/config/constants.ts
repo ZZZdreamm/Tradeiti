@@ -4,3 +4,5 @@
 export const READY_IMAGES_URL = `http://localhost:5173`;
 
 export const ACCESS_TOKEN = "accesstoken";
+
+export const JWT_TOKEN = "jwtToken";
