@@ -8,6 +8,7 @@ interface AuthProps {
   setAuthenticated: (value: boolean) => void;
   setCurrentUser: (value: any) => void;
   loading: boolean;
+  connectedToUsos: boolean;
 }
 
 interface Props {
@@ -21,6 +22,7 @@ const AuthContext = createContext<AuthProps>({
   setAuthenticated: () => {},
   setCurrentUser: () => {},
   loading: true,
+  connectedToUsos: false,
 });
 
 export function AuthProvider({ children }: Props) {
@@ -31,6 +33,7 @@ export function AuthProvider({ children }: Props) {
     loading,
     setAuthenticated,
     setCurrentUser,
+    connectedToUsos
   } = useCurrentUser();
 
   const states = useMemo(
@@ -41,6 +44,7 @@ export function AuthProvider({ children }: Props) {
       loading,
       setAuthenticated,
       setCurrentUser,
+      connectedToUsos
     }),
     [
       mounted,
@@ -49,6 +53,7 @@ export function AuthProvider({ children }: Props) {
       loading,
       setAuthenticated,
       setCurrentUser,
+      connectedToUsos
     ]
   );
 

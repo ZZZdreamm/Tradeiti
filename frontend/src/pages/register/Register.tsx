@@ -1,14 +1,13 @@
 import "./style.scss";
 import { Image } from "../../common/image/Image";
-// import { getRequestToken } from "../../apiFunctions/login";
 import { AuthForm } from "../../components/authForm/AuthForm";
+import { register } from "../../apiFunctions/register";
 import { UserCredentials } from "../../models/UserCredentials";
-import { login } from "../../apiFunctions/login";
 import { saveToken } from "../../auth/JwtToken";
 
-export const Login = () => {
-  const handleLogin = async (userCredentials: UserCredentials) => {
-    login(userCredentials)
+export const Register = () => {
+  const handleRegister = async (userCredentials: UserCredentials) => {
+    register(userCredentials)
       .then((response) => {
         console.log(response);
         if (response.token) {
@@ -24,8 +23,9 @@ export const Login = () => {
   return (
     <article className="login">
       <Image src="TradeEITI.png" />
-      <h2>Login</h2>
-      <AuthForm handleOnSubmit={handleLogin} />
+      <br></br>
+      <h2>Register</h2>
+      <AuthForm handleOnSubmit={handleRegister} />
     </article>
   );
 };

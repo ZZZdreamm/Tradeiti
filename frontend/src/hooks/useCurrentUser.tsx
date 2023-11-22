@@ -2,25 +2,39 @@ import { useEffect, useState } from "react";
 import { axiosBase } from "../config/axiosConfig";
 import { ACCESS_TOKEN } from "../config/constants";
 import { getCurrentUser } from "../apiFunctions/getCurrentUser";
+import { removeAccessToken } from "../auth/JwtToken";
+import { useNavigate } from "react-router-dom";
 
 export function useCurrentUser() {
+  const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
+  const [connectedToUsos, setConnectedToUsos] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    getCurrentUser()
-      .then((user) => {
-        setCurrentUser(user.data);
-        setAuthenticated(true);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
+    const jwtToken = localStorage.getItem("jwtToken");
+    setAuthenticated(jwtToken ? true : false);
+
+    if (!jwtToken) {
+      navigate("/login?redirected=true");
+    }
+    if (authenticated) {
+      getCurrentUser()
+        .then((user) => {
+          setCurrentUser(user.data);
+          setConnectedToUsos(true);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          removeAccessToken();
+          setLoading(false);
+        });
+    }
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -33,7 +47,6 @@ export function useCurrentUser() {
     });
   }, [authenticated, currentUser]);
 
-
   return {
     mounted,
     currentUser,
@@ -41,5 +54,6 @@ export function useCurrentUser() {
     loading,
     setAuthenticated,
     setCurrentUser,
+    connectedToUsos,
   };
 }
