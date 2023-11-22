@@ -1,9 +1,8 @@
-import { getRequestToken } from "../../apiFunctions/getRequestToken";
+import { connectUsos } from "../../apiFunctions/connectUsos";
 
 export function UsosConnect() {
   const getToken = async () => {
-    const authorizeUrl = await getRequestToken();
-    window.location.href = authorizeUrl;
+    await connectUsos();
   };
   return (
     <div>
