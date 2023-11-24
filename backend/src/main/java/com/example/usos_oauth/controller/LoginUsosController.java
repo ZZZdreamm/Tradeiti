@@ -28,14 +28,15 @@ public class LoginUsosController {
     private String frontendUrl;
 
     @GetMapping("/connect")
-    public RedirectView getRequestToken(){
+    public String getRequestToken(){
         OAuth1Operations operations = usosServiceProvider.getOAuthOperations();
         User currentUser = userService.getCurrentUser();
         String url = backendUrl + "/api/usos/authorize-token?user_id=" + currentUser.getId();
         OAuthToken token = operations.fetchRequestToken(url, null);
         userService.updateUserToken(currentUser.getId(), token);
         String usosUrl = operations.buildAuthorizeUrl(token.getValue(), null);
-        return new RedirectView(usosUrl, true, true);
+//        return new RedirectView(usosUrl, true, true);
+        return usosUrl;
     }
 
     @GetMapping("/authorize-token")
