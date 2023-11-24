@@ -19,7 +19,7 @@ export function AuthForm({ handleOnSubmit }: AuthFormProps) {
       </div>
       <div>
         <label>Hasło: </label><br />
-        <input type="password" {...register("password")} />
+        <input {...register("password")} />
       </div>
       <button id="loginButton" type="submit">
         Submit
