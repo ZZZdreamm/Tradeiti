@@ -3,7 +3,7 @@ import { useCurrentUser } from "../hooks/useCurrentUser";
 
 interface AuthProps {
   mounted: boolean;
-  authenticated: boolean;
+  authenticated: boolean | undefined;
   currentUser: any;
   setAuthenticated: (value: boolean) => void;
   setCurrentUser: (value: any) => void;
@@ -17,12 +17,12 @@ interface Props {
 
 const AuthContext = createContext<AuthProps>({
   mounted: false,
-  authenticated: false,
+  authenticated: undefined,
   currentUser: null,
   setAuthenticated: () => {},
   setCurrentUser: () => {},
   loading: true,
-  connectedToUsos: false,
+  connectedToUsos: undefined,
 });
 
 export function AuthProvider({ children }: Props) {
@@ -33,7 +33,7 @@ export function AuthProvider({ children }: Props) {
     loading,
     setAuthenticated,
     setCurrentUser,
-    connectedToUsos
+    connectedToUsos,
   } = useCurrentUser();
 
   const states = useMemo(
@@ -44,7 +44,7 @@ export function AuthProvider({ children }: Props) {
       loading,
       setAuthenticated,
       setCurrentUser,
-      connectedToUsos
+      connectedToUsos,
     }),
     [
       mounted,
@@ -53,7 +53,7 @@ export function AuthProvider({ children }: Props) {
       loading,
       setAuthenticated,
       setCurrentUser,
-      connectedToUsos
+      connectedToUsos,
     ]
   );
 

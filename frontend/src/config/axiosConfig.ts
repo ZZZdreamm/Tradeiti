@@ -1,5 +1,5 @@
 import axios from "axios";
-// import { JWT_TOKEN } from "./constants";
+import { JWT_TOKEN } from "./constants";
 
 export let apiBaseUrl = "https://www.arcziweb.com/api";
 
@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === "development") {
 export const axiosBase = axios.create({
   baseURL: apiBaseUrl,
   headers: {
-    // Authorization: "Bearer " + localStorage.getItem(JWT_TOKEN),
+    Authorization: "Bearer " + localStorage.getItem(JWT_TOKEN),
     "Content-Type": "application/json",
   },
 });
