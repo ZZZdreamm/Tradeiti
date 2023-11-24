@@ -11,7 +11,7 @@ export const withPrivateRoute = (WrappedComponent: any) => {
     const { mounted, authenticated, loading, connectedToUsos } =
       useAuthContext();
     useEffect(() => {
-      if (mounted && !authenticated) {
+      if (mounted && authenticated === false) {
         navigate(login);
       } else if (mounted && connectedToUsos === false) {
         navigate(usosConnect);
