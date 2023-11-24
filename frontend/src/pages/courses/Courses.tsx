@@ -1,5 +1,5 @@
 import { withPrivateRoute } from "../../common/withPrivateRoute/WithPrivateRoute";
-import { CourseComponent } from "../../components/course/Course";
+import { CoursesList } from "../../components/coursesList/CoursesList";
 import { MockedCourses } from "../../mocks/MockedCourses";
 import "./style.scss";
 
@@ -7,10 +7,7 @@ function Courses() {
   return (
     <section>
       <div className="coursesBox">
-      {MockedCourses &&
-        MockedCourses.map((course, index) => (
-          <CourseComponent key={index} course={course} />
-        ))}
+        <CoursesList courses={MockedCourses} />
       </div>
     </section>
   );

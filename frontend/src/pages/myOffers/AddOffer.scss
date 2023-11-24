@@ -1,0 +1,16 @@
+.addOffer {
+  & > .upper {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  & > .middle {
+    display: flex;
+    align-items: center;
+  }
+  & > .lower {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

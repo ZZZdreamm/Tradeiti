@@ -1,18 +1,20 @@
+import { useSearchParams } from "react-router-dom";
 import { withPrivateRoute } from "../../common/withPrivateRoute/WithPrivateRoute";
-import { ElementsContainer } from "../../components/elementsContainer/ElementsContainer";
-import { MyOffersList } from "../../components/offer/MyOffersList";
-import { mockedMyOffers } from "../../mocks/MockedMyOffers";
 import "./MyOffers.scss";
+import { ShowOffers } from "./ShowOffers";
+import { MyOffersSteps } from "./MyOffersSteps";
+import { AddOffer } from "./AddOffer";
+import { EditOffer } from "./EditOffer";
 
 const MyOffers = () => {
+  const [searchParams, _] = useSearchParams();
+  const page = searchParams.get("page");
   return (
-    <div>
-      <button className = 'offerButton'>Dodaj ofertę <b>+</b></button>
-      <button className = 'offerButton'>Usuń ofertę <b>-</b></button>
-      <ElementsContainer>
-      <MyOffersList offers={mockedMyOffers} />
-    </ElementsContainer>
-    </div>
+    <>
+      {!page && <ShowOffers />}
+      {page == MyOffersSteps.MY_OFFERS_ADD && <AddOffer />}
+      {page == MyOffersSteps.MY_OFFERS_EDIT && <EditOffer />}
+    </>
   );
 };
 

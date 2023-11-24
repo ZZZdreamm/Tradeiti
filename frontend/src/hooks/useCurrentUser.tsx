@@ -38,7 +38,7 @@ export function useCurrentUser() {
   }, []);
 
   useEffect(() => {
-    if (connectedToUsos) return;
+    if (!authenticated || connectedToUsos) return;
     checkIfConnectedToUsos()
       .then(() => {
         setConnectedToUsos(true);
@@ -47,7 +47,6 @@ export function useCurrentUser() {
       .catch((err) => {
         console.log(err);
         setConnectedToUsos(false);
-        // navigate("/usos-connect");
       });
   }, [authenticated, connectedToUsos]);
 
