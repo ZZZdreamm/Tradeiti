@@ -26,14 +26,14 @@ const HelpPage = () => {
         <li>Zatwierdzonej oferty nie można cofnąć.</li>
       </ul>
       </p>
-      <img src="authorsIcon.png" width = "200px" />
-      <h2>Autorzy</h2>
-      <h5>Oliwier Szypczyn</h5>
-      <h5>Kacper Multan</h5>
-      <h5>Artur Kempiński</h5>
-      <h5>Jakub Kryczka</h5>
-
-
+      <div className="authors">
+        <img src="authorsIcon.png" width = "200px" />
+        <h2>Autorzy</h2>
+          <h5>Oliwier Szypczyn</h5>
+          <h5>Kacper Multan</h5>
+          <h5>Artur Kempiński</h5>
+          <h5>Jakub Kryczka</h5>
+      </div>
     </div>
   );
 };

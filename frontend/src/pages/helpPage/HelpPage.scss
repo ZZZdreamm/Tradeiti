@@ -1,27 +1,30 @@
 .helpCont {
     width: 80%;
-    margin: auto;
-    margin-top: 40px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-p {
+.helpCont p {
     display: block;
     margin-bottom: 50px;
 }
 
-h5 {
+.helpCont h5 {
     display: inline-block;
     padding: 10px;
     font-weight: normal;
 }
 
-ul {
+.helpCont ul {
     list-style-type: none;
 }
-ul li {
+.helpCont ul li {
     &:before {
-      content: '\2022'; /* Unicode dla kropki (U+2022) */
-      margin-right: 5px; /* Dodaj odstęp między kropką a tekstem */
-      color: #000; /* Kolor kropki */
+      content: '\2022';
+      margin-right: 5px;
+      color: #000;
     }
   }
