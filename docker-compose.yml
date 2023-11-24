@@ -1,15 +1,14 @@
 version: '3'
 services:
   frontend:
-    build: frontend/.
+    build:
+      context: frontend/.
+      dockerfile: Dockerfile.dev
     depends_on:
       - backend
     container_name: frontend
     ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /etc/letsencrypt/archive/arcziweb.com:/etc/nginx/ssl
+      - "8091:5137"
 
   backend:
     build: backend/.
@@ -21,7 +20,8 @@ services:
       - SPRING_DATASOURCE_USERNAME=compose-postgres
       - SPRING_DATASOURCE_PASSWORD=compose-postgres
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      - APP_URL=http://localhost:8090
+      - BACKEND_URL=http://localhost:8090
+      - FRONTEND_URL=http://localhost:8091
 
   db:
     image: 'postgres:13.1-alpine'
