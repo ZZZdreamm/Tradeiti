@@ -12,7 +12,7 @@ export const Register = () => {
         console.log(response);
         if (response.token) {
           saveToken(response.token);
-          window.location.href = "/usos-connect";
+          window.location.href = "/#/usos-connect";
         }
       })
       .catch((err) => {
@@ -27,7 +27,12 @@ export const Register = () => {
       <div className="formDiv">
         <h2>Rejestracja</h2>
         <AuthForm handleOnSubmit={handleRegister} />
-        <button className="regButton" onClick = { () => window.location.href = "/#/login"}>Powrót</button>
+        <button
+          className="regButton"
+          onClick={() => (window.location.href = "/#/login")}
+        >
+          Powrót
+        </button>
       </div>
     </article>
   );

@@ -40,8 +40,8 @@ export function useCurrentUser() {
   useEffect(() => {
     if (connectedToUsos) return;
     checkIfConnectedToUsos()
-      .then((res: any) => {
-        setConnectedToUsos(res.data);
+      .then(() => {
+        setConnectedToUsos(true);
         setLoading(false);
       })
       .catch((err) => {
