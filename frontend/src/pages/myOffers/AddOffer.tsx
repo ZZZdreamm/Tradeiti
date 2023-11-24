@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import "./AddOffer.scss";
 import { ChooseCourse } from "./ChooseCourse";
 import { ChooseCourseHour } from "./ChooseCourseHour";
-import { Form, FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 
 export function AddOffer() {
   const methods = useForm();
