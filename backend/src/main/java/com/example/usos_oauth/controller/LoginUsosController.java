@@ -34,9 +34,7 @@ public class LoginUsosController {
         String url = backendUrl + "/api/usos/authorize-token?user_id=" + currentUser.getId();
         OAuthToken token = operations.fetchRequestToken(url, null);
         userService.updateUserToken(currentUser.getId(), token);
-        String usosUrl = operations.buildAuthorizeUrl(token.getValue(), null);
-//        return new RedirectView(usosUrl, true, true);
-        return usosUrl;
+        return operations.buildAuthorizeUrl(token.getValue(), null);
     }
 
     @GetMapping("/authorize-token")
