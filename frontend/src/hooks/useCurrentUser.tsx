@@ -24,7 +24,7 @@ export function useCurrentUser() {
     if (authenticated) {
       getCurrentUser()
         .then((user) => {
-          setCurrentUser(user.data);
+          setCurrentUser(user);
           setConnectedToUsos(true);
           setLoading(false);
         })
