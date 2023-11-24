@@ -11,7 +11,7 @@ export function useCurrentUser() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
-  const [connectedToUsos, setConnectedToUsos] = useState<boolean | undefined>();
+  const [connectedToUsos, setConnectedToUsos] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
     setMounted(true);
