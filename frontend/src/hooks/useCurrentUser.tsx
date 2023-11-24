@@ -21,6 +21,9 @@ export function useCurrentUser() {
     if (!jwtToken) {
       navigate("/login?redirected=true");
     }
+  }, []);
+
+  useEffect(() => {
     if (authenticated) {
       getCurrentUser()
         .then((user) => {
@@ -35,7 +38,7 @@ export function useCurrentUser() {
         });
     }
     setLoading(false);
-  }, []);
+  }, [authenticated]);
 
   useEffect(() => {
     if (!authenticated && !currentUser) return;
