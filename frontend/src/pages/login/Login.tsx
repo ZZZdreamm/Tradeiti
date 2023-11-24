@@ -13,7 +13,7 @@ export const Login = () => {
         console.log(response);
         if (response.token) {
           saveToken(response.token);
-          window.location.href = "/usos-connect";
+          window.location.href = "/#/usos-connect";
         }
       })
       .catch((err) => {
