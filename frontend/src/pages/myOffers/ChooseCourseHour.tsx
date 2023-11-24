@@ -8,7 +8,7 @@ import { mockedCourseDates } from "../../mocks/MockedCourseDates";
 import { useFormContext } from "react-hook-form";
 
 export function ChooseCourseHour() {
-  const { getValues, setValue } = useFormContext();
+  const { setValue } = useFormContext();
   const [_, setSearchParams] = useSearchParams();
   const [myHours, setMyHours] = useState<CourseDate[]>([]);
   const [opponentHours, setOpponentHours] = useState<CourseDate[]>([]);

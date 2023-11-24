@@ -5,7 +5,7 @@ import { mockedMyOffers } from "../../mocks/MockedMyOffers";
 import { MyOffersSteps } from "./MyOffersSteps";
 
 export function ShowOffers() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [_, setSearchParams] = useSearchParams();
 
   const handleAddOffer = () => {
     setSearchParams({
