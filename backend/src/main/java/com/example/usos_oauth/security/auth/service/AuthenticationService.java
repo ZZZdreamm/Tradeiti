@@ -1,6 +1,5 @@
 package com.example.usos_oauth.security.auth.service;
 
-
 import com.example.usos_oauth.security.auth.model.AuthenticationRequest;
 import com.example.usos_oauth.security.auth.model.AuthenticationResponse;
 import com.example.usos_oauth.security.model.Role;
@@ -23,8 +22,12 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(AuthenticationRequest registerRequest) {
+        String username = registerRequest.getUsername();
+        if (userRepository.findByUsername(username).isPresent()){
+            throw new UserAlreadyExistsException();
+        }
         User user = User.builder()
-                .username(registerRequest.getUsername())
+                .username(username)
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .role(Role.USER)
                 .build();
