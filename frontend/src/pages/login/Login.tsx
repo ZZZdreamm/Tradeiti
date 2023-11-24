@@ -5,8 +5,11 @@ import { AuthForm } from "../../components/authForm/AuthForm";
 import { UserCredentials } from "../../models/UserCredentials";
 import { login } from "../../apiFunctions/login";
 import { saveToken } from "../../auth/JwtToken";
+import { useState } from 'react';
 
 export const Login = () => {
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleLogin = async (userCredentials: UserCredentials) => {
     login(userCredentials)
       .then((response) => {
@@ -17,8 +20,15 @@ export const Login = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
-      });
+        if (err.response && err.response.status === 503) {
+          setErrorMessage("Komputer Artura zasypał śnieg.")
+          window.alert("Service Unavailable. Please try again later.");
+          window.location.reload();
+        } else if (err.response && err.response.status === 409) {
+          setErrorMessage("Username already exists.");
+        } else {
+          setErrorMessage("Unidentified error occured.");
+      }});
   };
 
   return (
@@ -26,7 +36,7 @@ export const Login = () => {
       <Image src="TradeEITI.png" />
       <div className="formDiv">
         <h2>Login</h2>
-        <AuthForm handleOnSubmit={handleLogin} />
+        <AuthForm handleOnSubmit={handleLogin} errorMessage={errorMessage}/>
         <button className="regButton" onClick = { () => window.location.href = "/#/register"}>Zarejestruj się</button>
       </div>
     </article>
