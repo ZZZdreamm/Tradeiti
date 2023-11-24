@@ -8,7 +8,7 @@ interface AuthProps {
   setAuthenticated: (value: boolean) => void;
   setCurrentUser: (value: any) => void;
   loading: boolean;
-  connectedToUsos: boolean;
+  connectedToUsos: boolean | undefined;
 }
 
 interface Props {
