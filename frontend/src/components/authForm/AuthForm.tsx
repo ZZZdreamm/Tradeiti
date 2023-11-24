@@ -14,11 +14,11 @@ export function AuthForm({ handleOnSubmit }: AuthFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label>Username: </label>
+        <label>Nazwa użytkownika: </label><br />
         <input {...register("username")} />
       </div>
       <div>
-        <label>Password: </label>
+        <label>Hasło: </label><br />
         <input {...register("password")} />
       </div>
       <button id="loginButton" type="submit">

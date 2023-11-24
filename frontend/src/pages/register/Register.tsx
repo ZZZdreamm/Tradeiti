@@ -24,8 +24,10 @@ export const Register = () => {
     <article className="login">
       <Image src="TradeEITI.png" />
       <br></br>
-      <h2>Register</h2>
-      <AuthForm handleOnSubmit={handleRegister} />
+      <div className="formDiv">
+        <h2>Register</h2>
+        <AuthForm handleOnSubmit={handleRegister} />
+      </div>
     </article>
   );
 };
