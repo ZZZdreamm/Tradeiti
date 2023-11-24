@@ -22,14 +22,16 @@ public class LoginUsosController {
     private final UsosServiceProvider usosServiceProvider;
     private final UserService userService;
 
-    @Value("${app.url}")
-    private String baseUrl;
+    @Value("${app.url.backend}")
+    private String backendUrl;
+    @Value("${app.url.frontend}")
+    private String frontendUrl;
 
     @GetMapping("/connect")
     public RedirectView getRequestToken(){
         OAuth1Operations operations = usosServiceProvider.getOAuthOperations();
         User currentUser = userService.getCurrentUser();
-        String url = baseUrl + "/api/usos/authorize-token?user_id=" + currentUser.getId();
+        String url = backendUrl + "/api/usos/authorize-token?user_id=" + currentUser.getId();
         OAuthToken token = operations.fetchRequestToken(url, null);
         userService.updateUserToken(currentUser.getId(), token);
         String usosUrl = operations.buildAuthorizeUrl(token.getValue(), null);
@@ -44,6 +46,6 @@ public class LoginUsosController {
       AuthorizedRequestToken authorizedRequestToken = new AuthorizedRequestToken(unauthorizedToken, oauthVerifier);
       OAuthToken accessToken = operations.exchangeForAccessToken(authorizedRequestToken, null);
       userService.updateUserToken(userId, accessToken);
-      return new RedirectView(baseUrl, true, true);
+      return new RedirectView(frontendUrl, true, true);
     }
 }
