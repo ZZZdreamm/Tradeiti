@@ -24,8 +24,10 @@ export const Login = () => {
   return (
     <article className="login">
       <Image src="TradeEITI.png" />
-      <h2>Login</h2>
-      <AuthForm handleOnSubmit={handleLogin} />
+      <div className="formDiv">
+        <h2>Login</h2>
+        <AuthForm handleOnSubmit={handleLogin} />
+      </div>
     </article>
   );
 };
