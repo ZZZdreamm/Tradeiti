@@ -13,7 +13,7 @@ export const withPrivateRoute = (WrappedComponent: any) => {
     useEffect(() => {
       if (mounted && !authenticated) {
         navigate(login);
-      } else if (mounted && !connectedToUsos) {
+      } else if (mounted && connectedToUsos === false) {
         navigate(usosConnect);
       }
     }, [authenticated, loading, connectedToUsos]);

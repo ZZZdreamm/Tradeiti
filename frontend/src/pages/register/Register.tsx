@@ -25,8 +25,9 @@ export const Register = () => {
       <Image src="TradeEITI.png" />
       <br></br>
       <div className="formDiv">
-        <h2>Register</h2>
+        <h2>Rejestracja</h2>
         <AuthForm handleOnSubmit={handleRegister} />
+        <button className="regButton" onClick = { () => window.location.href = "/#/login"}>Powrót</button>
       </div>
     </article>
   );
