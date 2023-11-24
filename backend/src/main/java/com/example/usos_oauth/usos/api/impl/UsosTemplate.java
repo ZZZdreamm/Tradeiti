@@ -4,6 +4,7 @@ import com.example.usos_oauth.usos.api.Usos;
 import com.example.usos_oauth.usos.api.impl.logic.Term;
 import com.example.usos_oauth.usos.api.impl.model.CourseEdition;
 import com.example.usos_oauth.usos.api.impl.model.CourseResponse;
+import com.example.usos_oauth.usos.api.impl.model.UsosUser;
 import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,6 +14,7 @@ import java.util.List;
 public class UsosTemplate extends AbstractOAuth1ApiBinding implements Usos {
 
     URI courseEditionsUri = URI.create("https://apps.usos.pw.edu.pl/services/courses/user");
+    URI userUri = URI.create("https://apps.usos.pw.edu.pl/services/users/user");
 
     public UsosTemplate(String consumerKey, String consumerSecret, String accessToken, String secret) {
         super(consumerKey, consumerSecret, accessToken, secret);
@@ -22,5 +24,9 @@ public class UsosTemplate extends AbstractOAuth1ApiBinding implements Usos {
         RestTemplate restTemplate = getRestTemplate();
         CourseResponse response = restTemplate.getForObject(courseEditionsUri, CourseResponse.class);
         return response.getCourse_editions().get(Term.getAcademicTerm());
+    }
+    public UsosUser getUser() {
+        RestTemplate restTemplate = getRestTemplate();
+        return restTemplate.getForObject(userUri, UsosUser.class);
     }
 }
