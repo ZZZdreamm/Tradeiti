@@ -27,6 +27,7 @@ export const Login = () => {
       <div className="formDiv">
         <h2>Login</h2>
         <AuthForm handleOnSubmit={handleLogin} />
+        <button className="regButton" onClick = { () => window.location.href = "/#/register"}>Zarejestruj się</button>
       </div>
     </article>
   );

@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useLocation } from 'react-router-dom';
 import "./style.scss";
 
 interface AuthFormProps {
@@ -7,6 +8,9 @@ interface AuthFormProps {
 
 export function AuthForm({ handleOnSubmit }: AuthFormProps) {
   const { register, handleSubmit } = useForm();
+
+  const location = useLocation();
+  const isRegisterPage = location.pathname.includes('/register');
 
   const onSubmit: SubmitHandler<any> = (values) => {
     return handleOnSubmit(values);
@@ -22,7 +26,7 @@ export function AuthForm({ handleOnSubmit }: AuthFormProps) {
         <input {...register("password")} />
       </div>
       <button id="loginButton" type="submit">
-        Submit
+        { isRegisterPage ? "Rejestruj" : "Zaloguj"}
       </button>
     </form>
   );
