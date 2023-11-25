@@ -4,6 +4,7 @@ import com.example.usos_oauth.usos.api.Usos;
 import com.example.usos_oauth.usos.api.impl.UsosTemplate;
 import org.springframework.social.oauth1.AbstractOAuth1ServiceProvider;
 import org.springframework.social.oauth1.OAuth1Template;
+import org.springframework.social.oauth1.OAuthToken;
 
 public class UsosServiceProvider extends AbstractOAuth1ServiceProvider<Usos> {
 
@@ -21,5 +22,9 @@ public class UsosServiceProvider extends AbstractOAuth1ServiceProvider<Usos> {
     @Override
     public Usos getApi(String accessToken, String secret) {
         return new UsosTemplate(getConsumerKey(), getConsumerSecret(), accessToken, secret);
+    }
+
+    public Usos getApi(OAuthToken token) {
+        return getApi(token.getValue(), token.getSecret());
     }
 }
