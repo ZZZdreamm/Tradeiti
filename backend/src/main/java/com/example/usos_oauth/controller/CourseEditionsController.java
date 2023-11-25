@@ -23,7 +23,7 @@ public class CourseEditionsController {
     @GetMapping
     public List<CourseEdition> getCourseEditions() {
         OAuthToken token = userService.getCurrentUserToken();
-        Usos api = usosServiceProvider.getApi(token.getValue(), token.getSecret());
+        Usos api = usosServiceProvider.getApi(token);
         return api.getCourseEditions();
     }
 }

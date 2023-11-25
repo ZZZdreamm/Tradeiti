@@ -56,7 +56,7 @@ public class LoginUsosController {
     public ResponseEntity<String> checkConnection() {
         try {
             OAuthToken token = userService.getCurrentUserToken();
-            Usos api = usosServiceProvider.getApi(token.getValue(), token.getSecret());
+            Usos api = usosServiceProvider.getApi(token);
             api.getUser();
             return ResponseEntity.ok("200 OK");
         } catch (HttpClientErrorException.Unauthorized e) {
