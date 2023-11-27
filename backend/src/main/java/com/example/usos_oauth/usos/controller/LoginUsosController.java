@@ -2,7 +2,7 @@ package com.example.usos_oauth.usos.controller;
 
 import com.example.usos_oauth.security.model.User;
 import com.example.usos_oauth.security.service.UserService;
-import com.example.usos_oauth.usos.api.Usos;
+import com.example.usos_oauth.usos.api.UsosTemplate;
 import com.example.usos_oauth.usos.connect.UsosServiceProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,13 +56,11 @@ public class LoginUsosController {
     public ResponseEntity<String> checkConnection() {
         try {
             OAuthToken token = userService.getCurrentUserToken();
-            Usos api = usosServiceProvider.getApi(token);
+            UsosTemplate api = usosServiceProvider.getApi(token);
             api.getUser();
             return ResponseEntity.ok("200 OK");
         } catch (HttpClientErrorException.Unauthorized e) {
             return ResponseEntity.status(HttpStatus.PROXY_AUTHENTICATION_REQUIRED).body("Token has expired");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
         }
     }
 }
