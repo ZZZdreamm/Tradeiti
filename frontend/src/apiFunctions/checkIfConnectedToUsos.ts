@@ -4,7 +4,7 @@ import { apiBaseUrl } from "../config/axiosConfig";
 import { JWT_TOKEN } from "../config/constants";
 
 export function checkIfConnectedToUsos() {
-  return fetch(`${apiBaseUrl}/usos/check-connectcon`, {
+  return fetch(`${apiBaseUrl}/usos/check-connection`, {
     headers: {
       Authorization: "Bearer " + localStorage.getItem(JWT_TOKEN),
     },
@@ -14,6 +14,7 @@ export function checkIfConnectedToUsos() {
     }
     return response.text();
   });
+  
   return new Promise((resolve, _) => {
     // reject("Not implemented");
     resolve(true);
