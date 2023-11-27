@@ -4,7 +4,7 @@ import { apiBaseUrl } from "../config/axiosConfig";
 import { JWT_TOKEN } from "../config/constants";
 
 export function checkIfConnectedToUsos() {
-  return fetch(`${apiBaseUrl}/usos/check-connectcon`, {
+  return fetch(`${apiBaseUrl}/usos/check-connection`, {
     headers: {
       Authorization: "Bearer " + localStorage.getItem(JWT_TOKEN),
     },
