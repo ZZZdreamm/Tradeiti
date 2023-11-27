@@ -31,12 +31,12 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(
-                                "/api/auth/**",
                                 "/api/auth/register",
                                 "/api/auth/login",
                                 "/api/usos/authorize-token",
                                 "/error"
                         ).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
