@@ -1,13 +1,15 @@
+import { useQuery } from "react-query";
 import { withPrivateRoute } from "../../common/withPrivateRoute/WithPrivateRoute";
 import { CoursesList } from "../../components/coursesList/CoursesList";
-import { MockedCourses } from "../../mocks/MockedCourses";
 import "./style.scss";
+import { getAllCourses } from "../../apiFunctions/getAllCourses";
 
 function Courses() {
+  const {data: courses} = useQuery("courses", getAllCourses)
   return (
     <section>
       <div className="coursesBox">
-        <CoursesList courses={MockedCourses} />
+        <CoursesList courses={courses.data} />
       </div>
     </section>
   );
