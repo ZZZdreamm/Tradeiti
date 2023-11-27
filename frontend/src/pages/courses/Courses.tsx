@@ -5,11 +5,11 @@ import "./style.scss";
 import { getAllCourses } from "../../apiFunctions/getAllCourses";
 
 function Courses() {
-  const {data: courses} = useQuery("courses", getAllCourses)
+  const { data: courses } = useQuery("courses", getAllCourses);
   return (
     <section>
       <div className="coursesBox">
-        <CoursesList courses={courses.data} />
+        <CoursesList courses={courses} />
       </div>
     </section>
   );
