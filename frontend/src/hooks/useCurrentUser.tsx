@@ -39,15 +39,17 @@ export function useCurrentUser() {
 
   useEffect(() => {
     if (!authenticated || connectedToUsos) return;
-    checkIfConnectedToUsos()
-      .then(() => {
-        setConnectedToUsos(true);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setConnectedToUsos(false);
-      });
+    setConnectedToUsos(true)
+    setLoading(false)
+    // checkIfConnectedToUsos()
+    //   .then(() => {
+    //     setConnectedToUsos(true);
+    //     setLoading(false);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     setConnectedToUsos(false);
+    //   });
   }, [authenticated, connectedToUsos]);
 
   useEffect(() => {
