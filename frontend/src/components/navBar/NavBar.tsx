@@ -3,8 +3,8 @@ import "./NavBar.scss";
 
 const titleAndNavigation = [
   {
-    title: "AKTUALNOŚCI",
-    navigation: "news",
+    title: "Home",
+    navigation: "/",
   },
   {
     title: "OFERTY",
@@ -13,10 +13,6 @@ const titleAndNavigation = [
   {
     title: "MOJE OFERTY",
     navigation: "myOffers",
-  },
-  {
-    title: "POMOC",
-    navigation: "helpPage",
   },
   { title: "KURSY", navigation: "courses" },
 ];
