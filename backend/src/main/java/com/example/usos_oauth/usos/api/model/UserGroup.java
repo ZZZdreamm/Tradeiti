@@ -8,7 +8,7 @@ import java.util.List;
 public class UserGroup {
     private String course_unit_id;
     private int group_number;
-    private ClassType class_type;
+    private LangDict class_type;
     private String class_type_id;
     private String group_url;
     private String course_id;
