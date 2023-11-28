@@ -1,9 +1,12 @@
 package com.example.usos_oauth.usos.service;
 
 import com.example.usos_oauth.usos.api.UsosTemplate;
+import com.example.usos_oauth.usos.api.logic.Term;
 import com.example.usos_oauth.usos.api.model.Activity;
+import com.example.usos_oauth.usos.api.model.CourseEdition;
 import com.example.usos_oauth.usos.api.model.UsosUser;
 import com.example.usos_oauth.usos.service.exception.UsosAccountNotConnectedException;
+import com.example.usos_oauth.usos.service.model.CourseDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -32,6 +35,15 @@ public class UsosService {
         if (!isUserConnected()) {
             throw new UsosAccountNotConnectedException();
         }
+    }
+
+    public List<CourseDTO> getUserActiveCourses() {
+        assertUserIsConnected();
+        String currentTerm = Term.getCurrentAcademicTerm();
+        List<CourseEdition> currentCourseEdition = usosTemplate.getCourseEditions().get(currentTerm);
+        return currentCourseEdition.stream()
+                .map(UsosDTOMapper::mapToCourseDTO)
+                .toList();
     }
     public List<Activity> getUserGroups(String course_id, String term_id) {
         assertUserIsConnected();

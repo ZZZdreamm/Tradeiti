@@ -1,6 +1,5 @@
 package com.example.usos_oauth.usos.api;
 
-import com.example.usos_oauth.usos.api.logic.Term;
 import com.example.usos_oauth.usos.api.model.Activity;
 import com.example.usos_oauth.usos.api.model.CourseEdition;
 import com.example.usos_oauth.usos.api.model.CourseResponse;
@@ -23,11 +22,9 @@ public class UsosTemplate extends AbstractOAuth1ApiBinding {
         super(consumerKey, consumerSecret, accessToken, secret);
     }
 
-    public List<CourseEdition> getCourseEditions() {
+    public Map<String, List<CourseEdition>> getCourseEditions() {
         RestTemplate restTemplate = getRestTemplate();
-        CourseResponse response = restTemplate.getForObject(courseEditionsUri, CourseResponse.class);
-        assert response != null;
-        return response.getCourse_editions().get(Term.getAcademicTerm());
+        return restTemplate.getForObject(courseEditionsUri, CourseResponse.class).getCourse_editions();
     }
 
     public UsosUser getUser() {
