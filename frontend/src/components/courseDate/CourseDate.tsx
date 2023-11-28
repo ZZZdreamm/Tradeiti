@@ -29,7 +29,6 @@ export function CourseDateComponent({
     const radioInput = event.currentTarget.querySelector('input[type="radio"]');
     const spans = getAllElementsByClassName(event.currentTarget.classList[1]);
     if (radioInput) {
-      (radioInput as HTMLElement).click(); // Trigger a click on the radio input
       (radioInput as HTMLElement).click();
       for(let i = 0; i < spans.length; i++){
         (spans[i] as HTMLElement).style.borderRadius = '0px';
