@@ -14,4 +14,5 @@ public class Activity {
     private List<Long> lecturer_ids;
     private LangDict classtype_name;
     private List<String> lecturer_names = new ArrayList<>();
+    private String weekday = "";
 }
