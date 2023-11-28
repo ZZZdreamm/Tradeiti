@@ -10,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -31,9 +30,18 @@ public class UsosTemplate extends AbstractOAuth1ApiBinding {
         return response.getCourse_editions().get(Term.getAcademicTerm());
     }
 
-    public void getUser() {
+    public UsosUser getUser() {
         RestTemplate restTemplate = getRestTemplate();
-        restTemplate.getForObject(userUri, UsosUser.class);
+        return restTemplate.getForObject(userUri, UsosUser.class);
+    }
+
+    public UsosUser getUser(String userId) {
+        RestTemplate restTemplate = getRestTemplate();
+        URI uri = UriComponentsBuilder.fromUri(userUri)
+                .queryParam("user_id", userId)
+                .build()
+                .toUri();
+        return restTemplate.getForObject(uri, UsosUser.class);
     }
 
     public List<Activity> getUserGroups(Map<String, String> params){
@@ -45,31 +53,7 @@ public class UsosTemplate extends AbstractOAuth1ApiBinding {
         .build()
         .toUri();
       Activity[] response = restTemplate.getForObject(uri, Activity[].class);
-
       assert response != null;
-      List<Activity> filteredResponse = Arrays.stream(response)
-          .filter(entry -> !"Wykład".equals(entry.getClasstype_name().getPl()))
-          .toList();
-
-//      for (Activity activity : response) {
-//          updateLecturerInfo(activity);
-//      }
-
-      return filteredResponse;
-    }
-
-    private void updateLecturerInfo(Activity activity) {
-        RestTemplate restTemplate = getRestTemplate();
-        List<Long> lecturerIds = activity.getLecturer_ids();
-        URI uri = UriComponentsBuilder.fromUri(userUri)
-                .queryParam("user_id", lecturerIds)
-                .build()
-                .toUri();
-        for (int i = 0; i < lecturerIds.size(); i++) {
-//          W tym miejscu wali mi 401 - Unauthorized tak jakby jwt nie działał pomocy
-            UsosUser user = restTemplate.getForObject(uri, UsosUser.class);
-            assert user != null;
-            activity.getLecturer_names().add(user.getFirst_name() + " " + user.getLast_name());
-        }
+      return List.of(response);
     }
 }
