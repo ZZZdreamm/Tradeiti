@@ -17,7 +17,6 @@ export function CoursesList({ courses, handleOnClick }: Props) {
             handleOnClick={handleOnClick}
           />
         ))}
-      ;
     </>
   );
 }
