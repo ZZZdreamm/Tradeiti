@@ -45,7 +45,7 @@ export const Login = () => {
   };
 
   return (
-    <article className="login">
+    <article className="login"> 
       <Image src="TradeEITI.png" />
       <div className="formDiv">
         <h2>Login</h2>
