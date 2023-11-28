@@ -4,10 +4,11 @@
     width: 100%;
     margin: 5px 0px;
     cursor: pointer;
+    border-radius: 0px;
     transition: border-radius 0.2s ease-out;
 }
 
-.radioSpan:hover {
+.radioSpan:hover:not(.unavailable) {
     border-radius: 15px;
     transition: border-radius 0.2s ease-in-out;
 }
@@ -17,4 +18,13 @@
 }
 .opponentHour {
     background-color: rgb(107, 196, 142);
+    border-color: green;
 }
+
+.unavailable {
+    opacity: 50%;
+}
+
+// .unavailable input[type="radio"]{
+//     display: none;
+// }
