@@ -3,6 +3,7 @@ package com.example.usos_oauth.usos.service;
 import com.example.usos_oauth.usos.api.UsosTemplate;
 import com.example.usos_oauth.usos.api.model.Activity;
 import com.example.usos_oauth.usos.api.model.UsosUser;
+import com.example.usos_oauth.usos.service.exception.UsosAccountNotConnectedException;
 import lombok.AllArgsConstructor;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -18,7 +19,7 @@ public class UsosService {
 
     private UsosTemplate usosTemplate;
 
-    public boolean testConnection() {
+    public boolean isUserConnected() {
         try {
             usosTemplate.getUser();
             return true;
@@ -26,7 +27,14 @@ public class UsosService {
             return false;
         }
     }
+
+    private void assertUserIsConnected() {
+        if (!isUserConnected()) {
+            throw new UsosAccountNotConnectedException();
+        }
+    }
     public List<Activity> getUserGroups(String course_id, String term_id) {
+        assertUserIsConnected();
         Map<String, String> params = new HashMap<>();
         params.put("course_id", course_id);
         params.put("term_id", term_id);
