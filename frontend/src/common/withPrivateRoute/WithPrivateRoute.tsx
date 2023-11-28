@@ -15,6 +15,15 @@ export const withPrivateRoute = (WrappedComponent: any) => {
         navigate(login);
       } else if (mounted && connectedToUsos === false) {
         navigate(usosConnect);
+      } else if (
+        mounted &&
+        authenticated === true &&
+        connectedToUsos === true
+      ) {
+        const path = window.location.pathname;
+        if (path.includes(usosConnect) || path.includes("/login")) {
+          navigate("/#/");
+        }
       }
     }, [authenticated, loading, connectedToUsos]);
     return (
