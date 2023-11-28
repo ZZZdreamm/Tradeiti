@@ -14,7 +14,7 @@ export function CourseDateComponent({
   hourType = "",
 }: CourseDateProps) {
 
-  const getAllElementsByClassName = (className) => {
+  const getAllElementsByClassName = (className: string) => {
     return document.querySelectorAll(`.${className}`);
   };
 
@@ -26,9 +26,9 @@ export function CourseDateComponent({
     const radioInput = event.currentTarget.querySelector('input[type="radio"]');
     const spans = getAllElementsByClassName(event.currentTarget.classList[1]);
     if (radioInput) {
-      radioInput.click(); // Trigger a click on the radio input
+      (radioInput as HTMLElement).click(); // Trigger a click on the radio input
       for(let i = 0; i < spans.length; i++){
-        spans[i].style.borderRadius = '0px';
+        (spans[i] as HTMLElement).style.borderRadius = '0px';
       }
       event.currentTarget.style.borderRadius = '15px';
       handleChooseDate(date, hourType); // Call your custom handler if needed
