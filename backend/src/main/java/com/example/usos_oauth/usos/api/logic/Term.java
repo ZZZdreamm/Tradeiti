@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Term {
-    public static String getAcademicTerm() {
+    public static String getCurrentAcademicTerm() {
         Date currentDate = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 

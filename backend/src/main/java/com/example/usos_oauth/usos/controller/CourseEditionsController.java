@@ -1,9 +1,9 @@
 package com.example.usos_oauth.usos.controller;
 
 import com.example.usos_oauth.security.service.UserService;
-import com.example.usos_oauth.usos.api.UsosTemplate;
-import com.example.usos_oauth.usos.api.model.CourseEdition;
 import com.example.usos_oauth.usos.connect.UsosServiceProvider;
+import com.example.usos_oauth.usos.service.UsosService;
+import com.example.usos_oauth.usos.service.model.CourseDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.social.oauth1.OAuthToken;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +21,9 @@ public class CourseEditionsController {
     private UserService userService;
 
     @GetMapping
-    public List<CourseEdition> getCourseEditions() {
+    public List<CourseDTO> getCourseEditions() {
         OAuthToken token = userService.getCurrentUserToken();
-        UsosTemplate api = usosServiceProvider.getApi(token);
-        return api.getCourseEditions();
+        UsosService usos = usosServiceProvider.getUsosService(token);
+        return usos.getUserActiveCourses();
     }
 }
