@@ -1,5 +1,6 @@
 import { CourseDate } from "../../models/CourseDate";
 import { CourseDateComponent } from "../courseDate/CourseDate";
+import "./CourseHours.scss"
 
 interface Props {
   dates: CourseDate[];

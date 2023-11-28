@@ -1,0 +1,20 @@
+.radioSpan {
+    border: 2px solid steelblue;
+    padding: 10px;
+    width: 100%;
+    margin: 5px 0px;
+    cursor: pointer;
+    transition: border-radius 0.2s ease-out;
+}
+
+.radioSpan:hover {
+    border-radius: 15px;
+    transition: border-radius 0.2s ease-in-out;
+}
+
+.myHour {
+    background-color: rgb(132, 167, 196);
+}
+.opponentHour {
+    background-color: rgb(107, 196, 142);
+}
