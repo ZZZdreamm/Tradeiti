@@ -68,5 +68,7 @@ export function useCurrentUser() {
     setAuthenticated,
     setCurrentUser,
     connectedToUsos,
+    setConnectedToUsos,
+    setLoading,
   };
 }
