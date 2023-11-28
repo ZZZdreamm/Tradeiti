@@ -8,14 +8,36 @@
     border: 3px solid white;
 }
 
-.offerButton:hover:nth-child(1){
+.offerButton:hover:nth-child(2){
     background-color: rgb(42, 130, 42);
     border: 3px solid rgb(20, 185, 20);
     transition: border 1s ease, background-color 1s ease;
 }
 
-.offerButton:hover:nth-child(2) {
+.offerButton:hover:nth-child(3) {
     background-color: rgb(100, 21, 21);
     border: 3px solid rgb(185, 20, 20);
     transition: border 1s ease, background-color 1s ease;
+}
+
+.stageDiv {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addStage {
+    border: 2px solid var(--bar-color);
+    border-radius: 100px;
+    min-height: 30px;
+    padding: 10px;
+    font-weight: bold;
+    background-color: var(--course-color);
+    transition: background-color 1s ease-in-out, color 1s ease;
+}
+
+.currentStage {
+    background-color: var(--bar-color);
+    color: white;
 }

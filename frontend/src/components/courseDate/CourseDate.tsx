@@ -1,6 +1,6 @@
 import { CourseDate } from "../../models/CourseDate";
 import "./CourseDate.scss"
-// import {useState} from 'react'
+  // import {useState} from 'react'
 
 interface CourseDateProps {
   date: CourseDate;
@@ -23,6 +23,9 @@ export function CourseDateComponent({
   };
 
   const handleSpanClick = (event: React.MouseEvent<HTMLSpanElement>) => {
+    if(event.currentTarget && event.currentTarget.classList.contains('unavailable')){
+      return;
+    }
     const radioInput = event.currentTarget.querySelector('input[type="radio"]');
     const spans = getAllElementsByClassName(event.currentTarget.classList[1]);
     if (radioInput) {
@@ -31,7 +34,7 @@ export function CourseDateComponent({
         (spans[i] as HTMLElement).style.borderRadius = '0px';
       }
       event.currentTarget.style.borderRadius = '15px';
-      handleChooseDate(date, hourType); // Call your custom handler if needed
+      handleChooseDate(date, hourType);
     }
   };
 
