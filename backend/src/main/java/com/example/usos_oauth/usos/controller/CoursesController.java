@@ -14,13 +14,13 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("api/course-editions")
-public class CourseEditionsController {
+@RequestMapping("api/courses")
+public class CoursesController {
 
     private UsosServiceProvider usosServiceProvider;
     private UserService userService;
 
-    @GetMapping
+    @GetMapping("/user")
     public List<CourseDTO> getCourseEditions() {
         OAuthToken token = userService.getCurrentUserToken();
         UsosService usos = usosServiceProvider.getUsosService(token);
