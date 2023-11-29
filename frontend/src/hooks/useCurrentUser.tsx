@@ -50,6 +50,19 @@ export function useCurrentUser() {
   }, [authenticated, connectedToUsos]);
 
 
+  // Poprawie to później
+
+  // useEffect(() => {
+  //   if (!authenticated) return;
+  //   axiosBase.interceptors.request.use((config) => {
+  //     if (!config.headers.Authorization) {
+  //       config.headers.Authorization =
+  //         "Bearer " + localStorage.getItem(JWT_TOKEN);
+  //     }
+  //     return config;
+  //   });
+  // }, [authenticated]);
+
   return {
     mounted,
     currentUser,
