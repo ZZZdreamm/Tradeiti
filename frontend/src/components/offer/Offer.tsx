@@ -9,11 +9,8 @@ interface Props {
 }
 
 export function OfferComponent({ offer }: Props) {
-  // const { currentUser } = useCurrentUser();
   const handleAcceptOffer = () => {
-    acceptOffer(
-      // offer.offer_id, currentUser?.id
-      ).then((res) => {
+    acceptOffer(offer.offer_id).then((res) => {
       console.log(res);
     });
   };
@@ -22,8 +19,11 @@ export function OfferComponent({ offer }: Props) {
       <div className="offer-left">
         <h6>{offer.offer_id}</h6>
         <h6>{offer.course_name}</h6>
-        <span>{offer.lecturer}</span>
-        <span>{offer.start_time}</span>
+        <span>{offer.selled_date_data.lecturer}</span>
+        <span>
+          {offer.selled_date_data.course_day}{" "}
+          {offer.selled_date_data.course_time}
+        </span>
       </div>
       <div className="offer-right">
         <Button onClick={handleAcceptOffer}>Accept offer</Button>
