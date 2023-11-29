@@ -79,7 +79,6 @@ export function ChooseCourseHour() {
           type="button"
           className="regButton"
           onClick={handleSaving}
-          // disabled={!choosenMyHour || !choosenOpponentHour}
           disabled={!myHour || !opponentHour}
         >
           Zapisz

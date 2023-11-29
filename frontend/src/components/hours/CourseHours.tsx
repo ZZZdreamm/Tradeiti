@@ -6,12 +6,14 @@ interface Props {
   dates: CourseDateData[];
   handleChooseDate?: (date: CourseDateData, hourType: string) => void;
   hourType?: string;
+  choosenHour?: CourseDateData;
 }
 
 export function CourseHours({
   dates,
   handleChooseDate = () => {},
   hourType,
+  choosenHour,
 }: Props) {
   return (
     <>
@@ -22,6 +24,7 @@ export function CourseHours({
             date={date}
             handleChooseDate={handleChooseDate}
             hourType={hourType}
+            choosenHour={choosenHour}
           />
         ))}
     </>

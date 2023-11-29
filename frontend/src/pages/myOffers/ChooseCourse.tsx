@@ -46,7 +46,10 @@ export function ChooseCourse() {
         <h3>Wybierz przedmiot</h3>
       </div>
       <div className="coursesBox">
-        <CoursesList courses={courses} handleOnClick={handleOnCourseClick} />
+        <CoursesList
+          courses={courses}
+          handleOnClick={handleOnCourseClick}
+        />
       </div>
     </>
   );
