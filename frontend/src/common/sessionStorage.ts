@@ -19,6 +19,12 @@ export function removeFromSessionStorage(key: string) {
   sessionStorage.removeItem(key);
 }
 
+export function removeMultipleValuesFromSessionStorage(keys: string[]) {
+  keys.forEach((key) => {
+    removeFromSessionStorage(key);
+  });
+}
+
 export function clearSessionStorage() {
   sessionStorage.clear();
 }

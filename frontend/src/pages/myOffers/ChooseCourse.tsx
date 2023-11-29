@@ -6,7 +6,10 @@ import { useSearchParams } from "react-router-dom";
 import { useFormContext } from "react-hook-form";
 import { useQuery } from "react-query";
 import { getAllCourses } from "../../apiFunctions/getAllCourses";
-import { saveInSessionStorage } from "../../common/sessionStorage";
+import {
+  removeMultipleValuesFromSessionStorage,
+  saveInSessionStorage,
+} from "../../common/sessionStorage";
 
 export function ChooseCourse() {
   const { data: courses } = useQuery("courses", getAllCourses);
@@ -24,6 +27,7 @@ export function ChooseCourse() {
         myHour: "",
         opponentHour: "",
       });
+      removeMultipleValuesFromSessionStorage(["myHour", "opponentHour"]);
       setValue("course", course);
       saveInSessionStorage("course", JSON.stringify(course));
       setSearchParams({
@@ -31,7 +35,7 @@ export function ChooseCourse() {
         stage: "2",
       });
     },
-    [setSearchParams]
+    [setSearchParams, setValue, reset]
   );
   return (
     <>
