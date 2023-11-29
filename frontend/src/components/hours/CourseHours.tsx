@@ -1,17 +1,19 @@
-import { CourseDate } from "../../models/CourseDate";
+import { CourseDateData } from "../../models/CourseDate";
 import { CourseDateComponent } from "../courseDate/CourseDate";
-import "./CourseHours.scss"
+import "./CourseHours.scss";
 
 interface Props {
-  dates: CourseDate[];
-  handleChooseDate?: (date: CourseDate, hourType: string) => void;
+  dates: CourseDateData[];
+  handleChooseDate?: (date: CourseDateData, hourType: string) => void;
   hourType?: string;
+  choosenHour?: CourseDateData;
 }
 
 export function CourseHours({
   dates,
   handleChooseDate = () => {},
   hourType,
+  choosenHour,
 }: Props) {
   return (
     <>
@@ -22,6 +24,7 @@ export function CourseHours({
             date={date}
             handleChooseDate={handleChooseDate}
             hourType={hourType}
+            choosenHour={choosenHour}
           />
         ))}
     </>

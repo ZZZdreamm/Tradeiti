@@ -1,16 +1,19 @@
-import { CourseDate } from "../../models/CourseDate";
+import { useEffect } from "react";
+import { CourseDateData } from "../../models/CourseDate";
 import "./CourseDate.scss";
 
 interface CourseDateProps {
-  date: CourseDate;
-  handleChooseDate?: (date: CourseDate, hourType: string) => void;
+  date: CourseDateData;
+  handleChooseDate?: (date: CourseDateData, hourType: string) => void;
   hourType?: string;
+  choosenHour?: CourseDateData;
 }
 
 export function CourseDateComponent({
   date,
   handleChooseDate = () => {},
   hourType = "",
+  choosenHour,
 }: CourseDateProps) {
   const getAllElementsByClassName = (className: string) => {
     return document.querySelectorAll(`.${className}`);
@@ -59,10 +62,40 @@ export function CourseDateComponent({
     }
   };
 
+  useEffect(() => {
+    if (
+      choosenHour &&
+      choosenHour.course_day === date.course_day &&
+      choosenHour.course_time === date.course_time &&
+      choosenHour.lecturer === date.lecturer
+    ) {
+      const span = document.getElementById(
+        `radioSpan/${hourType}/${date.course_day}/${date.course_time}`
+      ) as HTMLElement;
+      // const spanFirstChild = span.firstChild as HTMLInputElement;
+      // console.log(span);
+      // span.classList.add("unavailable");
+      // span.style.borderRadius = "15px";
+      // spanFirstChild.checked = true;
+      // spanFirstChild.disabled = true;
+      // spanFirstChild.click();
+      span.click();
+    }
+  }, []);
+
   return (
-    <span className={`radioSpan ${hourType}`} onClick={handleSpanClick}>
-      <input type="radio" name={`hours/${hourType}`} onClick={handleChange} />{" "}
-      {date.course_day} - {date.course_time}
+    <span
+      id={`radioSpan/${hourType}/${date.course_day}/${date.course_time}`}
+      className={`radioSpan ${hourType}`}
+      onClick={handleSpanClick}
+    >
+      <div className="radioSpan-date">
+        <input type="radio" name={`hours/${hourType}`} onClick={handleChange} />{" "}
+        <div>
+          {date.course_day} - {date.course_time}
+        </div>
+      </div>
+      <div>{date.lecturer}</div>
     </span>
   );
 }

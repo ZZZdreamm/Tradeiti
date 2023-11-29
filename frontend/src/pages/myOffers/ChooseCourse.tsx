@@ -6,10 +6,11 @@ import { useSearchParams } from "react-router-dom";
 import { useFormContext } from "react-hook-form";
 import { useQuery } from "react-query";
 import { getAllCourses } from "../../apiFunctions/getAllCourses";
+import { saveInSessionStorage } from "../../common/sessionStorage";
 
 export function ChooseCourse() {
   const { data: courses } = useQuery("courses", getAllCourses);
-  const { setValue } = useFormContext();
+  const { setValue, reset } = useFormContext();
   const [_, setSearchParams] = useSearchParams();
 
   const handleBack = useCallback(() => {
@@ -18,7 +19,13 @@ export function ChooseCourse() {
 
   const handleOnCourseClick = useCallback(
     (course: CourseDto) => {
+      reset({
+        course: "",
+        myHour: "",
+        opponentHour: "",
+      });
       setValue("course", course);
+      saveInSessionStorage("course", JSON.stringify(course));
       setSearchParams({
         page: MyOffersSteps.MY_OFFERS_ADD,
         stage: "2",
@@ -35,10 +42,7 @@ export function ChooseCourse() {
         <h3>Wybierz przedmiot</h3>
       </div>
       <div className="coursesBox">
-        <CoursesList
-          courses={courses}
-          handleOnClick={handleOnCourseClick}
-        />
+        <CoursesList courses={courses} handleOnClick={handleOnCourseClick} />
       </div>
     </>
   );
