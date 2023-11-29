@@ -1,28 +1,33 @@
 .radioSpan {
-    border: 2px solid steelblue;
-    padding: 10px;
-    width: 100%;
-    margin: 5px 0px;
-    cursor: pointer;
-    border-radius: 0px;
-    transition: border-radius 0.2s ease-out;
+  border: 2px solid steelblue;
+  padding: 10px;
+  width: 100%;
+  margin: 5px 0px;
+  cursor: pointer;
+  border-radius: 0px;
+  transition: border-radius 0.2s ease-out;
+  &-date {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
 }
 
 .radioSpan:hover:not(.unavailable) {
-    border-radius: 15px;
-    transition: border-radius 0.2s ease-in-out;
+  border-radius: 15px;
+  transition: border-radius 0.2s ease-in-out;
 }
 
 .myHour {
-    background-color: rgb(132, 167, 196);
+  background-color: rgb(132, 167, 196);
 }
 .opponentHour {
-    background-color: rgb(107, 196, 142);
-    border-color: green;
+  background-color: rgb(107, 196, 142);
+  border-color: green;
 }
 
 .unavailable {
-    opacity: 50%;
+  opacity: 50%;
 }
 
 // .unavailable input[type="radio"]{
