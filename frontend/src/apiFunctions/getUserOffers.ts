@@ -3,7 +3,7 @@ import { mockedMyOffers } from "../mocks/MockedMyOffers";
 import { Offer } from "../models/Offer";
 
 export function getUserOffers() {
-  return new Promise((resolve, _) => {
+  return new Promise<Offer[]>((resolve, _) => {
     resolve(mockedMyOffers);
   });
   return axiosBase.get<Offer[]>(`/offers/user`).then((response) => {
