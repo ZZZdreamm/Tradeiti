@@ -8,9 +8,7 @@ function Courses() {
   const { data: courses } = useQuery("courses", getAllCourses);
   return (
     <section>
-      <div className="coursesBox">
-        <CoursesList courses={courses} />
-      </div>
+      <CoursesList courses={courses} />
     </section>
   );
 }

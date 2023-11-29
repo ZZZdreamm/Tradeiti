@@ -6,6 +6,7 @@ import "./style.scss";
 import { getOffers } from "../../apiFunctions/getOffers";
 import { searchOffers } from "../../apiFunctions/searchOffers";
 import { useState } from "react";
+import { Offer } from "../../models/Offer";
 
 const searchTableInputsLabels = [
   { label: "Offer ID", input: "offer_id" },
@@ -16,7 +17,7 @@ const searchTableInputsLabels = [
 
 const Offers = () => {
   const { data: offers } = useQuery("offers", getOffers);
-  const [searchedOffers, setSearchedOffers] = useState([]);
+  const [searchedOffers, setSearchedOffers] = useState<Offer[]>([]);
 
   const handleSearch = async (values: any) => {
     const { data } = await searchOffers(values);
@@ -30,7 +31,7 @@ const Offers = () => {
         handleOnSubmit={handleSearch}
       />
       <OffersList
-        offers={searchedOffers.length > 0 ? searchedOffers : offers?.data}
+        offers={searchedOffers.length > 0 ? searchedOffers : offers}
       />
     </div>
   );
