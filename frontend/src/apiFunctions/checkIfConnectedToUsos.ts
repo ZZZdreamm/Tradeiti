@@ -14,9 +14,5 @@ export function checkIfConnectedToUsos() {
     }
     return response.text();
   });
-  
-  return new Promise((resolve, _) => {
-    // reject("Not implemented");
-    resolve(true);
-  });
+
 }
