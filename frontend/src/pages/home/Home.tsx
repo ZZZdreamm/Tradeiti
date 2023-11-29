@@ -70,6 +70,7 @@ const Home = () => {
         <h5>Kacper Multan</h5>
         <h5>Artur Kempiński</h5>
         <h5>Jakub Kryczka</h5>
+        
       </div>
     </div>
   );
