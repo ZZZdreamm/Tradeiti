@@ -1,12 +1,14 @@
 import { useCallback } from "react";
 import { CoursesList } from "../../components/coursesList/CoursesList";
-import { MockedCourses } from "../../mocks/MockedCourses";
 import { MyOffersSteps } from "./MyOffersSteps";
-import { Course } from "../../models/Course";
+import { CourseDto } from "../../models/Course";
 import { useSearchParams } from "react-router-dom";
 import { useFormContext } from "react-hook-form";
+import { useQuery } from "react-query";
+import { getAllCourses } from "../../apiFunctions/getAllCourses";
 
 export function ChooseCourse() {
+  const { data: courses } = useQuery("courses", getAllCourses);
   const { setValue } = useFormContext();
   const [_, setSearchParams] = useSearchParams();
 
@@ -15,7 +17,7 @@ export function ChooseCourse() {
   }, [setSearchParams]);
 
   const handleOnCourseClick = useCallback(
-    (course: Course) => {
+    (course: CourseDto) => {
       setValue("course", course);
       setSearchParams({
         page: MyOffersSteps.MY_OFFERS_ADD,
@@ -34,7 +36,7 @@ export function ChooseCourse() {
       </div>
       <div className="coursesBox">
         <CoursesList
-          courses={MockedCourses}
+          courses={courses}
           handleOnClick={handleOnCourseClick}
         />
       </div>

@@ -1,9 +1,9 @@
-import { Course } from "../../models/Course";
+import { CourseDto } from "../../models/Course";
 import { CourseComponent } from "../course/Course";
 
 interface Props {
-  courses: Course[];
-  handleOnClick?: (course: Course) => void;
+  courses: CourseDto[];
+  handleOnClick?: (course: CourseDto) => void;
 }
 
 export function CoursesList({ courses, handleOnClick }: Props) {
