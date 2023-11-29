@@ -7,5 +7,5 @@ export async function searchOffers(searchValues: SearchOfferOptions) {
     res({ data: mockedOffers.filter((offer) => offer.status === "pending") });
   });
 
-  return await axiosBase.post("/search-offers", searchValues);
+  return await axiosBase.post("/offers/search", searchValues);
 }

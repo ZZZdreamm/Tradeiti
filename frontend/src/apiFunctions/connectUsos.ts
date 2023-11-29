@@ -1,35 +1,11 @@
 // import { axiosBase } from "../config/axiosConfig";
-import { apiBaseUrl } from "../config/axiosConfig";
-import { JWT_TOKEN } from "../config/constants";
+import { axiosBase } from "../config/axiosConfig";
 
 export async function connectUsos() {
-  // return axiosBase
-  //   .get(
-  //     "/usos/connect"
-  //     // , {
-  //     //   headers: {
-  //     //     Authorization: "Bearer " + localStorage.getItem(JWT_TOKEN),
-  //     //   },
-  //     // }
-  //   )
-  //   .then((response) => {
-  //     console.log(response.data);
-  //     return response.data;
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-
-  // console.log(response.data);
-  // return response.data;
-  return fetch(`${apiBaseUrl}/usos/connect`, {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem(JWT_TOKEN),
-    },
-  }).then((response) => {
+  return axiosBase.get(`/usos/connect`).then((response) => {
     if (response.status > 400) {
       throw new Error("Failed to connect to USOS");
     }
-    return response.text();
+    return response.data;
   });
 }
