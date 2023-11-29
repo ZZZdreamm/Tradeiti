@@ -31,7 +31,7 @@ export function AddOffer() {
         stage: "1",
       });
     } else if (
-      !path.includes("stage=2") &&
+      path.includes("stage=3") &&
       (!values.myHour || !values.opponentHour)
     ) {
       setSearchParams({

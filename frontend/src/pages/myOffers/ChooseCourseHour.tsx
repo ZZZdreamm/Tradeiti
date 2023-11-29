@@ -6,31 +6,16 @@ import { CourseDateData } from "../../models/CourseDate";
 import { CourseHours } from "../../components/hours/CourseHours";
 import { mockedCourseDates } from "../../mocks/MockedCourseDates";
 import { useFormContext } from "react-hook-form";
-import {
-  getFromSessionStorage,
-  saveInSessionStorage,
-} from "../../common/sessionStorage";
+import { saveInSessionStorage } from "../../common/sessionStorage";
 
 export function ChooseCourseHour() {
-  const { setValue } = useFormContext();
+  const { setValue, watch } = useFormContext();
   const [_, setSearchParams] = useSearchParams();
   const [myHours, setMyHours] = useState<CourseDateData[]>([]);
   const [opponentHours, setOpponentHours] = useState<CourseDateData[]>([]);
-  const [choosenMyHour, setChoosenMyHour] = useState<CourseDateData>(() => {
-    const hour = getFromSessionStorage("myHour");
-    if (hour) {
-      return JSON.parse(hour);
-    }
-    return undefined;
-  });
-  const [choosenOpponentHour, setChoosenOpponentHour] =
-    useState<CourseDateData>(() => {
-      const hour = getFromSessionStorage("opponentHour");
-      if (hour) {
-        return JSON.parse(hour);
-      }
-      return undefined;
-    });
+
+  const myHour: CourseDateData = watch("myHour");
+  const opponentHour: CourseDateData = watch("opponentHour");
 
   useEffect(() => {
     setMyHours(mockedCourseDates);
@@ -46,15 +31,10 @@ export function ChooseCourseHour() {
 
   const handleChoosingHour = useCallback(
     (date: CourseDateData, hourType: string) => {
-      if (hourType == "myHour") {
-        setChoosenMyHour(date);
-      } else {
-        setChoosenOpponentHour(date);
-      }
       setValue(hourType, date);
       saveInSessionStorage(hourType, JSON.stringify(date));
     },
-    []
+    [setValue, saveInSessionStorage]
   );
 
   const handleSaving = useCallback(() => {
@@ -80,7 +60,6 @@ export function ChooseCourseHour() {
               dates={myHours}
               handleChooseDate={handleChoosingHour}
               hourType="myHour"
-              choosenHour={choosenMyHour}
             />
           </div>
         </div>
@@ -91,7 +70,6 @@ export function ChooseCourseHour() {
               dates={opponentHours}
               handleChooseDate={handleChoosingHour}
               hourType="opponentHour"
-              choosenHour={choosenOpponentHour}
             />
           </div>
         </div>
@@ -101,7 +79,7 @@ export function ChooseCourseHour() {
           type="button"
           className="regButton"
           onClick={handleSaving}
-          disabled={!choosenMyHour || !choosenOpponentHour}
+          disabled={!myHour || !opponentHour}
         >
           Zapisz
         </button>
