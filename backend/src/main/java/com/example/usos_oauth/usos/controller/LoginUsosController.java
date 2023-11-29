@@ -2,8 +2,8 @@ package com.example.usos_oauth.usos.controller;
 
 import com.example.usos_oauth.security.model.User;
 import com.example.usos_oauth.security.service.UserService;
-import com.example.usos_oauth.usos.api.Usos;
 import com.example.usos_oauth.usos.connect.UsosServiceProvider;
+import com.example.usos_oauth.usos.service.UsosService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.view.RedirectView;
 
 @RequiredArgsConstructor
@@ -54,15 +53,12 @@ public class LoginUsosController {
 
     @GetMapping("/check-connection")
     public ResponseEntity<String> checkConnection() {
-        try {
-            OAuthToken token = userService.getCurrentUserToken();
-            Usos api = usosServiceProvider.getApi(token);
-            api.getUser();
-            return ResponseEntity.ok("200 OK");
-        } catch (HttpClientErrorException.Unauthorized e) {
-            return ResponseEntity.status(HttpStatus.PROXY_AUTHENTICATION_REQUIRED).body("Token has expired");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
+        OAuthToken token = userService.getCurrentUserToken();
+        UsosService usos = usosServiceProvider.getUsosService(token);
+        if (usos.isUserConnected()) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.PROXY_AUTHENTICATION_REQUIRED);
         }
     }
 }
