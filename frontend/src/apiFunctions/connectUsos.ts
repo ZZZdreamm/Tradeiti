@@ -27,6 +27,9 @@ export async function connectUsos() {
       Authorization: "Bearer " + localStorage.getItem(JWT_TOKEN),
     },
   }).then((response) => {
+    if (response.status > 400) {
+      throw new Error("Failed to connect to USOS");
+    }
     return response.text();
   });
 }

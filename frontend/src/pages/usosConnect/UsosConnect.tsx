@@ -1,9 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import { connectUsos } from "../../apiFunctions/connectUsos";
+import { removeJwtToken } from "../../auth/JwtToken";
 
 export function UsosConnect() {
+  const navigate = useNavigate();
   const getToken = async () => {
-    const authorizeUrl = await connectUsos();
-    window.location.href = authorizeUrl;
+    connectUsos()
+      .then((response) => {
+        window.location.href = response;
+      })
+      .catch(() => {
+        removeJwtToken();
+        navigate("/login?redirected=true");
+      });
   };
   return (
     <div>
