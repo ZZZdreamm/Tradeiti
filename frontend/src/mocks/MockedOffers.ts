@@ -1,4 +1,5 @@
 import { Offer } from "../models/Offer";
+import { OfferStatus } from "../models/OfferStatus";
 
 export const mockedOffers: Offer[] = [
   {
@@ -8,7 +9,7 @@ export const mockedOffers: Offer[] = [
     lecturer: "Lecturer tomek",
     requester_id: "user1",
     accepter_id: "user2",
-    status: "accepted",
+    status: OfferStatus.accepted,
   },
   {
     offer_id: "2",
@@ -17,7 +18,7 @@ export const mockedOffers: Offer[] = [
     lecturer: "Lecturer 2",
     requester_id: "user3",
     accepter_id: "user4",
-    status: "pending",
+    status: OfferStatus.pending,
   },
   {
     offer_id: "3",
@@ -26,7 +27,7 @@ export const mockedOffers: Offer[] = [
     lecturer: "Lecturer 3",
     requester_id: "user5",
     accepter_id: "user6",
-    status: "ongoing",
+    status: OfferStatus.pending,
   },
   {
     offer_id: "4",
@@ -35,7 +36,7 @@ export const mockedOffers: Offer[] = [
     lecturer: "Lecturer 3",
     requester_id: "user5",
     accepter_id: "user6",
-    status: "ongoing",
+    status: OfferStatus.accepted,
   },
   {
     offer_id: "5",
@@ -44,7 +45,7 @@ export const mockedOffers: Offer[] = [
     lecturer: "Lecturer 3",
     requester_id: "user5",
     accepter_id: "user6",
-    status: "ongoing",
+    status: OfferStatus.pending,
   },
   {
     offer_id: "6",
@@ -53,7 +54,7 @@ export const mockedOffers: Offer[] = [
     lecturer: "Lecturer 3",
     requester_id: "user5",
     accepter_id: "user6",
-    status: "ongoing",
+    status: OfferStatus.pending,
   },
   {
     offer_id: "7",
@@ -62,7 +63,7 @@ export const mockedOffers: Offer[] = [
     lecturer: "Lecturer 3",
     requester_id: "user5",
     accepter_id: "user6",
-    status: "ongoing",
+    status: OfferStatus.pending,
   },
   {
     offer_id: "8",
@@ -71,51 +72,6 @@ export const mockedOffers: Offer[] = [
     lecturer: "Lecturer 3",
     requester_id: "user5",
     accepter_id: "user6",
-    status: "ongoing",
-  },
-  {
-    offer_id: "9",
-    course_name: "Offer 3",
-    start_time: "2023-11-19T12:45:00",
-    lecturer: "Lecturer 3",
-    requester_id: "user5",
-    accepter_id: "user6",
-    status: "ongoing",
-  },
-  {
-    offer_id: "10",
-    course_name: "Offer 3",
-    start_time: "2023-11-19T12:45:00",
-    lecturer: "Lecturer 3",
-    requester_id: "user5",
-    accepter_id: "user6",
-    status: "ongoing",
-  },
-  {
-    offer_id: "11",
-    course_name: "Offer 3",
-    start_time: "2023-11-19T12:45:00",
-    lecturer: "Lecturer 3",
-    requester_id: "user5",
-    accepter_id: "user6",
-    status: "ongoing",
-  },
-  {
-    offer_id: "13",
-    course_name: "Offer 3",
-    start_time: "2023-11-19T12:45:00",
-    lecturer: "Lecturer 3",
-    requester_id: "user5",
-    accepter_id: "user6",
-    status: "ongoing",
-  },
-  {
-    offer_id: "14",
-    course_name: "Offer 3",
-    start_time: "2023-11-19T12:45:00",
-    lecturer: "Lecturer 3",
-    requester_id: "user5",
-    accepter_id: "user6",
-    status: "ongoing",
+    status: OfferStatus.pending,
   },
 ];
