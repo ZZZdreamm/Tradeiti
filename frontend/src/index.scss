@@ -19,6 +19,7 @@
   --white-color: #ffffff;
   --course-color: rgb(200, 204, 225);
   --bar-color: rgb(58, 65, 93);
+  --hue: 223;
 }
 
 * {
@@ -158,6 +159,6 @@ label {
   display: flex;
 }
 
-.gap-4{
+.gap-4 {
   gap: 4px;
 }

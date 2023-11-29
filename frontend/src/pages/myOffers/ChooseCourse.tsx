@@ -45,12 +45,7 @@ export function ChooseCourse() {
         </button>
         <h3>Wybierz przedmiot</h3>
       </div>
-      <div className="coursesBox">
-        <CoursesList
-          courses={courses}
-          handleOnClick={handleOnCourseClick}
-        />
-      </div>
+      <CoursesList courses={courses} handleOnClick={handleOnCourseClick} />
     </>
   );
 }

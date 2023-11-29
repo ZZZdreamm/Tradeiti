@@ -14,6 +14,10 @@ const titleAndNavigation = [
     title: "MOJE OFERTY",
     navigation: "myOffers",
   },
+  {
+    title: "WYSŁANE OFERTY",
+    navigation: "offerRequests",
+  },
   { title: "KURSY", navigation: "courses" },
 ];
 

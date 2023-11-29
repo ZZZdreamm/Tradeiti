@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { acceptOffer } from "../../apiFunctions/acceptOffer";
 import { Button } from "../../common/button/Button";
 // import { useCurrentUser } from "../../hooks/useCurrentUser";
@@ -9,10 +10,18 @@ interface Props {
 }
 
 export function OfferComponent({ offer }: Props) {
+  const navigate = useNavigate();
   const handleAcceptOffer = () => {
-    acceptOffer(offer.offer_id).then((res) => {
-      console.log(res);
-    });
+    acceptOffer(offer.offer_id)
+      .then((res) => {
+        console.log(res);
+        alert("Offer acceptance request sent");
+        navigate(0);
+      })
+      .catch(() => {
+        alert("Something went wrong");
+        navigate(0);
+      });
   };
   return (
     <div className="offer">

@@ -3,6 +3,7 @@ import { PrivateHome } from "../pages/home/Home";
 import { Login } from "../pages/login/Login";
 import { PrivateMyOffers } from "../pages/myOffers/MyOffers";
 import { PrivateNews } from "../pages/news/News";
+import { PrivateOfferRequests } from "../pages/offerRequests/OfferRequests";
 import { PrivateOffers } from "../pages/offers/Offers";
 import { Redirect } from "../pages/redirect/Redirect";
 import { Register } from "../pages/register/Register";
@@ -20,6 +21,7 @@ export const privateRoutes = [
   { path: "/myOffers", element: <PrivateMyOffers /> },
   { path: "/news", element: <PrivateNews /> },
   { path: "/courses", element: <PrivateCourses /> },
+  { path: "/offerRequests", element: <PrivateOfferRequests /> },
   { path: "/", element: <PrivateHome /> },
   { path: "*", element: <PrivateHome /> },
 ];
