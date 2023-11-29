@@ -1,4 +1,5 @@
 import { Offer } from "../models/Offer";
+import { OfferStatus } from "../models/OfferStatus";
 
 export const mockedMyOffers: Offer[] = [
   {
@@ -8,7 +9,7 @@ export const mockedMyOffers: Offer[] = [
     lecturer: "Lecturer tomek",
     requester_id: "user1",
     accepter_id: "user2",
-    status: "accepted",
+    status: OfferStatus.accepted,
   },
   {
     offer_id: "2",
@@ -17,7 +18,7 @@ export const mockedMyOffers: Offer[] = [
     lecturer: "Lecturer 2",
     requester_id: "user3",
     accepter_id: "user4",
-    status: "pending",
+    status: OfferStatus.pending,
   },
   {
     offer_id: "3",
@@ -26,6 +27,6 @@ export const mockedMyOffers: Offer[] = [
     lecturer: "Lecturer 3",
     requester_id: "user5",
     accepter_id: "user6",
-    status: "ongoing",
+    status: OfferStatus.pending,
   }
 ];
