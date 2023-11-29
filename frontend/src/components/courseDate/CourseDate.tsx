@@ -1,20 +1,22 @@
 import { useEffect } from "react";
 import { CourseDateData } from "../../models/CourseDate";
 import "./CourseDate.scss";
+import { useFormContext } from "react-hook-form";
 
 interface CourseDateProps {
   date: CourseDateData;
   handleChooseDate?: (date: CourseDateData, hourType: string) => void;
   hourType?: string;
-  choosenHour?: CourseDateData;
 }
 
 export function CourseDateComponent({
   date,
   handleChooseDate = () => {},
   hourType = "",
-  choosenHour,
 }: CourseDateProps) {
+  const { watch } = useFormContext();
+  const choosenHour: CourseDateData = watch(hourType);
+
   const getAllElementsByClassName = (className: string) => {
     return document.querySelectorAll(`.${className}`);
   };
@@ -72,13 +74,6 @@ export function CourseDateComponent({
       const span = document.getElementById(
         `radioSpan/${hourType}/${date.course_day}/${date.course_time}`
       ) as HTMLElement;
-      // const spanFirstChild = span.firstChild as HTMLInputElement;
-      // console.log(span);
-      // span.classList.add("unavailable");
-      // span.style.borderRadius = "15px";
-      // spanFirstChild.checked = true;
-      // spanFirstChild.disabled = true;
-      // spanFirstChild.click();
       span.click();
     }
   }, []);
