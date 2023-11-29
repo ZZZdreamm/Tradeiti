@@ -1,11 +1,13 @@
 import { useSearchParams } from "react-router-dom";
 import { ElementsContainer } from "../../components/elementsContainer/ElementsContainer";
 import { MyOffersList } from "../../components/offer/MyOffersList";
-import { mockedMyOffers } from "../../mocks/MockedMyOffers";
 import { MyOffersSteps } from "./MyOffersSteps";
+import { useQuery } from "react-query";
+import { getUserOffers } from "../../apiFunctions/getUserOffers";
 
 export function ShowOffers() {
   const [_, setSearchParams] = useSearchParams();
+  const { data: offers } = useQuery("userOffers", getUserOffers);
 
   const handleAddOffer = () => {
     setSearchParams({
@@ -18,11 +20,8 @@ export function ShowOffers() {
       <button className="offerButton" onClick={handleAddOffer}>
         Dodaj ofertę <b>+</b>
       </button>
-      {/* <button className="offerButton">
-        Usuń ofertę <b>-</b>
-      </button> */}
       <ElementsContainer>
-        <MyOffersList offers={mockedMyOffers} />
+        <MyOffersList offers={offers} />
       </ElementsContainer>
     </>
   );

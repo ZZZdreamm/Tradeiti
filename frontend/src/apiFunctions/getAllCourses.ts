@@ -1,12 +1,7 @@
-import { apiBaseUrl } from "../config/axiosConfig";
-import { JWT_TOKEN } from "../config/constants";
+import { axiosBase } from "../config/axiosConfig";
 
 export function getAllCourses() {
-  return fetch(`${apiBaseUrl}/courses/user`, {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem(JWT_TOKEN),
-    },
-  }).then((response) => {
-    return response.json();
+  return axiosBase.get(`/courses/user`).then((response) => {
+    return response.data;
   });
 }

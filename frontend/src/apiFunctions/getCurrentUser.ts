@@ -1,13 +1,5 @@
-import { apiBaseUrl } from "../config/axiosConfig";
-import { JWT_TOKEN } from "../config/constants";
+import { axiosBase } from "../config/axiosConfig";
 
 export function getCurrentUser() {
-  // return axiosBase.get("/auth/test-token");
-  return fetch(`${apiBaseUrl}/auth/test-token`, {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem(JWT_TOKEN),
-    },
-  }).then((response) => {
-    return response.text();
-  });
+  return axiosBase.get("/auth/test-token");
 }

@@ -1,6 +1,6 @@
 import { axiosBase } from "../config/axiosConfig";
-import { Offer } from "../models/Offer";
+import { OfferCreationDto } from "../models/OfferCreationDto";
 
-export function addOffer(offer:Offer){
+export function addOffer(offer:OfferCreationDto){
     return axiosBase.post("/add-offer", offer);
 }

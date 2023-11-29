@@ -32,7 +32,7 @@ const Home = () => {
       </p>
       <img src="exchange.png" width="200px" />
       <h2>Jak działają wymiany?</h2>
-      <p>
+      <span>
         Wymiany odbywają się na określonych zasadach:
         <ul>
           <li>
@@ -62,7 +62,7 @@ const Home = () => {
           </li>
           <li>Zatwierdzonej oferty nie można cofnąć.</li>
         </ul>
-      </p>
+      </span>
       <div className="authors">
         <img src="authorsIcon.png" width="200px" />
         <h2>Autorzy</h2>
@@ -70,6 +70,7 @@ const Home = () => {
         <h5>Kacper Multan</h5>
         <h5>Artur Kempiński</h5>
         <h5>Jakub Kryczka</h5>
+        
       </div>
     </div>
   );

@@ -13,23 +13,26 @@ import { useNavigate } from "react-router-dom";
 export const Login = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
-  const { setLoading, setConnectedToUsos } = useAuthContext();
+  const { setLoading, setConnectedToUsos, setAuthenticated } = useAuthContext();
 
   const handleLogin = async (userCredentials: UserCredentials) => {
     login(userCredentials)
       .then((response) => {
         if (response.token) {
           saveToken(response.token);
+          setAuthenticated(true);
           checkIfConnectedToUsos()
             .then(() => {
               setConnectedToUsos(true);
               setLoading(false);
               navigate("/#/");
+              window.location.reload();
             })
             .catch((err) => {
               console.log(err);
               setConnectedToUsos(false);
               navigate("/#/usos-connect");
+              window.location.reload();
             });
         }
       })
