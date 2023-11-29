@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { axiosBase } from "../config/axiosConfig";
-import { ACCESS_TOKEN } from "../config/constants";
 import { getCurrentUser } from "../apiFunctions/getCurrentUser";
 import { removeJwtToken } from "../auth/JwtToken";
 import { useNavigate } from "react-router-dom";
@@ -34,6 +32,7 @@ export function useCurrentUser() {
         console.log(err);
         removeJwtToken();
         setAuthenticated(false);
+        navigate("/login?redirected=true");
       });
   }, []);
 
@@ -50,15 +49,6 @@ export function useCurrentUser() {
       });
   }, [authenticated, connectedToUsos]);
 
-  useEffect(() => {
-    if (!authenticated && !currentUser) return;
-    axiosBase.interceptors.request.use((config) => {
-      config.headers["Authorization"] = `Bearer ${localStorage.getItem(
-        ACCESS_TOKEN
-      )}`;
-      return config;
-    });
-  }, [authenticated, currentUser]);
 
   return {
     mounted,

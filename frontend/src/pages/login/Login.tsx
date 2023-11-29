@@ -8,8 +8,10 @@ import { saveToken } from "../../auth/JwtToken";
 import { useState } from "react";
 import { checkIfConnectedToUsos } from "../../apiFunctions/checkIfConnectedToUsos";
 import { useAuthContext } from "../../providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
+  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
   const { setLoading, setConnectedToUsos } = useAuthContext();
 
@@ -22,12 +24,12 @@ export const Login = () => {
             .then(() => {
               setConnectedToUsos(true);
               setLoading(false);
-              window.location.href = "/#/";
+              navigate("/#/");
             })
             .catch((err) => {
               console.log(err);
               setConnectedToUsos(false);
-              window.location.href = "/#/usos-connect";
+              navigate("/#/usos-connect");
             });
         }
       })
@@ -45,7 +47,7 @@ export const Login = () => {
   };
 
   return (
-    <article className="login"> 
+    <article className="login">
       <Image src="TradeEITI.png" />
       <div className="formDiv">
         <h2>Login</h2>
