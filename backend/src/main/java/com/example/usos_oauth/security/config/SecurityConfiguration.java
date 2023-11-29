@@ -34,7 +34,8 @@ public class SecurityConfiguration {
                                 "/api/auth/register",
                                 "/api/auth/login",
                                 "/api/usos/authorize-token",
-                                "/error"
+                                "/error",
+                                "/api/docs/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
