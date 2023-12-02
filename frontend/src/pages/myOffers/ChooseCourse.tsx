@@ -44,6 +44,7 @@ export function ChooseCourse() {
           Powrót
         </button>
         <h3>Wybierz przedmiot</h3>
+        <div></div>
       </div>
       <CoursesList courses={courses} handleOnClick={handleOnCourseClick} />
     </>

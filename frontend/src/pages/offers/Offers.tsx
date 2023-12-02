@@ -9,10 +9,10 @@ import { useState } from "react";
 import { Offer } from "../../models/Offer";
 
 const searchTableInputsLabels = [
-  { label: "Offer ID", input: "offer_id" },
-  { label: "Course name", input: "course_name" },
-  { label: "Lecturer", input: "lecturer" },
-  { label: "Start time", input: "start_time" },
+  { label: "ID", input: "offer_id" },
+  { label: "Zajęcia", input: "course_name" },
+  { label: "Prowadzący", input: "lecturer" },
+  { label: "Termin", input: "start_time" },
 ];
 
 const Offers = () => {

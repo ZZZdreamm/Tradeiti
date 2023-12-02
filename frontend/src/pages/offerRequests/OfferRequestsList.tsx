@@ -8,7 +8,7 @@ interface Props {
 
 export function OfferRequestsList({ offerRequests }: Props) {
   return (
-    <div>
+    <div className="requestList">
       {offerRequests ? (
         offerRequests.map((offerRequest) => (
           <OfferRequest
