@@ -5,7 +5,7 @@ import "./CourseHours.scss";
 
 interface Props {
   dates: CourseDateData[];
-  handleChooseDate?: (date: CourseDateData, hourType: string) => void;
+  handleChooseDate?: (date: CourseDateData | null, hourType: string) => void;
   hourType?: string;
 }
 
