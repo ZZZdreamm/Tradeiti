@@ -102,7 +102,7 @@ export const mockedOffers: Offer[] = [
     },
     requester_id: "user5",
     accepter_id: "user6",
-    status: OfferStatus.pending,
+    status: OfferStatus.requested,
   },
   {
     offer_id: "7",
@@ -119,7 +119,7 @@ export const mockedOffers: Offer[] = [
     },
     requester_id: "user5",
     accepter_id: "user6",
-    status: OfferStatus.pending,
+    status: OfferStatus.finalized,
   },
   {
     offer_id: "8",
@@ -136,6 +136,6 @@ export const mockedOffers: Offer[] = [
     },
     requester_id: "user5",
     accepter_id: "user6",
-    status: OfferStatus.pending,
+    status: OfferStatus.failed,
   },
 ];

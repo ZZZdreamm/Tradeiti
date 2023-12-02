@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { useFormContext } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import { MyOffersSteps } from "./MyOffersSteps";
+import "./FinalizeOffer.scss"
 
 export function FinalizeOffer() {
   const { getValues } = useFormContext();
@@ -22,19 +23,25 @@ export function FinalizeOffer() {
           Powrót
         </button>
         <h3>Podsumowanie oferty</h3>
+        <div></div>
       </div>
       {values.course && values.myHour && values.opponentHour && (
-        <ul>
-          <li>Id przedmiotu: {values.course.course_id}</li>
-          <li>Nazwa przedmiotu: {values.course.course_name}</li>
+        <ul className = 'offerDataList'>
+          <li><b></b>ID przedmiotu:  <b>{values.course.course_id}</b></li>
+          <li>Nazwa przedmiotu: <b>{values.course.course_name}</b></li>
+          <div className="exchangeHours">
           <li>
-            Moja dzien i godzina: {values.myHour.course_day}{" "}
+            <b>Oddajesz:</b> <br /> <br />
+            {values.myHour.course_day} <br />
             {values.myHour.course_time}
           </li>
+          <div className="arrowAnim"></div>
           <li>
-            Dzien i godzina oponenta: {values.opponentHour.course_day}{" "}
+            <b>Otrzymasz:</b> <br /><br />
+            {values.opponentHour.course_day}<br />
             {values.opponentHour.course_time}
           </li>
+          </div>
         </ul>
       )}
       <div className="lower">

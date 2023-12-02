@@ -5,7 +5,7 @@ import { useFormContext } from "react-hook-form";
 
 interface CourseDateProps {
   date: CourseDateData;
-  handleChooseDate?: (date: CourseDateData, hourType: string) => void;
+  handleChooseDate?: (date: CourseDateData | null, hourType: string) => void;
   hourType?: string;
 }
 
@@ -44,19 +44,24 @@ export function CourseDateComponent({
         ) {
           const oppSpans = getAllElementsByClassName("opponentHour");
           for (let o = 0; o < oppSpans.length; o++) {
-            const oppenentSpan = oppSpans[o] as HTMLElement;
-            const spanFirstChild = oppenentSpan.firstChild as HTMLInputElement;
-            if (oppenentSpan.classList.contains("unavailable")) {
-              oppenentSpan.classList.remove("unavailable");
-              spanFirstChild.disabled = false;
+            const opponentSpan = oppSpans[o] as HTMLElement;
+            const radioSpan = opponentSpan.querySelectorAll(`.radioSpan-date`)[0];
+            const spanInput = radioSpan.firstChild as HTMLInputElement;
+            if (opponentSpan.classList.contains("unavailable")) {
+              opponentSpan.classList.remove("unavailable");
+              spanInput.disabled = false;
             }
           }
           const op2Span = oppSpans[i] as HTMLElement;
-          const op2SpanFirstChild = op2Span.firstChild as HTMLInputElement;
+          const op2RadioSpan = op2Span.querySelectorAll(`.radioSpan-date`)[0];
+          const op2Input = op2RadioSpan.firstChild as HTMLInputElement;
           op2Span.classList.add("unavailable");
           op2Span.style.borderRadius = "0px";
-          op2SpanFirstChild.disabled = true;
-          op2SpanFirstChild.checked = false;
+          if(op2Input.checked){
+            op2Input.checked = false;
+            handleChooseDate(null, 'opponentHour')
+          }
+          op2Input.disabled = true;
         }
       }
       event.currentTarget.style.borderRadius = "15px";

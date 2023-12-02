@@ -51,6 +51,6 @@ export const mockedMyOffers: Offer[] = [
     },
     requester_id: "user5",
     accepter_id: "user6",
-    status: OfferStatus.pending,
+    status: OfferStatus.failed,
   },
 ];

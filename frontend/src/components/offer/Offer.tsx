@@ -26,16 +26,20 @@ export function OfferComponent({ offer }: Props) {
   return (
     <div className="offer">
       <div className="offer-left">
-        <h6>{offer.offer_id}</h6>
-        <h6>{offer.course_name}</h6>
-        <span>{offer.selled_date_data.lecturer}</span>
-        <span>
-          {offer.selled_date_data.course_day}{" "}
-          {offer.selled_date_data.course_time}
-        </span>
+        <p>ID: {"\t"}<b>{offer.offer_id}</b></p>
+        <p>Przedmiot: <b>{offer.course_name}</b></p>
+        <p>Prowadzący: <b>{offer.selled_date_data.lecturer}</b></p>
+        <p>
+          Termin: {" "}
+          <b>
+            {offer.selled_date_data.course_day}
+            {" "}
+            {offer.selled_date_data.course_time}
+          </b>
+        </p>
       </div>
       <div className="offer-right">
-        <Button onClick={handleAcceptOffer}>Accept offer</Button>
+        <Button className="acceptButton" onClick={handleAcceptOffer}>Akceptuj</Button>
       </div>
     </div>
   );

@@ -1,0 +1,55 @@
+.offerDataList {
+    list-style-type: none;
+    padding: 15px;
+    margin: 30px;
+    border: 3px  inset #1B3B6F;
+    border-radius: 40px;
+    font-size: 20px
+}
+
+.offerDataList b {
+    color: #1B3B6F
+}
+
+.offerDataList li {
+    padding: 5px;
+    margin: 15px;
+}
+
+
+.exchangeHours {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.exchangeHours li {
+    padding: 20px;
+    display: block;
+    border: 3px dotted #1B3B6F;
+    border-radius: 30px;
+    min-width: 300px;
+}
+
+
+.arrowAnim {
+    width:40px;
+    height:30px;
+    display:grid;
+  }
+  .arrowAnim:before,
+  .arrowAnim:after {
+    content: "";
+    grid-area: 1/1;
+    background: steelblue;
+    clip-path: polygon(0 10px,calc(100% - 15px) 10px,calc(100% - 15px) 0,100% 50%,calc(100% - 15px) 100%,calc(100% - 15px) calc(100% - 10px),0 calc(100% - 10px));
+    animation: a4 .5s infinite alternate;
+  }
+
+  .arrowAnim:after {
+    --s:-1;
+  }
+  @keyframes a4 {
+    0%  {transform: scale(var(--s,1)) translate(12px,-6px) translate(4px)}
+    100%{transform: scale(var(--s,1)) translate(12px,-6px) translate(-4px)}
+  }

@@ -30,7 +30,7 @@ export function ChooseCourseHour() {
   }, [setSearchParams]);
 
   const handleChoosingHour = useCallback(
-    (date: CourseDateData, hourType: string) => {
+    (date: CourseDateData | null, hourType: string) => {
       setValue(hourType, date);
       saveInSessionStorage(hourType, JSON.stringify(date));
     },
@@ -51,6 +51,7 @@ export function ChooseCourseHour() {
           Powrót
         </button>
         <h3>Wybierz godziny przedmiotu</h3>
+        <div></div>
       </div>
       <article>
         <div>

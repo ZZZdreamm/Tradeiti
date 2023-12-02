@@ -18,17 +18,17 @@ export function SearchTable({ inputsLabels, handleOnSubmit }: Props) {
   return (
     <form className="searchTable" onSubmit={handleSubmit(onSubmit)}>
       <ElementsContainer>
-        <div className="searchTable-header bold">Filters</div>
+        <div className="searchTable-header bold">Filtry</div>
         <div className="searchTable-body">
           {inputsLabels.map((value, index) => (
             <div key={index}>
-              <label>{value.label}</label>
+              <label><b>{value.label}:</b></label>
               <input {...register(value.input)} />
             </div>
           ))}
         </div>
         <div className="searchTable-footer">
-          <Button type="submit">Apply</Button>
+          <Button className="filterButton" type="submit">Filtruj</Button>
         </div>
       </ElementsContainer>
     </form>

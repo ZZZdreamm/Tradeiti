@@ -1,0 +1,52 @@
+.requestDiv {
+    padding: 20px;
+    border: 5px solid steelblue;
+    border-radius: 30px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.requestDiv span:nth-child(2).accepted{
+    color: green;
+    font-weight: bold;
+}
+
+.requestDiv span:nth-child(2).accepted::after{
+    content: " ✔️";
+}
+
+.requestDiv span:nth-child(2).pending{
+    color: gray;
+    font-weight: bold;
+}
+
+.requestDiv span:nth-child(2).pending::after{
+    content: " 🕐";
+}
+
+.requestDiv span:nth-child(2).failed{
+    color: rgb(184, 0, 0);
+    font-weight: bold;
+}
+
+.requestDiv span:nth-child(2).failed::after{
+    content: " ❌";
+}
+.requestDiv span:nth-child(2).requested{
+    color: rgb(184, 114, 0);
+    font-weight: bold;
+}
+
+.requestDiv span:nth-child(2).requested::after{
+    content: " ⏳";
+}
+.requestDiv span:nth-child(2).finalized{
+    color: rgb(44, 41, 41);
+    font-weight: bold;
+}
+
+.requestDiv span:nth-child(2).finalized::after{
+    content: " 🍻";
+}
