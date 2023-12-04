@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class Activity {
-    private LangDict name;
+    private int group_number;
     private String start_time;
     private String end_time;
     private LangDict course_name;

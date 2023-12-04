@@ -22,7 +22,7 @@ public class UsosTemplate extends AbstractOAuth1ApiBinding {
         super(consumerKey, consumerSecret, accessToken, secret);
     }
 
-    public Map<String, List<CourseEdition>> getCourseEditions() {
+    public Map<String, List<CourseEdition>> getUserCourseEditions() {
         RestTemplate restTemplate = getRestTemplate();
         return restTemplate.getForObject(courseEditionsUri, CourseResponse.class).getCourse_editions();
     }
@@ -41,12 +41,12 @@ public class UsosTemplate extends AbstractOAuth1ApiBinding {
         return restTemplate.getForObject(uri, UsosUser.class);
     }
 
-    public List<Activity> getUserGroups(Map<String, String> params){
+    public List<Activity> getCourseActivities(String course_id, String term_id){
       RestTemplate restTemplate = getRestTemplate();
       URI uri = UriComponentsBuilder.fromUri(userGroups)
-        .queryParam("course_id", params.get("course_id"))
-        .queryParam("term_id", params.get("term_id"))
-        .queryParam("fields", "name|start_time|end_time|course_name|lecturer_ids|classtype_name")
+        .queryParam("course_id", course_id)
+        .queryParam("term_id", term_id)
+        .queryParam("fields", "group_number|start_time|end_time|course_name|lecturer_ids|classtype_name")
         .build()
         .toUri();
       Activity[] response = restTemplate.getForObject(uri, Activity[].class);

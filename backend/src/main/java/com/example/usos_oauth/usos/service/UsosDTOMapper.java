@@ -1,5 +1,6 @@
 package com.example.usos_oauth.usos.service;
 
+import com.example.usos_oauth.usos.api.model.Activity;
 import com.example.usos_oauth.usos.api.model.CourseEdition;
 import com.example.usos_oauth.usos.api.model.UserGroup;
 import com.example.usos_oauth.usos.service.model.CourseDTO;
@@ -25,6 +26,17 @@ public class UsosDTOMapper {
                 .groups(courseEdition.getUser_groups().stream()
                         .map(UsosDTOMapper::mapToGroupDTO)
                         .toList())
+                .build();
+    }
+
+    public static GroupDTO mapToGroupDTO(Activity activity) {
+        return GroupDTO.builder()
+                .group_number(activity.getGroup_number())
+                .class_type_name(activity.getClasstype_name().getPl())
+                .lecturers(activity.getLecturer_names())
+                .weekday(activity.getWeekday())
+                .start_time(activity.getStart_time())
+                .end_time(activity.getEnd_time())
                 .build();
     }
 }

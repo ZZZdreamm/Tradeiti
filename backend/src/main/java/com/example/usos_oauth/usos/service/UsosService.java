@@ -7,6 +7,7 @@ import com.example.usos_oauth.usos.api.model.CourseEdition;
 import com.example.usos_oauth.usos.api.model.UsosUser;
 import com.example.usos_oauth.usos.service.exception.UsosAccountNotConnectedException;
 import com.example.usos_oauth.usos.service.model.CourseDTO;
+import com.example.usos_oauth.usos.service.model.GroupDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -40,19 +41,21 @@ public class UsosService {
     public List<CourseDTO> getUserActiveCourses() {
         assertUserIsConnected();
         String currentTerm = Term.getCurrentAcademicTerm();
-        List<CourseEdition> currentCourseEdition = usosTemplate.getCourseEditions().get(currentTerm);
+        List<CourseEdition> currentCourseEdition = usosTemplate.getUserCourseEditions().get(currentTerm);
         return currentCourseEdition.stream()
                 .map(UsosDTOMapper::mapToCourseDTO)
                 .toList();
     }
-    public List<Activity> getUserGroups(String course_id, String term_id) {
+    public List<GroupDTO> getCourseGroups(String course_id) {
         assertUserIsConnected();
-        Map<String, String> params = new HashMap<>();
-        params.put("course_id", course_id);
-        params.put("term_id", term_id);
-        List<Activity> activities = usosTemplate.getUserGroups(params);
+        String currentTerm = Term.getCurrentAcademicTerm();
+        List<Activity> activities = usosTemplate.getCourseActivities(course_id, currentTerm);
+        activities = removeLectures(activities);
         updateLecturer(activities);
-        return removeLectures(parseDateTime(activities));
+        parseDateTime(activities);
+        return activities.stream()
+                .map(UsosDTOMapper::mapToGroupDTO)
+                .toList();
     }
 
     private List<Activity> removeLectures(List<Activity> activities) {
@@ -90,7 +93,7 @@ public class UsosService {
         return activities;
     }
 
-    private void updateLecturer(List<Activity> activities) {
+    private List<Activity> updateLecturer(List<Activity> activities) {
         for (Activity activity : activities) {
             List<Long> lecturerIds = activity.getLecturer_ids();
             for (Long lecturerId : lecturerIds) {
@@ -99,6 +102,7 @@ public class UsosService {
                 activity.getLecturer_names().add(user.getFirst_name() + " " + user.getLast_name());
             }
         }
+        return activities;
     }
 
 }
