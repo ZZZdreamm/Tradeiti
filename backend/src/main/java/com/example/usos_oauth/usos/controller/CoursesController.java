@@ -29,7 +29,7 @@ public class CoursesController {
         return usos.getUserActiveCourses();
     }
 
-    @GetMapping("{course-id}/groups")
+    @GetMapping("groups/{course-id}")
     public List<GroupDTO> getCourseGroups(@PathVariable("course-id") String course_id) {
         OAuthToken token = userService.getCurrentUserToken();
         UsosService usos = usosServiceProvider.getUsosService(token);
