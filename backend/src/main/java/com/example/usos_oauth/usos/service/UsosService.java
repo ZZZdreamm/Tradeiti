@@ -3,7 +3,6 @@ package com.example.usos_oauth.usos.service;
 import com.example.usos_oauth.usos.api.UsosTemplate;
 import com.example.usos_oauth.usos.api.logic.Term;
 import com.example.usos_oauth.usos.api.model.Activity;
-import com.example.usos_oauth.usos.api.model.CourseEdition;
 import com.example.usos_oauth.usos.api.model.UsosUser;
 import com.example.usos_oauth.usos.service.exception.UsosAccountNotConnectedException;
 import com.example.usos_oauth.usos.service.model.CourseDTO;
@@ -17,7 +16,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @AllArgsConstructor
 public class UsosService {
@@ -39,45 +37,28 @@ public class UsosService {
         }
     }
 
-    public List<CourseDTO> getUserActiveCourses() {
-        assertUserIsConnected();
-        String currentTerm = Term.getCurrentAcademicTerm();
-        List<CourseEdition> currentCourseEdition = usosTemplate.getUserCourseEditions().get(currentTerm);
-        return currentCourseEdition.stream()
-                .map(UsosDTOMapper::mapToCourseDTO)
-                .map(this::fillCourseInfo)
-                .toList();
-    }
-
     public List<GroupDTO> getCourseGroups(String course_id) {
         assertUserIsConnected();
         String currentTerm = Term.getCurrentAcademicTerm();
         List<Activity> activities = usosTemplate.getCourseActivities(course_id, currentTerm);
-        activities = removeLectures(activities);
-        updateLecturer(activities);
-        parseDateTime(activities);
+        activities = formatActivities(activities);
         return activities.stream()
                 .map(UsosDTOMapper::mapToGroupDTO)
                 .toList();
     }
 
-    private CourseDTO fillCourseInfo(CourseDTO course) {
-        String course_id = course.getCourse_id();
-        List<Integer> group_numbers = course.getGroups().stream()
-                .map(GroupDTO::getGroup_number)
-                .toList();
+    public List<CourseDTO> getUserCourses() {
+        assertUserIsConnected();
+        List<Activity> activities = usosTemplate.getUserActivities();
+        activities = formatActivities(activities);
+        return UsosDTOMapper.mapToCourseDTOList(activities);
+    }
 
-        List<GroupDTO> allFilledGroups = getCourseGroups(course_id);
-
-        List<GroupDTO> updatedGroups = group_numbers.stream()
-        .map(groupNumber -> allFilledGroups.stream()
-                .filter(group -> group.getGroup_number() == groupNumber)
-                .findFirst())
-        .filter(Optional::isPresent)
-        .map(Optional::get)
-        .toList();
-        course.setGroups(updatedGroups);
-        return course;
+    private List<Activity> formatActivities(List<Activity> activities) {
+        activities = removeLectures(activities);
+        updateLecturer(activities);
+        parseDateTime(activities);
+        return activities;
     }
 
     private List<Activity> removeLectures(List<Activity> activities) {

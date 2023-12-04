@@ -6,6 +6,7 @@ import com.example.usos_oauth.usos.connect.UsosServiceProvider;
 import com.example.usos_oauth.usos.service.UsosService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.oauth1.AuthorizedRequestToken;
@@ -35,7 +36,9 @@ public class LoginUsosController {
         OAuth1Operations operations = usosServiceProvider.getOAuthOperations();
         User currentUser = userService.getCurrentUser();
         String url = backendUrl + "/api/usos/authorize-token?user_id=" + currentUser.getId();
-        OAuthToken token = operations.fetchRequestToken(url, null);
+        HttpHeaders params = new HttpHeaders();
+        params.add("scopes", "studies");
+        OAuthToken token = operations.fetchRequestToken(url, params);
         userService.updateUserToken(currentUser.getId(), token);
         return operations.buildAuthorizeUrl(token.getValue(), null);
     }

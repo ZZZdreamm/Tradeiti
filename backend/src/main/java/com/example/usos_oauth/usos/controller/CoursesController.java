@@ -26,7 +26,7 @@ public class CoursesController {
     public List<CourseDTO> getCourseEditions() {
         OAuthToken token = userService.getCurrentUserToken();
         UsosService usos = usosServiceProvider.getUsosService(token);
-        return usos.getUserActiveCourses();
+        return usos.getUserCourses();
     }
 
     @GetMapping("groups/{course-id}")

@@ -6,6 +6,9 @@ import com.example.usos_oauth.usos.api.model.UserGroup;
 import com.example.usos_oauth.usos.service.model.CourseDTO;
 import com.example.usos_oauth.usos.service.model.GroupDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class UsosDTOMapper {
 
@@ -38,5 +41,27 @@ public class UsosDTOMapper {
                 .start_time(activity.getStart_time())
                 .end_time(activity.getEnd_time())
                 .build();
+    }
+
+    public static List<CourseDTO> mapToCourseDTOList(List<Activity> activities) {
+        List<CourseDTO> courses = new ArrayList<>();
+        List<String> courseIds = activities.stream()
+                .map(Activity::getCourse_id)
+                .distinct()
+                .toList();
+        for (String courseId : courseIds) {
+            List<Activity> courseActivities = activities.stream()
+                    .filter(activity -> activity.getCourse_id().equals(courseId))
+                    .toList();
+            CourseDTO courseDTO = CourseDTO.builder()
+                    .course_id(courseId)
+                    .course_name(courseActivities.get(0).getCourse_name().getPl())
+                    .groups(courseActivities.stream()
+                            .map(UsosDTOMapper::mapToGroupDTO)
+                            .toList())
+                    .build();
+            courses.add(courseDTO);
+        }
+        return courses;
     }
 }

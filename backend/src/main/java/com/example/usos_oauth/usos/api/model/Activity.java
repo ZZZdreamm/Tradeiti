@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class Activity {
+    private String course_id;
     private int group_number;
     private String start_time;
     private String end_time;
