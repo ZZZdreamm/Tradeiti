@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @AllArgsConstructor
 public class UsosService {
@@ -44,8 +45,10 @@ public class UsosService {
         List<CourseEdition> currentCourseEdition = usosTemplate.getUserCourseEditions().get(currentTerm);
         return currentCourseEdition.stream()
                 .map(UsosDTOMapper::mapToCourseDTO)
+                .map(this::fillCourseInfo)
                 .toList();
     }
+
     public List<GroupDTO> getCourseGroups(String course_id) {
         assertUserIsConnected();
         String currentTerm = Term.getCurrentAcademicTerm();
@@ -58,17 +61,35 @@ public class UsosService {
                 .toList();
     }
 
+    private CourseDTO fillCourseInfo(CourseDTO course) {
+        String course_id = course.getCourse_id();
+        List<Integer> group_numbers = course.getGroups().stream()
+                .map(GroupDTO::getGroup_number)
+                .toList();
+
+        List<GroupDTO> allFilledGroups = getCourseGroups(course_id);
+
+        List<GroupDTO> updatedGroups = group_numbers.stream()
+        .map(groupNumber -> allFilledGroups.stream()
+                .filter(group -> group.getGroup_number() == groupNumber)
+                .findFirst())
+        .filter(Optional::isPresent)
+        .map(Optional::get)
+        .toList();
+        course.setGroups(updatedGroups);
+        return course;
+    }
+
     private List<Activity> removeLectures(List<Activity> activities) {
         return activities.stream()
                 .filter(activity -> !activity.getClasstype_name().getPl().equals("Wykład"))
                 .toList();
     }
 
-    private List<Activity> parseDateTime(List<Activity> activities) {
+    private void parseDateTime(List<Activity> activities) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        // Mapping between English and Polish weekday names
         Map<String, String> weekdayMapping = new HashMap<>();
         weekdayMapping.put("MONDAY", "Poniedziałek");
         weekdayMapping.put("TUESDAY", "Wtorek");
@@ -90,10 +111,9 @@ public class UsosService {
             activity.setEnd_time(formattedEndTime);
         }
 
-        return activities;
     }
 
-    private List<Activity> updateLecturer(List<Activity> activities) {
+    private void updateLecturer(List<Activity> activities) {
         for (Activity activity : activities) {
             List<Long> lecturerIds = activity.getLecturer_ids();
             for (Long lecturerId : lecturerIds) {
@@ -102,7 +122,6 @@ public class UsosService {
                 activity.getLecturer_names().add(user.getFirst_name() + " " + user.getLast_name());
             }
         }
-        return activities;
     }
 
 }
