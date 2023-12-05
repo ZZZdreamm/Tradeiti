@@ -1,7 +1,6 @@
 package com.example.usos_oauth.usos.service;
 
 import com.example.usos_oauth.usos.api.UsosTemplate;
-import com.example.usos_oauth.usos.api.logic.Term;
 import com.example.usos_oauth.usos.api.model.Activity;
 import com.example.usos_oauth.usos.api.model.UsosUser;
 import com.example.usos_oauth.usos.service.exception.UsosAccountNotConnectedException;
@@ -10,12 +9,7 @@ import com.example.usos_oauth.usos.service.model.GroupDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.web.client.HttpClientErrorException;
 
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @AllArgsConstructor
 public class UsosService {
@@ -39,9 +33,9 @@ public class UsosService {
 
     public List<GroupDTO> getCourseGroups(String course_id) {
         assertUserIsConnected();
-        String currentTerm = Term.getCurrentAcademicTerm();
+        String currentTerm = UsosTermCalculator.getCurrentAcademicTerm();
         List<Activity> activities = usosTemplate.getCourseActivities(course_id, currentTerm);
-        activities = formatActivities(activities);
+        activities = processActivities(activities);
         return activities.stream()
                 .map(UsosDTOMapper::mapToGroupDTO)
                 .toList();
@@ -50,11 +44,11 @@ public class UsosService {
     public List<CourseDTO> getUserCourses() {
         assertUserIsConnected();
         List<Activity> activities = usosTemplate.getUserActivities();
-        activities = formatActivities(activities);
+        activities = processActivities(activities);
         return UsosDTOMapper.mapToCourseDTOList(activities);
     }
 
-    private List<Activity> formatActivities(List<Activity> activities) {
+    private List<Activity> processActivities(List<Activity> activities) {
         activities = removeLectures(activities);
         updateLecturer(activities);
         parseDateTime(activities);
@@ -68,38 +62,17 @@ public class UsosService {
     }
 
     private void parseDateTime(List<Activity> activities) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("HH:mm");
-
-        Map<String, String> weekdayMapping = new HashMap<>();
-        weekdayMapping.put("MONDAY", "Poniedziałek");
-        weekdayMapping.put("TUESDAY", "Wtorek");
-        weekdayMapping.put("WEDNESDAY", "Środa");
-        weekdayMapping.put("THURSDAY", "Czwartek");
-        weekdayMapping.put("FRIDAY", "Piątek");
-        weekdayMapping.put("SATURDAY", "Sobota");
-        weekdayMapping.put("SUNDAY", "Niedziela");
-
         for (Activity activity : activities) {
-            LocalDateTime startTime = LocalDateTime.parse(activity.getStart_time(), formatter);
-            DayOfWeek dayOfWeek = startTime.getDayOfWeek();
-            String polishWeekday = weekdayMapping.get(dayOfWeek.name());
-            activity.setWeekday(polishWeekday);
-            String formattedTime = startTime.format(outputFormatter);
-            activity.setStart_time(formattedTime);
-            LocalDateTime endTime = LocalDateTime.parse(activity.getEnd_time(), formatter);
-            String formattedEndTime = endTime.format(outputFormatter);
-            activity.setEnd_time(formattedEndTime);
+            activity.setWeekday(UsosDateTimeMapper.parseWeekday(activity.getStart_time()));
+            activity.setStart_time(UsosDateTimeMapper.parseHour(activity.getStart_time()));
+            activity.setEnd_time(UsosDateTimeMapper.parseHour(activity.getEnd_time()));
         }
-
     }
 
     private void updateLecturer(List<Activity> activities) {
         for (Activity activity : activities) {
-            List<Long> lecturerIds = activity.getLecturer_ids();
-            for (Long lecturerId : lecturerIds) {
+            for (Long lecturerId : activity.getLecturer_ids()) {
                 UsosUser user = usosTemplate.getUser(String.valueOf(lecturerId));
-                assert user != null;
                 activity.getLecturer_names().add(user.getFirst_name() + " " + user.getLast_name());
             }
         }
