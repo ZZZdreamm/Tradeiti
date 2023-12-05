@@ -25,14 +25,16 @@ export function AddOffer() {
     const createdOffer: OfferCreationDto = {
       course_id: values.course.course_id,
       selled_date_data: {
-        course_day: values.myHour.course_day,
-        course_time: values.myHour.course_time,
-        lecturer: values.myHour.lecturer,
+        start_time: values.myHour.start_time,
+        end_time: values.myHour.end_time,
+        lecturers: values.myHour.lecturers,
+        weekday: values.myHour.weekday,
       },
       exchanged_date_data: {
-        course_day: values.opponentHour.course_day,
-        course_time: values.opponentHour.course_time,
-        lecturer: values.opponentHour.lecturer,
+        start_time: values.opponentHour.start_time,
+        end_time: values.opponentHour.end_time,
+        lecturers: values.opponentHour.lecturers,
+        weekday: values.opponentHour.weekday,
       },
     };
     console.log(createdOffer);

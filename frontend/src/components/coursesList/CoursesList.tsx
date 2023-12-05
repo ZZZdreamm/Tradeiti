@@ -1,10 +1,11 @@
 import { Loader } from "../../common/loader/Loader";
 import { CourseDto } from "../../models/Course";
+import { GroupDto } from "../../models/GroupDto";
 import { CourseComponent } from "../course/Course";
 
 interface Props {
   courses: CourseDto[] | undefined;
-  handleOnClick?: (course: CourseDto) => void;
+  handleOnClick?: (course: CourseDto, chooseGroup: GroupDto) => void;
 }
 
 export function CoursesList({ courses, handleOnClick }: Props) {

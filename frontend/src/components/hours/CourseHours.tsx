@@ -4,7 +4,7 @@ import { CourseDateComponent } from "../courseDate/CourseDate";
 import "./CourseHours.scss";
 
 interface Props {
-  dates: CourseDateData[];
+  dates: CourseDateData[] | undefined;
   handleChooseDate?: (date: CourseDateData | null, hourType: string) => void;
   hourType?: string;
 }
