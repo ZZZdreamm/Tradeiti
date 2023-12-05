@@ -1,14 +1,12 @@
-package com.example.usos_oauth.usos.api.logic;
+package com.example.usos_oauth.usos.service;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Term {
+public class UsosTermCalculator {
     public static String getCurrentAcademicTerm() {
         Date currentDate = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(currentDate);
