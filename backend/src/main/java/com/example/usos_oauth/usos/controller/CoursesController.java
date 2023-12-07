@@ -1,12 +1,9 @@
 package com.example.usos_oauth.usos.controller;
 
-import com.example.usos_oauth.security.service.UserService;
-import com.example.usos_oauth.usos.connect.UsosServiceProvider;
-import com.example.usos_oauth.usos.service.UsosService;
-import com.example.usos_oauth.usos.service.model.CourseDTO;
-import com.example.usos_oauth.usos.service.model.GroupDTO;
+import com.example.usos_oauth.usos.service.connect.UsosServiceAuthorizer;
+import com.example.usos_oauth.usos.model.dto.CourseDTO;
+import com.example.usos_oauth.usos.model.dto.GroupDTO;
 import lombok.AllArgsConstructor;
-import org.springframework.social.oauth1.OAuthToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,20 +16,15 @@ import java.util.List;
 @RequestMapping("api/courses")
 public class CoursesController {
 
-    private UsosServiceProvider usosServiceProvider;
-    private UserService userService;
+    private UsosServiceAuthorizer usosServiceAuthorizer;
 
     @GetMapping("/user")
-    public List<CourseDTO> getCourseEditions() {
-        OAuthToken token = userService.getCurrentUserToken();
-        UsosService usos = usosServiceProvider.getUsosService(token);
-        return usos.getUserCourses();
+    public List<CourseDTO> getUserCourses() {
+        return usosServiceAuthorizer.getUsosService().getUserCourses();
     }
 
     @GetMapping("groups/{course-id}")
-    public List<GroupDTO> getCourseGroups(@PathVariable("course-id") String course_id) {
-        OAuthToken token = userService.getCurrentUserToken();
-        UsosService usos = usosServiceProvider.getUsosService(token);
-        return usos.getCourseGroups(course_id);
+    public List<GroupDTO> getGroupsOfCourse(@PathVariable("course-id") String course_id) {
+        return usosServiceAuthorizer.getUsosService().getCourseGroups(course_id);
     }
 }

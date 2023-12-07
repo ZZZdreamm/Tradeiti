@@ -1,11 +1,14 @@
-package com.example.usos_oauth.usos.service;
+package com.example.usos_oauth.usos.service.usos;
 
 import com.example.usos_oauth.usos.api.UsosTemplate;
-import com.example.usos_oauth.usos.api.model.Activity;
-import com.example.usos_oauth.usos.api.model.UsosUser;
-import com.example.usos_oauth.usos.service.exception.UsosAccountNotConnectedException;
-import com.example.usos_oauth.usos.service.model.CourseDTO;
-import com.example.usos_oauth.usos.service.model.GroupDTO;
+import com.example.usos_oauth.usos.model.usos.Activity;
+import com.example.usos_oauth.usos.model.usos.UsosUser;
+import com.example.usos_oauth.usos.model.dto.CourseDTO;
+import com.example.usos_oauth.usos.model.dto.GroupDTO;
+import com.example.usos_oauth.usos.service.usos.exception.UsosAccountNotConnectedException;
+import com.example.usos_oauth.usos.service.usos.utils.UsosDTOMapper;
+import com.example.usos_oauth.usos.service.usos.utils.UsosDateTimeParser;
+import com.example.usos_oauth.usos.service.usos.utils.UsosTermCalculator;
 import lombok.AllArgsConstructor;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -31,10 +34,10 @@ public class UsosService {
         }
     }
 
-    public List<GroupDTO> getCourseGroups(String course_id) {
+    public List<GroupDTO> getCourseGroups(String courseId) {
         assertUserIsConnected();
         String currentTerm = UsosTermCalculator.getCurrentAcademicTerm();
-        List<Activity> activities = usosTemplate.getCourseActivities(course_id, currentTerm);
+        List<Activity> activities = usosTemplate.getCourseActivities(courseId, currentTerm);
         activities = processActivities(activities);
         return activities.stream()
                 .map(UsosDTOMapper::mapToGroupDTO)
@@ -57,23 +60,23 @@ public class UsosService {
 
     private List<Activity> removeLectures(List<Activity> activities) {
         return activities.stream()
-                .filter(activity -> !activity.getClasstype_name().getPl().equals("Wykład"))
+                .filter(activity -> !activity.getClasstypeName().getPl().equals("Wykład"))
                 .toList();
     }
 
     private void parseDateTime(List<Activity> activities) {
         for (Activity activity : activities) {
-            activity.setWeekday(UsosDateTimeMapper.parseWeekday(activity.getStart_time()));
-            activity.setStart_time(UsosDateTimeMapper.parseHour(activity.getStart_time()));
-            activity.setEnd_time(UsosDateTimeMapper.parseHour(activity.getEnd_time()));
+            activity.setWeekday(UsosDateTimeParser.parseWeekday(activity.getStartTime()));
+            activity.setStartTime(UsosDateTimeParser.parseHour(activity.getStartTime()));
+            activity.setEndTime(UsosDateTimeParser.parseHour(activity.getEndTime()));
         }
     }
 
     private void updateLecturer(List<Activity> activities) {
         for (Activity activity : activities) {
-            for (Long lecturerId : activity.getLecturer_ids()) {
+            for (Long lecturerId : activity.getLecturerIds()) {
                 UsosUser user = usosTemplate.getUser(String.valueOf(lecturerId));
-                activity.getLecturer_names().add(user.getFirst_name() + " " + user.getLast_name());
+                activity.getLecturerNames().add(user.getFirstName() + " " + user.getLastName());
             }
         }
     }

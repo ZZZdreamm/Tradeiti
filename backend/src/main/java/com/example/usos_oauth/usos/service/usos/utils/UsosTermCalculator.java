@@ -1,4 +1,4 @@
-package com.example.usos_oauth.usos.service;
+package com.example.usos_oauth.usos.service.usos.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

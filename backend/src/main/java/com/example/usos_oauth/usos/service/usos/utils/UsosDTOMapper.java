@@ -1,8 +1,8 @@
-package com.example.usos_oauth.usos.service;
+package com.example.usos_oauth.usos.service.usos.utils;
 
-import com.example.usos_oauth.usos.api.model.Activity;
-import com.example.usos_oauth.usos.service.model.CourseDTO;
-import com.example.usos_oauth.usos.service.model.GroupDTO;
+import com.example.usos_oauth.usos.model.usos.Activity;
+import com.example.usos_oauth.usos.model.dto.CourseDTO;
+import com.example.usos_oauth.usos.model.dto.GroupDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,28 +12,28 @@ public class UsosDTOMapper {
 
     public static GroupDTO mapToGroupDTO(Activity activity) {
         return GroupDTO.builder()
-                .group_number(activity.getGroup_number())
-                .class_type_name(activity.getClasstype_name().getPl())
-                .lecturers(activity.getLecturer_names())
+                .groupNumber(activity.getGroupNumber())
+                .classTypeName(activity.getClasstypeName().getPl())
+                .lecturers(activity.getLecturerNames())
                 .weekday(activity.getWeekday())
-                .start_time(activity.getStart_time())
-                .end_time(activity.getEnd_time())
+                .startTime(activity.getStartTime())
+                .endTime(activity.getEndTime())
                 .build();
     }
 
     public static List<CourseDTO> mapToCourseDTOList(List<Activity> activities) {
         List<CourseDTO> courses = new ArrayList<>();
         List<String> courseIds = activities.stream()
-                .map(Activity::getCourse_id)
+                .map(Activity::getCourseId)
                 .distinct()
                 .toList();
         for (String courseId : courseIds) {
             List<Activity> courseActivities = activities.stream()
-                    .filter(activity -> activity.getCourse_id().equals(courseId))
+                    .filter(activity -> activity.getCourseId().equals(courseId))
                     .toList();
             CourseDTO courseDTO = CourseDTO.builder()
-                    .course_id(courseId)
-                    .course_name(courseActivities.get(0).getCourse_name().getPl())
+                    .courseId(courseId)
+                    .courseName(courseActivities.get(0).getCourseName().getPl())
                     .groups(courseActivities.stream()
                             .map(UsosDTOMapper::mapToGroupDTO)
                             .toList())

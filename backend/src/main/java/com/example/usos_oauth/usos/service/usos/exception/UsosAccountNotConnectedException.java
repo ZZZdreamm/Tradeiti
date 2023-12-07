@@ -1,4 +1,4 @@
-package com.example.usos_oauth.usos.service.exception;
+package com.example.usos_oauth.usos.service.usos.exception;
 
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
