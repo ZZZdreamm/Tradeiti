@@ -1,10 +1,10 @@
-package com.example.usos_oauth.usos.service;
+package com.example.usos_oauth.usos.service.usos.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
-public class UsosDateTimeMapper {
+public class UsosDateTimeParser {
 
     static Map<String, String> weekdayMapping = Map.of(
             "MONDAY", "Poniedziałek",
