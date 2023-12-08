@@ -102,4 +102,5 @@ export function CourseDateComponent({
       </div>
     </span>
   );
+  
 }
