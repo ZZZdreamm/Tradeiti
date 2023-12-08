@@ -13,7 +13,7 @@ export function FinalizeOffer() {
     setSearchParams({
       page: MyOffersSteps.MY_OFFERS_ADD,
       course_id: values.course.course_id,
-      class_type_name: values.course.class_type_name,
+      class_type_name: values.group.class_type_name,
       stage: "2",
     });
   }, [setSearchParams]);
