@@ -16,6 +16,7 @@ export const Register = () => {
         if (response.token) {
           saveToken(response.token);
           window.location.href = "/#/usos-connect";
+          window.location.reload();
         }
       })
       .catch((err) => {
