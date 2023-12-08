@@ -6,8 +6,7 @@ export function getCourseDateFromCourses(
   course_id: string | null,
   class_type_name: string | null
 ) {
-  if (!course_id || !class_type_name)
-    throw new Error("course_id or class_type_name is null");
+  if (!course_id || !class_type_name) return undefined
   const myGroup = courses
     ?.find((course) => course.course_id === course_id)
     ?.groups.find((group) => group.class_type_name === class_type_name);
