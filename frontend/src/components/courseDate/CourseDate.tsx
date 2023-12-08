@@ -72,12 +72,12 @@ export function CourseDateComponent({
   useEffect(() => {
     if (
       choosenHour &&
-      choosenHour.course_day === date.course_day &&
-      choosenHour.course_time === date.course_time &&
-      choosenHour.lecturer === date.lecturer
+      choosenHour.weekday === date.weekday &&
+      choosenHour.start_time === date.start_time &&
+      choosenHour.lecturers === date.lecturers
     ) {
       const span = document.getElementById(
-        `radioSpan/${hourType}/${date.course_day}/${date.course_time}`
+        `radioSpan/${hourType}/${date.weekday}/${date.start_time}`
       ) as HTMLElement;
       span.click();
     }
@@ -85,17 +85,17 @@ export function CourseDateComponent({
 
   return (
     <span
-      id={`radioSpan/${hourType}/${date.course_day}/${date.course_time}`}
+      id={`radioSpan/${hourType}/${date.weekday}/${date.start_time}`}
       className={`radioSpan ${hourType}`}
       onClick={handleSpanClick}
     >
       <div className="radioSpan-date">
         <input type="radio" name={`hours/${hourType}`} onClick={handleChange} />{" "}
         <div>
-          {date.course_day} - {date.course_time}
+          {date.start_time} - {date.end_time}
         </div>
       </div>
-      <div>{date.lecturer}</div>
+      <div>{date.lecturers}</div>
     </span>
   );
 }

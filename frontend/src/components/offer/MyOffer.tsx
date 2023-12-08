@@ -30,10 +30,14 @@ export function MyOfferComponent({ offer }: Props) {
       <div className="offer-left">
         <h6>{offer.offer_id}</h6>
         <h6>{offer.course_name}</h6>
-        <span>{offer.selled_date_data.lecturer}</span>
         <span>
-          {offer.selled_date_data.course_day}{" "}
-          {offer.selled_date_data.course_time}
+          {offer.selled_date_data.lecturers.map((lecturer) => (
+            <span>{lecturer}</span>
+          ))}
+        </span>
+        <span>
+          {offer.selled_date_data.weekday} {offer.selled_date_data.start_time}-{" "}
+          {offer.selled_date_data.end_time}
         </span>
       </div>
       <div className="offer-right">
