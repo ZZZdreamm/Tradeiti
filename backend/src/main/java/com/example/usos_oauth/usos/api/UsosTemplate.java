@@ -1,7 +1,7 @@
 package com.example.usos_oauth.usos.api;
 
-import com.example.usos_oauth.usos.api.model.Activity;
-import com.example.usos_oauth.usos.api.model.UsosUser;
+import com.example.usos_oauth.usos.model.usos.Activity;
+import com.example.usos_oauth.usos.model.usos.UsosUser;
 import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -34,11 +34,11 @@ public class UsosTemplate extends AbstractOAuth1ApiBinding {
         return restTemplate.getForObject(uri, UsosUser.class);
     }
 
-    public List<Activity> getCourseActivities(String course_id, String term_id) {
+    public List<Activity> getCourseActivities(String courseId, String termId) {
       RestTemplate restTemplate = getRestTemplate();
       URI uri = UriComponentsBuilder.fromUri(courseActivitiesUrl)
-        .queryParam("course_id", course_id)
-        .queryParam("term_id", term_id)
+        .queryParam("course_id", courseId)
+        .queryParam("term_id", termId)
         .queryParam("fields", activitiesFields)
         .build()
         .toUri();

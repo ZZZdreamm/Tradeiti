@@ -1,6 +1,6 @@
 package com.example.usos_oauth.usos.config;
 
-import com.example.usos_oauth.usos.connect.UsosServiceProvider;
+import com.example.usos_oauth.usos.service.connect.UsosServiceProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
