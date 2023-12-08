@@ -21,7 +21,7 @@ export function FinalizeOffer() {
   return (
     <>
       <div className="upper">
-        <button className="regButton" onClick={handleBack}>
+        <button className="regButton" type="button" onClick={handleBack}>
           Powrót
         </button>
         <h3>Podsumowanie oferty</h3>

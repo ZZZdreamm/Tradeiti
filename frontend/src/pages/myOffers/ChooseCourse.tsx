@@ -49,7 +49,7 @@ export function ChooseCourse() {
   return (
     <>
       <div className="upper">
-        <button className="regButton" onClick={handleBack}>
+        <button className="regButton" type="button" onClick={handleBack}>
           Powrót
         </button>
         <h3>Wybierz przedmiot</h3>
