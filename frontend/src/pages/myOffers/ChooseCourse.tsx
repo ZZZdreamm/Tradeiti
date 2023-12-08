@@ -22,7 +22,7 @@ export function ChooseCourse() {
   }, [setSearchParams]);
 
   const handleOnCourseClick = useCallback(
-    (course: CourseDto, chooseGroup: GroupDto) => {
+    (course: CourseDto, choosenGroup: GroupDto) => {
       reset({
         course: "",
         group: "",
@@ -30,14 +30,17 @@ export function ChooseCourse() {
         opponentHour: "",
       });
       removeMultipleValuesFromSessionStorage(["myHour", "opponentHour"]);
-      setValue("course", course);
-      setValue("group", chooseGroup);
+      setValue("course", {
+        course_id: course.course_id,
+        course_name: course.course_name,
+      });
+      setValue("group", choosenGroup);
       saveInSessionStorage("course", JSON.stringify(course));
-      saveInSessionStorage("group", JSON.stringify(chooseGroup));
+      saveInSessionStorage("group", JSON.stringify(choosenGroup));
       setSearchParams({
         page: MyOffersSteps.MY_OFFERS_ADD,
         course: course.course_id,
-        class_type_name: chooseGroup.class_type_name,
+        class_type_name: choosenGroup.class_type_name,
         stage: "2",
       });
     },
