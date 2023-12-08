@@ -10,6 +10,7 @@ import { MyOffersSteps } from "./MyOffersSteps";
 import { OfferCreationDto } from "../../models/OfferCreationDto";
 import { addOffer } from "../../apiFunctions/addOffer";
 import { FormOffer } from "../../models/form/FormOffer";
+import { clearSessionStorage } from "../../common/sessionStorage";
 
 export function AddOffer() {
   const navigate = useNavigate();
@@ -42,12 +43,14 @@ export function AddOffer() {
       .then((response) => {
         console.log(response);
         alert("Oferta została dodana");
-        navigate(0);
+        clearSessionStorage();
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
         alert("Wystąpił błąd");
-        navigate(0);
+        clearSessionStorage();
+        navigate("/");
       });
   };
 
