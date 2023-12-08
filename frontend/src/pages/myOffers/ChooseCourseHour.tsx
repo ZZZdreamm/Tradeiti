@@ -10,13 +10,14 @@ import { useQuery } from "react-query";
 import { getAllCourses } from "../../apiFunctions/getAllCourses";
 import { getCourseDateFromCourses } from "./GetCourseDateFromCourses";
 import { getCourseGroups } from "../../apiFunctions/getCourseGroups";
+import { Loader } from "../../common/loader/Loader";
 
 export function ChooseCourseHour() {
   const { setValue, watch } = useFormContext();
   const [searchParams, setSearchParams] = useSearchParams();
   const { data: courses } = useQuery("courses", getAllCourses);
   const courseId = searchParams.get("course") ?? "";
-  const courseClassType = searchParams.get("class_type_name");
+  const courseClassType = searchParams.get("class_type_name") ?? "";
   const { data: allCourseGroups } = useQuery(
     ["allCourseHours", courseId, courseClassType],
     () => getCourseGroups(courseId)
@@ -73,26 +74,32 @@ export function ChooseCourseHour() {
         <div></div>
       </div>
       <article>
-        <div>
-          <h5>Twoja godzina</h5>
-          <div className="hours">
-            <CourseHours
-              dates={myCourseHour}
-              handleChooseDate={handleChoosingHour}
-              hourType="myHour"
-            />
-          </div>
-        </div>
-        <div>
-          <h5>Godzina oponenta</h5>
-          <div className="hours">
-            <CourseHours
-              dates={allClassHours}
-              handleChooseDate={handleChoosingHour}
-              hourType="opponentHour"
-            />
-          </div>
-        </div>
+        {allClassHours && myCourseHour ? (
+          <>
+            <div>
+              <h5>Twoja godzina</h5>
+              <div className="hours">
+                <CourseHours
+                  dates={myCourseHour}
+                  handleChooseDate={handleChoosingHour}
+                  hourType="myHour"
+                />
+              </div>
+            </div>
+            <div>
+              <h5>Godzina oponenta</h5>
+              <div className="hours">
+                <CourseHours
+                  dates={allClassHours}
+                  handleChooseDate={handleChoosingHour}
+                  hourType="opponentHour"
+                />
+              </div>
+            </div>
+          </>
+        ) : (
+          <Loader />
+        )}
       </article>
       <div className="lower">
         <button
