@@ -28,13 +28,15 @@ export function OfferComponent({ offer }: Props) {
       <div className="offer-left">
         <p>ID: {"\t"}<b>{offer.offer_id}</b></p>
         <p>Przedmiot: <b>{offer.course_name}</b></p>
-        <p>Prowadzący: <b>{offer.selled_date_data.lecturer}</b></p>
+        <p>Prowadzący: <b>{offer.selled_date_data.lecturers.map((lecturer) => (
+          <span>{lecturer}</span>
+        ))}</b></p>
         <p>
           Termin: {" "}
           <b>
-            {offer.selled_date_data.course_day}
+            {offer.selled_date_data.start_time}
             {" "}
-            {offer.selled_date_data.course_time}
+            {offer.selled_date_data.end_time}
           </b>
         </p>
       </div>
