@@ -1,6 +1,7 @@
 package com.example.usos_oauth.security.service;
 
 import com.example.usos_oauth.security.model.User;
+import com.example.usos_oauth.security.model.UsosAuth;
 import com.example.usos_oauth.security.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,7 +32,7 @@ public class UserService implements UserDetailsService {
 
     public OAuthToken getUserToken(Long userId) {
         User user = loadUserById(userId);
-        return new OAuthToken(user.getAuthentication_key(), user.getAuthentication_secret());
+        return new OAuthToken(user.getUsos_auth().getOauthKey(), user.getUsos_auth().getOauthSecret());
     }
 
     public OAuthToken getCurrentUserToken() {
@@ -41,8 +42,10 @@ public class UserService implements UserDetailsService {
 
     public void updateUserToken(Long userId, OAuthToken token) {
         User user = userRepository.getReferenceById(userId);
-        user.setAuthentication_key(token.getValue());
-        user.setAuthentication_secret(token.getSecret());
+        UsosAuth usosAuth = new UsosAuth();
+        usosAuth.setOauthKey(token.getValue());
+        usosAuth.setOauthSecret(token.getSecret());
+        user.setUsos_auth(usosAuth);
         userRepository.save(user);
     }
 

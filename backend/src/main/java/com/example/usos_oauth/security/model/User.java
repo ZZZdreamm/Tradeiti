@@ -30,6 +30,8 @@ public class User implements UserDetails {
     private Role role;
     private String authentication_key;
     private String authentication_secret;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private UsosAuth usos_auth;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
