@@ -1,26 +1,45 @@
 import { useSearchParams } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { MyOffersSteps } from "./MyOffersSteps";
 import "./ChooseCourseHour.scss";
 import { CourseDateData } from "../../models/CourseDate";
 import { CourseHours } from "../../components/hours/CourseHours";
-import { mockedCourseDates } from "../../mocks/MockedCourseDates";
 import { useFormContext } from "react-hook-form";
 import { saveInSessionStorage } from "../../common/sessionStorage";
+import { useQuery } from "react-query";
+import { getAllCourses } from "../../apiFunctions/getAllCourses";
+import { getCourseDateFromCourses } from "./GetCourseDateFromCourses";
+import { getCourseGroups } from "../../apiFunctions/getCourseGroups";
 
 export function ChooseCourseHour() {
   const { setValue, watch } = useFormContext();
-  const [_, setSearchParams] = useSearchParams();
-  const [myHours, setMyHours] = useState<CourseDateData[]>([]);
-  const [opponentHours, setOpponentHours] = useState<CourseDateData[]>([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { data: courses } = useQuery("courses", getAllCourses);
+  const courseId = searchParams.get("course") ?? "";
+  const courseClassType = searchParams.get("class_type_name");
+  const { data: allCourseGroups } = useQuery(
+    ["allCourseHours", courseId, courseClassType],
+    () => getCourseGroups(courseId)
+  );
+  const myCourseHour = getCourseDateFromCourses(
+    courses,
+    courseId,
+    courseClassType
+  );
+  const allClassHours = allCourseGroups?.data
+    .filter((group) => group.class_type_name === courseClassType)
+    .map((group) => {
+      const hour: CourseDateData = {
+        weekday: group.weekday,
+        start_time: group.start_time,
+        end_time: group.end_time,
+        lecturers: group.lecturers,
+      };
+      return hour;
+    });
 
   const myHour: CourseDateData = watch("myHour");
   const opponentHour: CourseDateData = watch("opponentHour");
-
-  useEffect(() => {
-    setMyHours(mockedCourseDates);
-    setOpponentHours(mockedCourseDates);
-  }, []);
 
   const handleBack = useCallback(() => {
     setSearchParams({
@@ -58,7 +77,7 @@ export function ChooseCourseHour() {
           <h5>Twoja godzina</h5>
           <div className="hours">
             <CourseHours
-              dates={myHours}
+              dates={myCourseHour}
               handleChooseDate={handleChoosingHour}
               hourType="myHour"
             />
@@ -68,7 +87,7 @@ export function ChooseCourseHour() {
           <h5>Godzina oponenta</h5>
           <div className="hours">
             <CourseHours
-              dates={opponentHours}
+              dates={allClassHours}
               handleChooseDate={handleChoosingHour}
               hourType="opponentHour"
             />

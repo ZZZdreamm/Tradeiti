@@ -1,5 +1,6 @@
 export interface CourseDateData {
-  course_day: string;
-  course_time: string;
-  lecturer: string;
+  weekday: string;
+  start_time: string;
+  end_time: string;
+  lecturers: string[];
 }

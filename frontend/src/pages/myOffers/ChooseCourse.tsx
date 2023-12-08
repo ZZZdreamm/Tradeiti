@@ -10,6 +10,7 @@ import {
   removeMultipleValuesFromSessionStorage,
   saveInSessionStorage,
 } from "../../common/sessionStorage";
+import { GroupDto } from "../../models/GroupDto";
 
 export function ChooseCourse() {
   const { data: courses } = useQuery("courses", getAllCourses);
@@ -21,17 +22,22 @@ export function ChooseCourse() {
   }, [setSearchParams]);
 
   const handleOnCourseClick = useCallback(
-    (course: CourseDto) => {
+    (course: CourseDto, chooseGroup: GroupDto) => {
       reset({
         course: "",
+        group: "",
         myHour: "",
         opponentHour: "",
       });
       removeMultipleValuesFromSessionStorage(["myHour", "opponentHour"]);
       setValue("course", course);
+      setValue("group", chooseGroup);
       saveInSessionStorage("course", JSON.stringify(course));
+      saveInSessionStorage("group", JSON.stringify(chooseGroup));
       setSearchParams({
         page: MyOffersSteps.MY_OFFERS_ADD,
+        course: course.course_id,
+        class_type_name: chooseGroup.class_type_name,
         stage: "2",
       });
     },
