@@ -1,4 +1,3 @@
-import { Loader } from "../../common/loader/Loader";
 import { CourseDateData } from "../../models/CourseDate";
 import { CourseDateComponent } from "../courseDate/CourseDate";
 import "./CourseHours.scss";
@@ -16,7 +15,7 @@ export function CourseHours({
 }: Props) {
   return (
     <>
-      {dates ? (
+      {dates && (
         dates.map((date, index) => (
           <CourseDateComponent
             key={index}
@@ -25,8 +24,6 @@ export function CourseHours({
             hourType={hourType}
           />
         ))
-      ) : (
-        <Loader />
       )}
     </>
   );

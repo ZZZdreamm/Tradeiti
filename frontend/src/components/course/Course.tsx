@@ -14,7 +14,7 @@ export function CourseComponent({ course, handleOnClick = () => {} }: Props) {
       <p>{course.course_id}</p>
       {course.groups.map((group, index) => (
         <div key={index} onClick={() => handleOnClick(course, group)}>
-          <p>{group.class_type_name}</p>
+          <p className="course-class">{group.class_type_name}</p>
         </div>
       ))}
     </div>

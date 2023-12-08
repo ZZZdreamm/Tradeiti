@@ -45,7 +45,8 @@ export function CourseDateComponent({
           const oppSpans = getAllElementsByClassName("opponentHour");
           for (let o = 0; o < oppSpans.length; o++) {
             const opponentSpan = oppSpans[o] as HTMLElement;
-            const radioSpan = opponentSpan.querySelectorAll(`.radioSpan-date`)[0];
+            const radioSpan =
+              opponentSpan.querySelectorAll(`.radioSpan-date`)[0];
             const spanInput = radioSpan.firstChild as HTMLInputElement;
             if (opponentSpan.classList.contains("unavailable")) {
               opponentSpan.classList.remove("unavailable");
@@ -57,9 +58,9 @@ export function CourseDateComponent({
           const op2Input = op2RadioSpan.firstChild as HTMLInputElement;
           op2Span.classList.add("unavailable");
           op2Span.style.borderRadius = "0px";
-          if(op2Input.checked){
+          if (op2Input.checked) {
             op2Input.checked = false;
-            handleChooseDate(null, 'opponentHour')
+            handleChooseDate(null, "opponentHour");
           }
           op2Input.disabled = true;
         }
@@ -92,10 +93,14 @@ export function CourseDateComponent({
       <div className="radioSpan-date">
         <input type="radio" name={`hours/${hourType}`} onClick={handleChange} />{" "}
         <div>
-          {date.start_time} - {date.end_time}
+          {date.weekday} {date.start_time} - {date.end_time}
         </div>
       </div>
-      <div>{date.lecturers}</div>
+      <div>
+        {date.lecturers &&
+          date.lecturers.map((lecturer) => <span>{lecturer}</span>)}
+      </div>
     </span>
   );
+  
 }
