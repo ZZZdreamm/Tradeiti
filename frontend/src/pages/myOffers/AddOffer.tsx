@@ -25,13 +25,14 @@ export function AddOffer() {
   const onSubmit: SubmitHandler<FormOffer> = (values) => {
     const createdOffer: OfferCreationDto = {
       course_id: values.course.course_id,
-      selled_date_data: {
+      course_name: values.course.course_name,
+      my_date: {
         start_time: values.myHour.start_time,
         end_time: values.myHour.end_time,
         lecturers: values.myHour.lecturers,
         weekday: values.myHour.weekday,
       },
-      exchanged_date_data: {
+      wanted_date: {
         start_time: values.opponentHour.start_time,
         end_time: values.opponentHour.end_time,
         lecturers: values.opponentHour.lecturers,
