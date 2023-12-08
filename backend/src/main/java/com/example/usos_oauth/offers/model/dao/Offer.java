@@ -20,7 +20,7 @@ public class Offer {
     @ManyToOne
     private User receiver;
     @Enumerated(EnumType.STRING)
-    private OfferState state;
+    private OfferState state = OfferState.PENDING;
     @OneToOne(cascade = CascadeType.ALL)
     private Course myCourse;
     @OneToOne(cascade = CascadeType.ALL)
