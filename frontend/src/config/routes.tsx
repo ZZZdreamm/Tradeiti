@@ -8,6 +8,8 @@ import { PrivateOffers } from "../pages/offers/Offers";
 import { Redirect } from "../pages/redirect/Redirect";
 import { Register } from "../pages/register/Register";
 import { UsosConnect } from "../pages/usosConnect/UsosConnect";
+import { PrivateUserPage } from "../pages/userPage/UserPage";
+import { PrivateModifyUser } from "../pages/modifyUser/ModifyUser";
 
 export const routes = [
   { path: "/register", element: <Register /> },
@@ -22,6 +24,8 @@ export const privateRoutes = [
   { path: "/news", element: <PrivateNews /> },
   { path: "/courses", element: <PrivateCourses /> },
   { path: "/offerRequests", element: <PrivateOfferRequests /> },
+  { path: "/userPage", element: <PrivateUserPage /> },
+  { path: "/modifyUser", element: <PrivateModifyUser /> },
   { path: "/", element: <PrivateHome /> },
   { path: "*", element: <PrivateHome /> },
 ];
