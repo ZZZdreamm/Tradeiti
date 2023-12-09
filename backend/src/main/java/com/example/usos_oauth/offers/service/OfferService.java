@@ -6,6 +6,7 @@ import com.example.usos_oauth.offers.model.dto.CreateOfferDTO;
 import com.example.usos_oauth.offers.model.dto.OfferDTO;
 import com.example.usos_oauth.offers.repository.OfferRepository;
 import com.example.usos_oauth.offers.service.utils.OfferDTOMapper;
+import com.example.usos_oauth.security.model.User;
 import com.example.usos_oauth.security.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -66,29 +67,57 @@ public class OfferService {
     }
 
     public void deleteOffer(Long id) {
-        assertUserIsOwner(id);
+        assertCurrentUserIsOwner(id);
         offerRepository.deleteById(id);
     }
 
-    public void acceptOffer(Long id) {
-        assertUserIsOwner(id);
-        changeOfferState(id, OfferState.COMPLETED);
+    public void sendRequest(Long id) {
+        assertCurrentUserIsNotOwner(id);
+        updateOfferState(id, OfferState.REQUEST_SENT);
+        updateOfferReceiver(id, userService.getCurrentUser());
     }
 
-    public void rejectOffer(Long id) {
-        assertUserIsOwner(id);
-        changeOfferState(id, OfferState.PENDING);
+    public void acceptRequest(Long id) {
+        assertCurrentUserIsOwner(id);
+        updateOfferState(id, OfferState.COMPLETED);
     }
 
-    private void changeOfferState(Long id, OfferState state) {
+    public void rejectRequest(Long id) {
+        assertCurrentUserIsOwner(id);
+        updateOfferState(id, OfferState.PENDING);
+        updateOfferReceiver(id, null);
+    }
+
+    private void updateOfferState(Long id, OfferState state) {
         Offer offer = offerRepository.findById(id).orElseThrow();
         offer.setState(state);
         offerRepository.save(offer);
     }
 
-    private void assertUserIsOwner(Long id) {
+    private void updateOfferReceiver(Long id, User receiver) {
         Offer offer = offerRepository.findById(id).orElseThrow();
-        if (!offer.getOwner().equals(userService.getCurrentUser())) {
+        offer.setReceiver(receiver);
+        offerRepository.save(offer);
+    }
+
+    private void assertCurrentUserIsOwner(Long id) {
+        assertUserIsOwner(id, userService.getCurrentUser());
+    }
+
+    private void assertCurrentUserIsNotOwner(Long id) {
+        assertUserIsNotOwner(id, userService.getCurrentUser());
+    }
+
+    private void assertUserIsNotOwner(Long id, User user) {
+        Offer offer = offerRepository.findById(id).orElseThrow();
+        if (offer.getOwner().equals(user)) {
+            throw new RuntimeException("User is the owner of the offer");
+        }
+    }
+
+    private void assertUserIsOwner(Long id, User user) {
+        Offer offer = offerRepository.findById(id).orElseThrow();
+        if (!offer.getOwner().equals(user)) {
             throw new RuntimeException("User is not the owner of the offer");
         }
     }
