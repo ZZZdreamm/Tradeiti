@@ -1,7 +1,5 @@
 export enum OfferStatus {
-  failed = "failed",
-  pending = "pending",
-  requested = "requested",
-  accepted = "accepted",
-  finalized = "finalized",
+  Pending = "Pending",
+  Request_sent = "Request sent",
+  Completed = "Completed",
 }

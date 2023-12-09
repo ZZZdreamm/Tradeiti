@@ -1,8 +1,8 @@
 import { axiosBase } from "../config/axiosConfig";
+import { OfferStatus } from "../models/OfferStatus";
 
-export function acceptOffer(offer_id: string) {
-  return new Promise<{ data: any; status: number }>((res, _) => {
-    res({ data: "mocked value", status: 200 });
-  });
-  return axiosBase.patch(`/offers/accept?offer_id=${offer_id}`);
+export function acceptOffer(offer_id: string, state: OfferStatus) {
+  if (state !== OfferStatus.Request_sent)
+    throw new Error("Offer is not in the correct state to be accepted");
+  return axiosBase.patch(`/offers/accept/${offer_id}`);
 }

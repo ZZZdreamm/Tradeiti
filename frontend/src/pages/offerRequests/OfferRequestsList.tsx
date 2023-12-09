@@ -1,9 +1,9 @@
 import { Loader } from "../../common/loader/Loader";
 import { OfferRequest } from "../../components/offerRequest/OfferRequest";
-import { Offer } from "../../models/Offer";
+import { OfferDto } from "../../models/Offer";
 
 interface Props {
-  offerRequests: Offer[] | undefined;
+  offerRequests: OfferDto[] | undefined;
 }
 
 export function OfferRequestsList({ offerRequests }: Props) {

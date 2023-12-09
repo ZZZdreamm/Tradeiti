@@ -1,9 +1,9 @@
 import { Loader } from "../../common/loader/Loader";
-import { Offer } from "../../models/Offer";
+import { OfferDto } from "../../models/Offer";
 import { MyOfferComponent } from "./MyOffer";
 
 interface Props {
-  offers: Offer[] | undefined;
+  offers: OfferDto[] | undefined;
 }
 
 export function MyOffersList({ offers }: Props) {

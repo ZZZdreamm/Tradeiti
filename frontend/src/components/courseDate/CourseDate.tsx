@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { CourseDateData } from "../../models/CourseDate";
 import "./CourseDate.scss";
 import { useFormContext } from "react-hook-form";
+import { GroupDto } from "../../models/GroupDto";
 
 interface CourseDateProps {
-  date: CourseDateData;
-  handleChooseDate?: (date: CourseDateData | null, hourType: string) => void;
+  date: GroupDto;
+  handleChooseDate?: (date: GroupDto | null, hourType: string) => void;
   hourType?: string;
 }
 
@@ -15,7 +15,7 @@ export function CourseDateComponent({
   hourType = "",
 }: CourseDateProps) {
   const { watch } = useFormContext();
-  const choosenHour: CourseDateData = watch(hourType);
+  const choosenHour: GroupDto = watch(hourType);
 
   const getAllElementsByClassName = (className: string) => {
     return document.querySelectorAll(`.${className}`);
@@ -71,18 +71,22 @@ export function CourseDateComponent({
   };
 
   useEffect(() => {
+    const span = document.getElementById(
+      `radioSpan/${hourType}/${date.weekday}/${date.start_time}`
+    ) as HTMLSpanElement;
+    const input = span.querySelector('input[type="radio"]') as HTMLInputElement;
+    if (input.checked) return;
     if (
       choosenHour &&
-      choosenHour.weekday === date.weekday &&
-      choosenHour.start_time === date.start_time &&
-      choosenHour.lecturers === date.lecturers
+      choosenHour.weekday == date.weekday &&
+      choosenHour.start_time == date.start_time &&
+      choosenHour.end_time == date.end_time &&
+      choosenHour.class_type_name == date.class_type_name &&
+      choosenHour.group_number == date.group_number
     ) {
-      const span = document.getElementById(
-        `radioSpan/${hourType}/${date.weekday}/${date.start_time}`
-      ) as HTMLElement;
       span.click();
     }
-  }, []);
+  }, [choosenHour]);
 
   return (
     <span
@@ -96,11 +100,12 @@ export function CourseDateComponent({
           {date.weekday} {date.start_time} - {date.end_time}
         </div>
       </div>
-      <div>
+      <div className="lecturers">
         {date.lecturers &&
-          date.lecturers.map((lecturer) => <span>{lecturer}</span>)}
+          date.lecturers.map((lecturer, index) => (
+            <span key={index}>{lecturer}</span>
+          ))}
       </div>
     </span>
   );
-  
 }

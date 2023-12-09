@@ -1,21 +1,19 @@
-import { Offer } from "../../models/Offer";
+import { OfferDto } from "../../models/Offer";
+import { OfferStatus } from "../../models/OfferStatus";
 import "./OfferRequest.scss";
 
 interface Props {
-  offerRequest: Offer;
+  offerRequest: OfferDto;
 }
 
 export function OfferRequest({ offerRequest }: Props) {
   return (
     <div className="requestDiv">
-      <span>{offerRequest.course_name}</span>
-      <span className = {offerRequest.status}>
-        {offerRequest.status == "accepted" ? "Zaakceptowana" : ""}
-        {offerRequest.status == "pending" ? "Oczekuje" : ""}
-        {offerRequest.status == "failed" ? "Wycofana / Odrzucona" : ""}
-        {offerRequest.status == "requested" ? "Prośba wysłana" : ""}
-        {offerRequest.status == "finalized" ? "Zakończona" : ""}
-        </span>
+      <span>{offerRequest.my_course.course_name}</span>
+      <span className={offerRequest.state}>
+        {offerRequest.state == OfferStatus.Request_sent && "Prośba wysłana"}
+        {offerRequest.state == OfferStatus.Completed && "Zaakceptowana"}
+      </span>
     </div>
   );
 }

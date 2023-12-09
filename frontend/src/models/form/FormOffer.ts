@@ -1,8 +1,8 @@
 import { CourseDto } from "../Course";
-import { CourseDateData } from "../CourseDate";
+import { GroupDto } from "../GroupDto";
 
 export interface FormOffer {
   course: CourseDto;
-  myHour: CourseDateData;
-  opponentHour: CourseDateData;
+  myHour: GroupDto;
+  opponentHour: GroupDto;
 }
