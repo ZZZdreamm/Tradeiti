@@ -1,12 +1,11 @@
-import { CourseDateData } from "./CourseDate";
+import { CourseDto } from "./Course";
 import { OfferStatus } from "./OfferStatus";
 
-export interface Offer {
+export interface OfferDto {
   offer_id: string;
-  course_name: string;
-  selled_date_data: CourseDateData;
-  exchanged_date_data: CourseDateData;
-  requester_id: string;
-  accepter_id: string;
-  status: OfferStatus;
+  owner_username: string;
+  receiver_username: string;
+  state: OfferStatus;
+  my_course: CourseDto;
+  wanted_course: CourseDto;
 }

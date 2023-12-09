@@ -1,10 +1,10 @@
-import { CourseDateData } from "../../models/CourseDate";
+import { GroupDto } from "../../models/GroupDto";
 import { CourseDateComponent } from "../courseDate/CourseDate";
 import "./CourseHours.scss";
 
 interface Props {
-  dates: CourseDateData[] | undefined;
-  handleChooseDate?: (date: CourseDateData | null, hourType: string) => void;
+  dates: GroupDto[] | undefined;
+  handleChooseDate?: (date: GroupDto | null, hourType: string) => void;
   hourType?: string;
 }
 

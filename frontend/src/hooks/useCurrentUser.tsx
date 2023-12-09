@@ -24,8 +24,8 @@ export function useCurrentUser() {
     }
 
     getCurrentUser()
-      .then((user) => {
-        setCurrentUser(user);
+      .then(() => {
+        setCurrentUser(localStorage.getItem("username"));
         setAuthenticated(true);
       })
       .catch((err) => {

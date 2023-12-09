@@ -1,18 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import { acceptOffer } from "../../apiFunctions/acceptOffer";
+import { requestOffer } from "../../apiFunctions/requestOffer";
 import { Button } from "../../common/button/Button";
-// import { useCurrentUser } from "../../hooks/useCurrentUser";
-import { Offer } from "../../models/Offer";
+import { OfferDto } from "../../models/Offer";
 import "./style.scss";
+import { useAuthContext } from "../../providers/AuthProvider";
 
 interface Props {
-  offer: Offer;
+  offer: OfferDto;
 }
 
 export function OfferComponent({ offer }: Props) {
   const navigate = useNavigate();
+  const { currentUser } = useAuthContext();
+
   const handleAcceptOffer = () => {
-    acceptOffer(offer.offer_id)
+    requestOffer(offer.offer_id)
       .then((res) => {
         console.log(res);
         alert("Offer acceptance request sent");
@@ -26,22 +28,35 @@ export function OfferComponent({ offer }: Props) {
   return (
     <div className="offer">
       <div className="offer-left">
-        <p>ID: {"\t"}<b>{offer.offer_id}</b></p>
-        <p>Przedmiot: <b>{offer.course_name}</b></p>
-        <p>Prowadzący: <b>{offer.selled_date_data.lecturers.map((lecturer) => (
-          <span>{lecturer}</span>
-        ))}</b></p>
         <p>
-          Termin: {" "}
+          ID: {"\t"}
+          <b>{offer.my_course.course_id}</b>
+        </p>
+        <p>
+          Przedmiot: <b>{offer.my_course.course_name}</b>
+        </p>
+        <p>
+          Prowadzący:{" "}
           <b>
-            {offer.selled_date_data.start_time}
-            {" "}
-            {offer.selled_date_data.end_time}
+            {offer.my_course.groups[0].lecturers.map((lecturer, index) => (
+              <span key={index}>{lecturer}</span>
+            ))}
+          </b>
+        </p>
+        <p>
+          Termin:{" "}
+          <b>
+            {offer.my_course.groups[0].start_time} -{" "}
+            {offer.my_course.groups[0].end_time}
           </b>
         </p>
       </div>
       <div className="offer-right">
-        <Button className="acceptButton" onClick={handleAcceptOffer}>Akceptuj</Button>
+        {offer.owner_username !== currentUser && (
+          <Button className="acceptButton" onClick={handleAcceptOffer}>
+            Akceptuj
+          </Button>
+        )}
       </div>
     </div>
   );

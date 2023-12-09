@@ -8,7 +8,7 @@ import { getDefaultOfferFormValues } from "./DefaultOfferFormValues";
 import { useEffect } from "react";
 import { MyOffersSteps } from "./MyOffersSteps";
 import { OfferCreationDto } from "../../models/OfferCreationDto";
-import { addOffer } from "../../apiFunctions/addOffer";
+import { createOffer } from "../../apiFunctions/createOffer";
 import { FormOffer } from "../../models/form/FormOffer";
 import { clearSessionStorage } from "../../common/sessionStorage";
 
@@ -24,23 +24,37 @@ export function AddOffer() {
 
   const onSubmit: SubmitHandler<FormOffer> = (values) => {
     const createdOffer: OfferCreationDto = {
-      course_id: values.course.course_id,
-      course_name: values.course.course_name,
-      my_date: {
-        start_time: values.myHour.start_time,
-        end_time: values.myHour.end_time,
-        lecturers: values.myHour.lecturers,
-        weekday: values.myHour.weekday,
+      my_course: {
+        course_id: values.course.course_id,
+        course_name: values.course.course_name,
+        groups: [
+          {
+            group_number: values.myHour.group_number,
+            class_type_name: values.myHour.class_type_name,
+            weekday: values.myHour.weekday,
+            start_time: values.myHour.start_time,
+            end_time: values.myHour.end_time,
+            lecturers: values.myHour.lecturers,
+          },
+        ],
       },
-      wanted_date: {
-        start_time: values.opponentHour.start_time,
-        end_time: values.opponentHour.end_time,
-        lecturers: values.opponentHour.lecturers,
-        weekday: values.opponentHour.weekday,
+      wanted_course: {
+        course_id: values.course.course_id,
+        course_name: values.course.course_name,
+        groups: [
+          {
+            group_number: values.opponentHour.group_number,
+            class_type_name: values.opponentHour.class_type_name,
+            weekday: values.opponentHour.weekday,
+            start_time: values.opponentHour.start_time,
+            end_time: values.opponentHour.end_time,
+            lecturers: values.opponentHour.lecturers,
+          },
+        ],
       },
     };
     console.log(createdOffer);
-    addOffer(createdOffer)
+    createOffer(createdOffer)
       .then((response) => {
         console.log(response);
         alert("Oferta została dodana");

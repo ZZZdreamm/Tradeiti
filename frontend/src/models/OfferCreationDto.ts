@@ -1,8 +1,6 @@
-import { CourseDateData } from "./CourseDate";
+import { CourseDto } from "./Course";
 
 export interface OfferCreationDto {
-  course_id: string;
-  course_name:string;
-  my_date: CourseDateData;
-  wanted_date: CourseDateData;
+  my_course: CourseDto;
+  wanted_course: CourseDto;
 }

@@ -33,3 +33,10 @@
 // .unavailable input[type="radio"]{
 //     display: none;
 // }
+
+.lecturers{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

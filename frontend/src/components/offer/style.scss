@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    p:nth-child(1) b{
+    p:nth-child(1) b {
       color: var(--id-filter);
     }
 
@@ -46,17 +46,17 @@ p {
   margin: 5px 10px;
 }
 
-.approveButton:disabled{
+.approveButton:disabled {
   border: 0px;
   cursor: default;
 }
 
-.approveButton:enabled:hover:nth-child(2){
+.approveButton:enabled:hover:nth-child(2) {
   background-color: rgb(124, 241, 124);
   border: 1px solid rgb(20, 185, 20);
   transition: border 1s ease, background-color 1s ease;
 }
-.approveButton:enabled:hover:nth-child(3){
+.approveButton:enabled:hover:nth-child(3) {
   background-color: rgb(219, 127, 127);
   border: 1px solid rgb(185, 20, 20);
   transition: border 1s ease, background-color 1s ease;
@@ -74,10 +74,20 @@ p {
   border: 2px #758aad outset;
 }
 
-.acceptButton{
+.acceptButton {
   padding: 10px 20px;
 }
 .acceptButton:hover {
   border: 2px inset #758aad;
   padding: 9px 19px;
+}
+
+.offer-left-lecturers {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  & > * {
+    font-weight: 600;
+  }
 }

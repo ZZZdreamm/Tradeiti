@@ -25,6 +25,7 @@ export const Login = () => {
             .then(() => {
               setConnectedToUsos(true);
               setLoading(false);
+              localStorage.setItem("username", userCredentials.username);
               navigate("/#/");
               window.location.reload();
             })
