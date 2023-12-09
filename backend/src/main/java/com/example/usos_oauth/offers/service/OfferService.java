@@ -64,4 +64,32 @@ public class OfferService {
     public void deleteAllOffers() {
         offerRepository.deleteAll();
     }
+
+    public void deleteOffer(Long id) {
+        assertUserIsOwner(id);
+        offerRepository.deleteById(id);
+    }
+
+    public void acceptOffer(Long id) {
+        assertUserIsOwner(id);
+        changeOfferState(id, OfferState.COMPLETED);
+    }
+
+    public void rejectOffer(Long id) {
+        assertUserIsOwner(id);
+        changeOfferState(id, OfferState.PENDING);
+    }
+
+    private void changeOfferState(Long id, OfferState state) {
+        Offer offer = offerRepository.findById(id).orElseThrow();
+        offer.setState(state);
+        offerRepository.save(offer);
+    }
+
+    private void assertUserIsOwner(Long id) {
+        Offer offer = offerRepository.findById(id).orElseThrow();
+        if (!offer.getOwner().equals(userService.getCurrentUser())) {
+            throw new RuntimeException("User is not the owner of the offer");
+        }
+    }
 }
