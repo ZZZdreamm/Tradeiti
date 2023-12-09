@@ -1,6 +1,6 @@
 export interface SearchOfferOptions {
   course_name: string;
-  start_time: string;
+  date: string;
   lecturer: string;
-  offer_id: string;
+  course_id: string;
 }
