@@ -8,17 +8,19 @@ interface Props {
 
 export function OfferRequestsList({ offerRequests }: Props) {
   return (
-    <div className="requestList">
+    <>
       {offerRequests ? (
-        offerRequests.map((offerRequest) => (
-          <OfferRequest
-            key={offerRequest.offer_id}
-            offerRequest={offerRequest}
-          />
-        ))
+        <div className="requestList">
+          {offerRequests.map((offerRequest) => (
+            <OfferRequest
+              key={offerRequest.offer_id}
+              offerRequest={offerRequest}
+            />
+          ))}
+        </div>
       ) : (
         <Loader />
       )}
-    </div>
+    </>
   );
 }
