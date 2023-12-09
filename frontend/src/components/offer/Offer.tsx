@@ -25,8 +25,17 @@ export function OfferComponent({ offer }: Props) {
         navigate(0);
       });
   };
+
   return (
-    <div className="offer">
+    <div
+      className="offer"
+      style={{
+        backgroundColor:
+          offer.owner_username === currentUser?.username
+            ? `var(--my-course-color)`
+            : `var(--course-color)`,
+      }}
+    >
       <div className="offer-left">
         <p>
           ID: {"\t"}
@@ -46,13 +55,14 @@ export function OfferComponent({ offer }: Props) {
         <p>
           Termin:{" "}
           <b>
-            {offer.my_course.groups[0].start_time} -{" "}
+            {offer.my_course.groups[0].weekday},{" "}
+            {offer.my_course.groups[0].start_time}-
             {offer.my_course.groups[0].end_time}
           </b>
         </p>
       </div>
       <div className="offer-right">
-        {offer.owner_username !== currentUser && (
+        {offer.owner_username !== currentUser?.username && (
           <Button className="acceptButton" onClick={handleAcceptOffer}>
             Akceptuj
           </Button>
