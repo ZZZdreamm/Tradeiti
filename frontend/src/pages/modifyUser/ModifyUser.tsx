@@ -1,39 +1,65 @@
-import { withPrivateRoute } from "../../common/withPrivateRoute/WithPrivateRoute";
-import { changeUsername } from "../../apiFunctions/change-username";
-import "./ModifyUser.scss";
+import { useState } from 'react';
+import { withPrivateRoute } from '../../common/withPrivateRoute/WithPrivateRoute';
+import './ModifyUser.scss';
 
 const ModifyUser = () => {
-    const checkRadio = (e) => {
-        e.target.parentElement.firstChild.checked = true;
-    }
-    const avatars = [
-        {name: 'man',
-        path: '/avatars/man.png'},
-        {name: 'woman',
-        path:'/avatars/woman.png'},
-        {name: 'helicopter',
-        path: '/avatars/helicopter.png'}
-    ];
-    const userName = localStorage.getItem("username");
+  const [selectedAvatar, setSelectedAvatar] = useState('man');
+  const [userLogin, setUserLogin] = useState(localStorage.getItem('username') || '');
+
+  const checkRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedAvatar(e.target.value);
+  };
+
+  const selectAvatar = (avatarName: string) => {
+    setSelectedAvatar(avatarName);
+  };
+
+  const avatars = [
+    { name: 'man', path: '/avatars/man.png' },
+    { name: 'woman', path: '/avatars/woman.png' },
+    { name: 'helicopter', path: '/avatars/helicopter.png' },
+  ];
+
+  const handleChange = () => {
+    alert(userLogin + ' ' + selectedAvatar);
+  };
+
   return (
     <>
-        <div className="userContainer">
+      <div className="userContainer">
         <div className="avatar">
-            {avatars.map((avatar) => (
-                <div className="avatarRadio">
-                <input type="radio" name="avatar" value={avatar.name} checked/>
-                <img src={avatar.path} alt="Avatar" onClick={checkRadio}/>
-                </div>
-        ))}
+          {avatars.map((avatar) => (
+            <div className="avatarRadio" key={avatar.name}>
+              <input
+                type="radio"
+                name="avatar"
+                value={avatar.name}
+                checked={selectedAvatar === avatar.name}
+                onChange={checkRadio}
+              />
+              <img
+                src={avatar.path}
+                alt="Avatar"
+                onClick={() => selectAvatar(avatar.name)}
+              />
+            </div>
+          ))}
         </div>
         <div className="userData">
-            <b>Nowa nazwa użytkownika:</b> <input type="text" name="userLogin" id="userLogin"
-            placeholder = {"Old login: " + userName}/>
-            <br />
+          <b>Nowa nazwa użytkownika:</b>{' '}
+          <input
+            type="text"
+            name="userLogin"
+            id="userLogin"
+            placeholder={'Old login: ' + userLogin}
+            onChange={(e) => setUserLogin(e.target.value)}
+          />
+          <br />
         </div>
-        </div>
-        <button className="changeButton">Zapisz dane</button>
-
+      </div>
+      <button className="changeButton" onClick={handleChange}>
+        Zapisz dane
+      </button>
     </>
   );
 };
