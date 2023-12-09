@@ -4,6 +4,7 @@ import com.example.usos_oauth.security.auth.model.AuthenticationRequest;
 import com.example.usos_oauth.security.auth.model.AuthenticationResponse;
 import com.example.usos_oauth.security.model.Role;
 import com.example.usos_oauth.security.model.User;
+import com.example.usos_oauth.security.model.UsosAuth;
 import com.example.usos_oauth.security.repository.UserRepository;
 import com.example.usos_oauth.security.service.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -24,13 +25,17 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(AuthenticationRequest registerRequest) {
         String username = registerRequest.getUsername();
-        if (userRepository.findByUsername(username).isPresent()){
+        if (userRepository.findByUsername(username).isPresent()) {
             throw new UserAlreadyExistsException();
         }
         User user = User.builder()
                 .username(username)
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .role(Role.USER)
+                .usos_auth(UsosAuth.builder()
+                        .oauthKey("none")
+                        .oauthSecret("none")
+                        .build())
                 .build();
         userRepository.save(user);
         String jwtToken = jwtService.generateToken(user);
