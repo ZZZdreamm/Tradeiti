@@ -3,7 +3,7 @@ import "./NavBar.scss";
 
 const titleAndNavigation = [
   {
-    title: "Home",
+    title: "HOME",
     navigation: "/",
   },
   {
@@ -18,7 +18,7 @@ const titleAndNavigation = [
     title: "WYSŁANE OFERTY",
     navigation: "offerRequests",
   },
-  { title: "KURSY", navigation: "courses" },
+  { title: "ZAKOŃCZONE OFERTY", navigation: "finalizedOffers" },
 ];
 
 export const NavBar = () => {
