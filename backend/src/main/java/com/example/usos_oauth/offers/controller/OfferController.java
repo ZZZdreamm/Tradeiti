@@ -54,16 +54,22 @@ public class OfferController {
         return offerService.getOffersOfState(OfferState.PENDING);
     }
 
+    @PatchMapping("/send-request/{id}")
+    public ResponseEntity<String> sendRequest(@PathVariable Long id) {
+        offerService.sendRequest(id);
+        return ResponseEntity.ok("Request sent");
+    }
+
     @PatchMapping("/accept/{id}")
-    public ResponseEntity<String> acceptOffer(@PathVariable Long id) {
-        offerService.acceptOffer(id);
-        return ResponseEntity.ok("Offer accepted");
+    public ResponseEntity<String> acceptRequest(@PathVariable Long id) {
+        offerService.acceptRequest(id);
+        return ResponseEntity.ok("Request accepted");
     }
 
     @PatchMapping("/reject/{id}")
-    public ResponseEntity<String> rejectOffer(@PathVariable Long id) {
-        offerService.rejectOffer(id);
-        return ResponseEntity.ok("Offer rejected");
+    public ResponseEntity<String> rejectRequest(@PathVariable Long id) {
+        offerService.rejectRequest(id);
+        return ResponseEntity.ok("Request rejected");
     }
 
 }
