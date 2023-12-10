@@ -20,7 +20,7 @@ public class CoursesController {
 
     @GetMapping("/user")
     public List<CourseDTO> getUserCourses() {
-        return usosServiceAuthorizer.getUsosService().getUserCourses();
+        return usosServiceAuthorizer.getUsosService().getCurrentUserCourses();
     }
 
     @GetMapping("groups/{course-id}")

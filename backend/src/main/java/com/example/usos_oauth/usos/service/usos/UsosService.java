@@ -44,20 +44,28 @@ public class UsosService {
                 .toList();
     }
 
-    public List<CourseDTO> getUserCourses() {
+    public List<CourseDTO> getCurrentUserCourses() {
         assertUserIsConnected();
         List<Activity> activities = usosTemplate.getUserActivities();
         activities = processActivities(activities);
         return UsosDTOMapper.mapToCourseDTOList(activities);
     }
 
-    public List<String> getUserCoursesIds() {
+    public List<String> getCurrentUserCoursesIds() {
         assertUserIsConnected();
-        List<Activity> activities = usosTemplate.getUserActivities();
-        activities = processActivities(activities);
-        return activities.stream()
-                .map(Activity::getCourseId)
+        List<CourseDTO> courses = getCurrentUserCourses();
+        return courses.stream()
+                .map(CourseDTO::getCourseId)
                 .toList();
+    }
+
+    public boolean IsCurrentUserInGroup(String wantedCourseId, int wantedGroupNumber) {
+        assertUserIsConnected();
+        List<CourseDTO> courses = getCurrentUserCourses();
+        return courses.stream()
+                .filter(course -> course.getCourseId().equals(wantedCourseId))
+                .anyMatch(course -> course.getGroups().stream()
+                        .anyMatch(group -> group.getGroupNumber() == wantedGroupNumber));
     }
 
     private List<Activity> processActivities(List<Activity> activities) {
@@ -89,5 +97,4 @@ public class UsosService {
             }
         }
     }
-
 }
