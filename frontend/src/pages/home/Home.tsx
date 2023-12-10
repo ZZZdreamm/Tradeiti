@@ -2,7 +2,7 @@
 import { withPrivateRoute } from "../../common/withPrivateRoute/WithPrivateRoute";
 import "./Home.scss";
 
-const Home = () => {
+export const Home = () => {
   return (
     <div className="helpCont">
       <img src="TradeEITI.png" width="200px" />
@@ -70,7 +70,7 @@ const Home = () => {
         <h5>Kacper Multan</h5>
         <h5>Artur Kempiński</h5>
         <h5>Jakub Kryczka</h5>
-        
+
       </div>
     </div>
   );
