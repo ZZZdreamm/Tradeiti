@@ -19,6 +19,7 @@ const titleAndNavigation = [
     navigation: "offerRequests",
   },
   { title: "ZAKOŃCZONE OFERTY", navigation: "finalizedOffers" },
+  { title: "KURSY", navigation: "courses" },
 ];
 
 export const NavBar = () => {
