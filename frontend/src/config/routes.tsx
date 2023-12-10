@@ -1,5 +1,5 @@
 import { PrivateFinalizedOffers } from "../pages/finalizedOffers/FinalizedOffers";
-import { PrivateHome } from "../pages/home/Home";
+import { Home } from "../pages/home/Home";
 import { Login } from "../pages/login/Login";
 import { PrivateMyOffers } from "../pages/myOffers/MyOffers";
 import { PrivateNews } from "../pages/news/News";
@@ -10,6 +10,7 @@ import { Register } from "../pages/register/Register";
 import { UsosConnect } from "../pages/usosConnect/UsosConnect";
 import { PrivateUserPage } from "../pages/userPage/UserPage";
 import { PrivateModifyUser } from "../pages/modifyUser/ModifyUser";
+import { PrivateCourses } from "../pages/courses/Courses";
 
 export const routes = [
   { path: "/register", element: <Register /> },
@@ -23,9 +24,10 @@ export const privateRoutes = [
   { path: "/myOffers", element: <PrivateMyOffers /> },
   { path: "/news", element: <PrivateNews /> },
   { path: "/finalizedOffers", element: <PrivateFinalizedOffers /> },
+  { path: "/courses", element: <PrivateCourses /> },
   { path: "/offerRequests", element: <PrivateOfferRequests /> },
   { path: "/userPage", element: <PrivateUserPage /> },
   { path: "/modifyUser", element: <PrivateModifyUser /> },
-  { path: "/", element: <PrivateHome /> },
-  { path: "*", element: <PrivateHome /> },
+  { path: "/", element: <Home /> },
+  { path: "*", element: <Home /> },
 ];

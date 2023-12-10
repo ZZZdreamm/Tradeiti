@@ -8,13 +8,24 @@ import { checkIfOfferExistsAlready } from "./checkIfOfferExistsAlready";
 interface Props {
   course: CourseDto;
   handleOnClick?: (course: CourseDto, chooseGroup: GroupDto) => void;
+  inOffers: boolean;
 }
 
-export function CourseComponent({ course, handleOnClick = () => {} }: Props) {
+export function CourseComponent({
+  course,
+  handleOnClick = () => {},
+  inOffers,
+}: Props) {
   const { data: myOffers } = useQuery("offers", getUserOffers);
-  const groupsToShow = course.groups.filter((group) =>
-    checkIfOfferExistsAlready(myOffers, course.course_id, group.class_type_name)
-  );
+  const groupsToShow = inOffers
+    ? course.groups.filter((group) =>
+        checkIfOfferExistsAlready(
+          myOffers,
+          course.course_id,
+          group.class_type_name
+        )
+      )
+    : course.groups;
   return (
     <div className={`course ${groupsToShow.length === 0 && "unavailable"}`}>
       <h6>{course.course_name}</h6>
