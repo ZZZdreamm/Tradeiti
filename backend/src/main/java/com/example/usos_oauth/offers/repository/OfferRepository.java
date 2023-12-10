@@ -14,5 +14,7 @@ public interface OfferRepository extends JpaRepository<Offer, Long> {
     List<Offer> findAllByReceiver(User receiver);
 
     List<Offer> findAllByState(OfferState state);
+
+    List<Offer> findAllByOwnerAndState(User currentUser, OfferState state);
 }
 

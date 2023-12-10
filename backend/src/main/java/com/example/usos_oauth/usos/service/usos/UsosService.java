@@ -51,6 +51,15 @@ public class UsosService {
         return UsosDTOMapper.mapToCourseDTOList(activities);
     }
 
+    public List<String> getUserCoursesIds() {
+        assertUserIsConnected();
+        List<Activity> activities = usosTemplate.getUserActivities();
+        activities = processActivities(activities);
+        return activities.stream()
+                .map(Activity::getCourseId)
+                .toList();
+    }
+
     private List<Activity> processActivities(List<Activity> activities) {
         activities = removeLectures(activities);
         updateLecturer(activities);

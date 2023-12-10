@@ -8,6 +8,7 @@ import com.example.usos_oauth.offers.repository.OfferRepository;
 import com.example.usos_oauth.offers.service.utils.OfferDTOMapper;
 import com.example.usos_oauth.security.model.User;
 import com.example.usos_oauth.security.service.UserService;
+import com.example.usos_oauth.usos.service.connect.UsosServiceAuthorizer;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ public class OfferService {
 
     private OfferRepository offerRepository;
     private UserService userService;
+    private UsosServiceAuthorizer usosServiceAuthorizer;
 
     public Long createOffer(CreateOfferDTO createOffer) {
         Offer offer = new Offer();
@@ -55,15 +57,19 @@ public class OfferService {
                 .toList();
     }
 
+    public List<OfferDTO> getUserOffersOfState(OfferState state) {
+        List<String> userCoursesIds = usosServiceAuthorizer.getUsosService().getUserCoursesIds();
+        List<OfferDTO> offers = getOffersOfState(state);
+        return offers.stream()
+                .filter(offer -> userCoursesIds.contains(offer.getMyCourse().getCourseId()))
+                .toList();
+    }
+
     public List<OfferDTO> getOffersOfState(OfferState state) {
         List<Offer> offers = offerRepository.findAllByState(state);
         return offers.stream()
                 .map(OfferDTOMapper::mapToOfferDTO)
                 .toList();
-    }
-
-    public void deleteAllOffers() {
-        offerRepository.deleteAll();
     }
 
     public void deleteOffer(Long id) {

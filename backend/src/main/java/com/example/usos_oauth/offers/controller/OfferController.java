@@ -22,36 +22,25 @@ public class OfferController {
         return ResponseEntity.ok(offerService.createOffer(offer));
     }
 
-    @DeleteMapping("/all/delete")
-    public ResponseEntity<String> deleteAllOffers() {
-        offerService.deleteAllOffers();
-        return ResponseEntity.ok("All offers deleted");
-    }
-
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteOffer(@PathVariable Long id) {
         offerService.deleteOffer(id);
         return ResponseEntity.ok("Offer deleted");
     }
 
-    @GetMapping("/all")
-    public List<OfferDTO> getAllOffers() {
-        return offerService.getAllOffers();
-    }
-
-    @GetMapping("/all/user")
+    @GetMapping("/owned")
     public List<OfferDTO> getUserOffers() {
         return offerService.getUserOffers();
     }
 
-    @GetMapping("/all/received")
+    @GetMapping("/received")
     public List<OfferDTO> getReceivedOffers() {
         return offerService.getReceivedOffers();
     }
 
-    @GetMapping("/all/pending")
-    public List<OfferDTO> getPendingOffers() {
-        return offerService.getOffersOfState(OfferState.PENDING);
+    @GetMapping("/user/{state}")
+    public List<OfferDTO> getPendingOffers(@PathVariable OfferState state) {
+        return offerService.getUserOffersOfState(state);
     }
 
     @PatchMapping("/send-request/{id}")
