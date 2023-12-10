@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsernameRequest {
+public class UserDataResponse {
     private String username;
+    private String avatar;
 }

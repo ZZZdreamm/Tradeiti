@@ -38,6 +38,7 @@ public class AuthenticationService {
                         .oauthKey("none")
                         .oauthSecret("none")
                         .build())
+                .avatar("helicopter")
                 .build();
         userRepository.save(user);
         String jwtToken = jwtService.generateToken(user);
@@ -61,7 +62,7 @@ public class AuthenticationService {
                 .build();
     }
 
-        public AuthenticationResponse changeUsername(String newUsername) {
+    public AuthenticationResponse changeUsername(String newUsername) {
         if (userService.isUsernameTaken(newUsername)) {
             throw new UserAlreadyExistsException();
         }
