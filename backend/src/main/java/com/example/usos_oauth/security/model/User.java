@@ -32,6 +32,7 @@ public class User implements UserDetails {
     private String authentication_secret;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private UsosAuth usos_auth;
+    private String avatar;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

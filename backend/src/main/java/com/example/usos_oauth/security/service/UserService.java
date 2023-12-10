@@ -1,5 +1,8 @@
 package com.example.usos_oauth.security.service;
 
+import com.example.usos_oauth.security.auth.model.UserDataResponse;
+import com.example.usos_oauth.security.auth.service.UnknownAvatarException;
+import com.example.usos_oauth.security.model.Avatar;
 import com.example.usos_oauth.security.model.User;
 import com.example.usos_oauth.security.model.UsosAuth;
 import com.example.usos_oauth.security.repository.UserRepository;
@@ -60,4 +63,29 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    public boolean checkAvatar(String newAvatar){
+        for (Avatar avatar : Avatar.values()) {
+            if (avatar.getAvatar().equals(newAvatar))
+                return true;
+        }
+        return false;
+    }
+
+    public void changeAvatar(String newAvatar) {
+        User user = getCurrentUser();
+        if (checkAvatar(newAvatar)) {
+            user.setAvatar(newAvatar);
+            userRepository.save(user);
+        } else {
+            throw new UnknownAvatarException();
+        }
+    }
+
+    public UserDataResponse getUserInfo() {
+        User user = getCurrentUser();
+        return UserDataResponse.builder()
+                .username(user.getUsername())
+                .avatar(user.getAvatar())
+                .build();
+    }
 }
