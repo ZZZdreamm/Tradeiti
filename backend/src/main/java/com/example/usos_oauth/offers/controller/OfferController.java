@@ -30,7 +30,7 @@ public class OfferController {
 
     @GetMapping("/owned")
     public List<OfferDTO> getUserOffers() {
-        return offerService.getUserOffers();
+        return offerService.getOwnedOffers();
     }
 
     @GetMapping("/received")
@@ -39,8 +39,13 @@ public class OfferController {
     }
 
     @GetMapping("/user/{state}")
-    public List<OfferDTO> getPendingOffers(@PathVariable OfferState state) {
-        return offerService.getUserOffersOfState(state);
+    public List<OfferDTO> getOffersOfState(@PathVariable OfferState state) {
+        return offerService.getOffersMatchingUserCourses(state);
+    }
+
+    @GetMapping("/user/present/{state}")
+    public List<OfferDTO> getPresentOffers(@PathVariable OfferState state) {
+        return offerService.getOffersWithUserOfState(state);
     }
 
     @PatchMapping("/send-request/{id}")

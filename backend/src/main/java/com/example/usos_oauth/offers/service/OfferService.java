@@ -5,6 +5,7 @@ import com.example.usos_oauth.offers.model.dao.OfferState;
 import com.example.usos_oauth.offers.model.dto.CreateOfferRequest;
 import com.example.usos_oauth.offers.model.dto.OfferDTO;
 import com.example.usos_oauth.offers.repository.OfferRepository;
+import com.example.usos_oauth.offers.service.exception.OperationForbiddenException;
 import com.example.usos_oauth.offers.service.utils.OfferDTOMapper;
 import com.example.usos_oauth.security.model.User;
 import com.example.usos_oauth.security.service.UserService;
@@ -13,6 +14,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @AllArgsConstructor
 @Service
@@ -43,7 +45,7 @@ public class OfferService {
                 .toList();
     }
 
-    public List<OfferDTO> getUserOffers() {
+    public List<OfferDTO> getOwnedOffers() {
         List<Offer> offers = offerRepository.findAllByOwner(userService.getCurrentUser());
         return offers.stream()
                 .map(OfferDTOMapper::mapToOfferDTO)
@@ -57,7 +59,7 @@ public class OfferService {
                 .toList();
     }
 
-    public List<OfferDTO> getUserOffersOfState(OfferState state) {
+    public List<OfferDTO> getOffersMatchingUserCourses(OfferState state) {
         List<String> userCoursesIds = usosServiceAuthorizer.getUsosService().getUserCoursesIds();
         List<OfferDTO> offers = getOffersOfState(state);
         return offers.stream()
@@ -69,6 +71,15 @@ public class OfferService {
         List<Offer> offers = offerRepository.findAllByState(state);
         return offers.stream()
                 .map(OfferDTOMapper::mapToOfferDTO)
+                .toList();
+    }
+
+    public List<OfferDTO> getOffersWithUserOfState(OfferState state) {
+        List<OfferDTO> ownedOffers = getOwnedOffers();
+        List<OfferDTO> receivedOffers = getReceivedOffers();
+        return Stream.of(ownedOffers, receivedOffers)
+                .flatMap(List::stream)
+                .filter(offer -> offer.getState().equals(state))
                 .toList();
     }
 
@@ -117,14 +128,14 @@ public class OfferService {
     private void assertUserIsNotOwner(Long id, User user) {
         Offer offer = offerRepository.findById(id).orElseThrow();
         if (offer.getOwner().equals(user)) {
-            throw new RuntimeException("User is the owner of the offer");
+            throw new OperationForbiddenException();
         }
     }
 
     private void assertUserIsOwner(Long id, User user) {
         Offer offer = offerRepository.findById(id).orElseThrow();
         if (!offer.getOwner().equals(user)) {
-            throw new RuntimeException("User is not the owner of the offer");
+            throw new OperationForbiddenException();
         }
     }
 }
