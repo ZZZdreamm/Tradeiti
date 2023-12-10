@@ -19,7 +19,7 @@ public class Course {
     private String weekDay;
     private String startHour;
     private String endHour;
-    private String courseFullName;
+    private String usosCourseId;
     private String classTypeName;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Lecturer> lecturers;

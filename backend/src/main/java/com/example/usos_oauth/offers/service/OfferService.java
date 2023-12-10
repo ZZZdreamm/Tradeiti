@@ -60,7 +60,7 @@ public class OfferService {
     }
 
     public List<OfferDTO> getOffersMatchingUserCourses(OfferState state) {
-        List<String> userCoursesIds = usosServiceAuthorizer.getUsosService().getUserCoursesIds();
+        List<String> userCoursesIds = usosServiceAuthorizer.getUsosService().getCurrentUserCoursesIds();
         List<OfferDTO> offers = getOffersOfState(state);
         return offers.stream()
                 .filter(offer -> userCoursesIds.contains(offer.getMyCourse().getCourseId()))
@@ -90,8 +90,18 @@ public class OfferService {
 
     public void sendRequest(Long id) {
         assertCurrentUserIsNotOwner(id);
+        assertCurrentUserHasRequiredGroup(id);
         updateOfferState(id, OfferState.REQUEST_SENT);
         updateOfferReceiver(id, userService.getCurrentUser());
+    }
+
+    private void assertCurrentUserHasRequiredGroup(Long id) {
+        Offer offer = offerRepository.findById(id).orElseThrow();
+        String wantedCourseId = offer.getWantedCourse().getUsosCourseId();
+        int wantedGroupNumber = offer.getWantedCourse().getGroupNumber();
+        if (!usosServiceAuthorizer.getUsosService().IsCurrentUserInGroup(wantedCourseId, wantedGroupNumber)) {
+            throw new OperationForbiddenException();
+        }
     }
 
     public void acceptRequest(Long id) {
