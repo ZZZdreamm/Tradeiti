@@ -1,5 +1,5 @@
 import { CourseDto } from "./Course";
-import { OfferStatus } from "./OfferStatus";
+import { OfferStatus } from "./enums/OfferStatus";
 
 export interface OfferDto {
   offer_id: string;

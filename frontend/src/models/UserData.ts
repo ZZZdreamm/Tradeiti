@@ -1,4 +1,4 @@
-import { Avatar } from "./Avatar";
+import { Avatar } from "./enums/Avatar";
 
 export interface UserData {
   username: string;

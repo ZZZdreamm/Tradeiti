@@ -1,5 +1,5 @@
 import { axiosBase } from "../config/axiosConfig";
-import { OfferStatus } from "../models/OfferStatus";
+import { OfferStatus } from "../models/enums/OfferStatus";
 
 export function acceptOffer(offer_id: string, state: OfferStatus) {
   if (state !== OfferStatus.REQUEST_SENT)

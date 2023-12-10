@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { withPrivateRoute } from "../../common/withPrivateRoute/WithPrivateRoute";
 import "./style.scss";
 import { getOffers } from "../../apiFunctions/getOffers";
-import { OfferStatus } from "../../models/OfferStatus";
+import { OfferStatus } from "../../models/enums/OfferStatus";
 import { Loader } from "../../common/loader/Loader";
 
 function FinalizedOffers() {

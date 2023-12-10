@@ -1,7 +1,7 @@
 import { rejectOffer } from "../../apiFunctions/rejectOffer";
 import { removeOffer } from "../../apiFunctions/deleteOffer";
 import { OfferDto } from "../../models/Offer";
-import { OfferStatus } from "../../models/OfferStatus";
+import { OfferStatus } from "../../models/enums/OfferStatus";
 import "./style.scss";
 import { acceptOffer } from "../../apiFunctions/acceptOffer";
 
@@ -13,16 +13,19 @@ export function MyOfferComponent({ offer }: Props) {
   const handleApproveOffer = () => {
     acceptOffer(offer.offer_id, offer.state).then((res) => {
       console.log(res);
+      window.location.reload();
     });
   };
   const handleRemoveOffer = () => {
     removeOffer(offer.offer_id).then((res) => {
       console.log(res);
+      window.location.reload();
     });
   };
   const handleRejectOffer = () => {
     rejectOffer(offer.offer_id).then((res) => {
       console.log(res);
+      window.location.reload();
     });
   };
   return (
@@ -46,23 +49,23 @@ export function MyOfferComponent({ offer }: Props) {
       <div className="offer-right">
         <p>
           Status:{" "}
-          {offer.state === OfferStatus.Request_sent
+          {offer.state === OfferStatus.REQUEST_SENT
             ? "Request sent ✔️"
             : offer.state}
         </p>
         <button
           className="approveButton"
           onClick={handleApproveOffer}
-          disabled={offer.state !== OfferStatus.Request_sent}
+          disabled={offer.state !== OfferStatus.REQUEST_SENT}
         >
           Zatwierdź ofertę
         </button>
-        {offer.state === OfferStatus.Request_sent && (
+        {offer.state === OfferStatus.REQUEST_SENT && (
           <button className="approveButton" onClick={handleRejectOffer}>
             Odrzuć ofertę
           </button>
         )}
-        {offer.state === OfferStatus.Pending && (
+        {offer.state === OfferStatus.PENDING && (
           <button className="approveButton" onClick={handleRemoveOffer}>
             Wycofaj ofertę
           </button>
