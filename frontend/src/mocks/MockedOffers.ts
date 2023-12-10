@@ -1,157 +1,151 @@
-import { OfferDto } from "../models/Offer";
-// import { OfferStatus } from "../models/OfferStatus";
+import { OfferDto } from '../models/Offer';
+import { CourseDto } from '../models/Course';
+import { OfferStatus } from '../models/enums/OfferStatus';
 
+// Mocked course data with additional groups
+const mockedCourse: CourseDto = {
+  course_id: '123',
+  course_name: 'Computer Science',
+  groups: [
+    {
+      group_number: 1,
+      class_type_name: 'Lecture',
+      start_time: '09:00 AM',
+      end_time: '10:30 AM',
+      weekday: 'Monday',
+      lecturers: ['Dr. Smith', 'Professor Kruk'],
+    },
+    {
+      group_number: 2,
+      class_type_name: 'Lab',
+      start_time: '02:00 PM',
+      end_time: '04:30 PM',
+      weekday: 'Wednesday',
+      lecturers: ['Prof. Johnson'],
+    },
+    // Add more groups if needed
+  ],
+};
+
+const mockedCourseToo: CourseDto = {
+  course_id: '123',
+  course_name: 'Computer Science',
+  groups: [
+    {
+      group_number: 2,
+      class_type_name: 'Lab',
+      start_time: '02:00 PM',
+      end_time: '04:30 PM',
+      weekday: 'Wednesday',
+      lecturers: ['Prof. Johnson'],
+    },
+    // Add more groups if needed
+  ],
+};
+
+// Additional mocked offers with different details
 export const mockedOffers: OfferDto[] = [
-  // {
-  //   offer_id: "sadasda-sadad-asd",
-  //   course_name: "Bazdy danych",
-  //   selled_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   exchanged_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   requester_id: "user1",
-  //   accepter_id: "user2",
-  //   status: OfferStatus.Request_sent,
-  // },
-  // {
-  //   offer_id: "2",
-  //   course_name: "Offer 2",
-  //   selled_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   exchanged_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   requester_id: "user3",
-  //   accepter_id: "user4",
-  //   status: OfferStatus.Pending,
-  // },
-  // {
-  //   offer_id: "3",
-  //   course_name: "Offer 3",
-  //   selled_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   exchanged_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   requester_id: "user5",
-  //   accepter_id: "user6",
-  //   status: OfferStatus.Pending,
-  // },
-  // {
-  //   offer_id: "4",
-  //   course_name: "Offer 3",
-  //   selled_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   exchanged_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   requester_id: "user5",
-  //   accepter_id: "user6",
-  //   status: OfferStatus.Request_sent,
-  // },
-  // {
-  //   offer_id: "5",
-  //   course_name: "Offer 3",
-  //   selled_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   exchanged_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   requester_id: "user5",
-  //   accepter_id: "user6",
-  //   status: OfferStatus.Pending,
-  // },
-  // {
-  //   offer_id: "6",
-  //   course_name: "Offer 3",
-  //   selled_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   exchanged_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   requester_id: "user5",
-  //   accepter_id: "user6",
-  //   status: OfferStatus.Request_sent,
-  // },
-  // {
-  //   offer_id: "7",
-  //   course_name: "Offer 3",
-  //   selled_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   exchanged_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   requester_id: "user5",
-  //   accepter_id: "user6",
-  //   status: OfferStatus.Completed,
-  // },
-  // {
-  //   offer_id: "8",
-  //   course_name: "Offer 3",
-  //   selled_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   exchanged_date_data: {
-  //     weekday: "Poniedziałek",
-  //     start_time: "12:00",
-  //     end_time: "14:00",
-  //     lecturers: ["dr hab. inż. Jan Kowalski"],
-  //   },
-  //   requester_id: "user5",
-  //   accepter_id: "user6",
-  //   status: OfferStatus.Pending,
-  // },
+  {
+    offer_id: '1',
+    owner_username: 'user1',
+    receiver_username: 'user2',
+    state: OfferStatus.PENDING,
+    my_course: mockedCourse,
+    wanted_course: mockedCourse,
+  },
+  {
+    offer_id: '2',
+    owner_username: 'user3',
+    receiver_username: 'user4',
+    state: OfferStatus.REQUEST_SENT,
+    my_course: mockedCourse,
+    wanted_course: mockedCourse,
+  },
+  {
+    offer_id: '3',
+    owner_username: 'user5',
+    receiver_username: 'user6',
+    state: OfferStatus.COMPLETED,
+    my_course: mockedCourse,
+    wanted_course: mockedCourse,
+  },
+  {
+    offer_id: '4',
+    owner_username: 'user7',
+    receiver_username: 'user8',
+    state: OfferStatus.PENDING,
+    my_course: mockedCourse,
+    wanted_course: mockedCourse,
+  },
+  {
+    offer_id: '5',
+    owner_username: 'user9',
+    receiver_username: 'user10',
+    state: OfferStatus.REQUEST_SENT,
+    my_course: mockedCourse,
+    wanted_course: mockedCourse,
+  },
+  {
+    offer_id: '6',
+    owner_username: 'user11',
+    receiver_username: 'user12',
+    state: OfferStatus.COMPLETED,
+    my_course: mockedCourse,
+    wanted_course: mockedCourse,
+  },
+
+];
+
+// export const mockedOffers: OfferDto[] = [];
+
+export const finishedOffers: OfferDto[] = [
+  {
+    offer_id: '1',
+    owner_username: 'user1',
+    receiver_username: 'user2',
+    state: OfferStatus.PENDING,
+    my_course: mockedCourse,
+    wanted_course: mockedCourseToo,
+  },
+  {
+    offer_id: '2',
+    owner_username: 'user3',
+    receiver_username: 'user4',
+    state: OfferStatus.REQUEST_SENT,
+    my_course: mockedCourse,
+    wanted_course: mockedCourse,
+  },
+  {
+    offer_id: '3',
+    owner_username: 'user5',
+    receiver_username: 'user6',
+    state: OfferStatus.COMPLETED,
+    my_course: mockedCourse,
+    wanted_course: mockedCourse,
+  },
+  {
+    offer_id: '4',
+    owner_username: 'user7',
+    receiver_username: 'user8',
+    state: OfferStatus.PENDING,
+    my_course: mockedCourse,
+    wanted_course: mockedCourse,
+  },
+  {
+    offer_id: '5',
+    owner_username: 'user9',
+    receiver_username: 'user10',
+    state: OfferStatus.REQUEST_SENT,
+    my_course: mockedCourse,
+    wanted_course: mockedCourse,
+  },
+  {
+    offer_id: '6',
+    owner_username: 'user11',
+    receiver_username: 'user12',
+    state: OfferStatus.COMPLETED,
+    my_course: mockedCourse,
+    wanted_course: mockedCourse,
+  },
+
 ];

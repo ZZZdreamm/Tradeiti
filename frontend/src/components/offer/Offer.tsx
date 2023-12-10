@@ -17,11 +17,11 @@ export function OfferComponent({ offer }: Props) {
     requestOffer(offer.offer_id)
       .then((res) => {
         console.log(res);
-        alert("Offer acceptance request sent");
+        alert("Prośba o akceptację oferty wysłana");
         navigate(0);
       })
       .catch(() => {
-        alert("Something went wrong");
+        alert("Coś poszło nie tak");
         navigate(0);
       });
   };
@@ -42,22 +42,36 @@ export function OfferComponent({ offer }: Props) {
           <b>{offer.my_course.course_id}</b>
         </p>
         <p>
+          Wystawiający: {"\t"}
+          <b>{offer.owner_username}</b>
+        </p>
+        <p>
           Przedmiot: <b>{offer.my_course.course_name}</b>
         </p>
         <p>
           Prowadzący:{" "}
           <b>
-            {offer.my_course.groups[0].lecturers.map((lecturer, index) => (
-              <span key={index}>{lecturer}</span>
+            {offer.my_course.groups[0].lecturers.map((lecturer, index, array) => (
+              <span key={index}>{lecturer}
+              {index < array.length - 1 && ', '}
+              </span>
             ))}
           </b>
         </p>
         <p>
-          Termin:{" "}
+          Oddaję:{" "}
           <b>
             {offer.my_course.groups[0].weekday},{" "}
             {offer.my_course.groups[0].start_time}-
             {offer.my_course.groups[0].end_time}
+          </b>
+        </p>
+        <p>
+          Chcę:{" "}
+          <b>
+            {offer.wanted_course.groups[0].weekday},{" "}
+            {offer.wanted_course.groups[0].start_time}-
+            {offer.wanted_course.groups[0].end_time}
           </b>
         </p>
       </div>

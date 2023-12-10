@@ -19,7 +19,7 @@ const titleAndNavigation = [
     title: "WYSŁANE OFERTY",
     navigation: "offerRequests",
   },
-  { title: "ZAKOŃCZONE OFERTY", navigation: "finalizedOffers" },
+  { title: "ZAKOŃCZONE WYMIANY", navigation: "finalizedOffers" },
   { title: "KURSY", navigation: "courses" },
 ];
 
@@ -58,6 +58,7 @@ export const NavBar = () => {
       ? titleAndNavigation
       : authenticatedLabels
     : notAuthenticatedLabels;
+  // const labels = titleAndNavigation;
   return (
     <nav className="navBar">
       {labels.map((item, index) => (

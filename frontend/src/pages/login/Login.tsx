@@ -40,12 +40,10 @@ export const Login = () => {
       .catch((err) => {
         if (err.response && err.response.status === 503) {
           setErrorMessage("Komputer Artura zasypał śnieg.");
-          window.alert("Service Unavailable. Please try again later.");
-          window.location.reload();
         } else if (err.response && err.response.status === 409) {
-          setErrorMessage("Username already exists.");
+          setErrorMessage("Nazwa użytkownika lub hasło są niepoprawne.");
         } else {
-          setErrorMessage("Unidentified error occured.");
+          setErrorMessage("Błąd logowania.");
         }
       });
   };

@@ -26,11 +26,11 @@
       color: var(--id-filter);
     }
 
-    p:nth-child(2) b {
+    p:nth-child(3) b {
       color: var(--course-filter);
     }
 
-    p:nth-child(3) b {
+    p:nth-child(4) b {
       color: var(--lecturer-filter);
     }
   }
@@ -90,4 +90,9 @@ p {
   & > * {
     font-weight: 600;
   }
+}
+
+.noOffersCom {
+  grid-column: span 2;
+  color: rgb(161, 161, 161);
 }

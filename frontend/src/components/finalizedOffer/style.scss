@@ -1,0 +1,45 @@
+.finishedDiv {
+    padding: 15px;
+    border: outset wheat 4px;
+    margin-bottom: 20px;
+    border-radius: 30px;
+    background-color: var(--bar-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in;
+}
+
+.finishedDiv:hover {
+    background-color: rgb(69, 79, 120);
+}
+
+
+.timeContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    & > div {
+        border: 4px inset wheat;
+        color: black;
+        background-color: var(--course-color);
+        padding: 10px;
+        border-radius: 20px;
+        margin-top: 15px;
+    };
+}
+
+.leftSide {
+    opacity: 60%;
+}
+
+.chatButton {
+    border: 3px outset wheat;
+    background-color: var(--course-color);
+    border-radius: 20px;
+}
+
+.chatButton:hover {
+    border: 3px inset wheat;
+    border-radius: 20px;
+}
