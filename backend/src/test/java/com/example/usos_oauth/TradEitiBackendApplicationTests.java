@@ -8,6 +8,7 @@ class TradEitiBackendApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }
