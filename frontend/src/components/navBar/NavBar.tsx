@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./NavBar.scss";
+import { useAuthContext } from "../../providers/AuthProvider";
 
 const titleAndNavigation = [
   {
@@ -22,11 +23,44 @@ const titleAndNavigation = [
   { title: "KURSY", navigation: "courses" },
 ];
 
+const authenticatedLabels = [
+  {
+    title: "HOME",
+    navigation: "/",
+  },
+  {
+    title: "CONNECT USOS",
+    navigation: "usos-connect",
+  },
+];
+
+const notAuthenticatedLabels = [
+  {
+    title: "HOME",
+    navigation: "/",
+  },
+  {
+    title: "LOGIN",
+    navigation: "login",
+  },
+  {
+    title: "REGISTER",
+    navigation: "register",
+  },
+];
+
 export const NavBar = () => {
   const navigate = useNavigate();
+  const { authenticated, connectedToUsos } = useAuthContext();
+
+  const labels = authenticated
+    ? connectedToUsos
+      ? titleAndNavigation
+      : authenticatedLabels
+    : notAuthenticatedLabels;
   return (
     <nav className="navBar">
-      {titleAndNavigation.map((item, index) => (
+      {labels.map((item, index) => (
         <div
           key={index}
           className="menuTile"
