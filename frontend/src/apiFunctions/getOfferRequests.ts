@@ -6,7 +6,7 @@ export function getOfferRequests() {
   // return new Promise<OfferDto[]>((res, _) => {
   //   res(mockedOffers);
   // });
-  return axiosBase.get<OfferDto[]>(`/offers/all/received`).then((response) => {
+  return axiosBase.get<OfferDto[]>(`/offers/received`).then((response) => {
     return response.data;
   });
 }
