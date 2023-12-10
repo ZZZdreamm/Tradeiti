@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class CreateOfferDTO {
+public class CreateOfferRequest {
 
     private CourseDTO myCourse;
     private CourseDTO wantedCourse;
