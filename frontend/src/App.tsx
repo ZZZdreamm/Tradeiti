@@ -16,11 +16,13 @@ function App() {
         <Providers>
           <Authorized isAuthorized={<TopBar />} />
           <Authorized isAuthorized={<PwBar />} />
-          <Authorized isAuthorized={<NavBar />} />
+          {/* <Authorized isAuthorized={<NavBar />} /> */}
+          <NavBar />
           <main id="mainRoot">
             <RoutesProvider />
           </main>
-          <Authorized isAuthorized={<Footer />} />
+          <Footer />
+          {/* <Authorized isAuthorized={<Footer />} /> */}
         </Providers>
       </AppLayout>
     </HashRouter>
