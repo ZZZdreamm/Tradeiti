@@ -13,7 +13,7 @@ import {
   extractLecturersFromOffers,
   extractSimpleValuesFromOffers,
 } from "./extractValuesFromOffers";
-import { OfferStatus } from "../../models/OfferStatus";
+import { OfferStatus } from "../../models/enums/OfferStatus";
 
 const Offers = () => {
   const { data: allOffers } = useQuery(["offers", "pending"], () =>

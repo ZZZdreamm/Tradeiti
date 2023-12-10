@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { withPrivateRoute } from "../../common/withPrivateRoute/WithPrivateRoute";
 import "./OfferRequests.scss";
 import { OfferRequestsList } from "./OfferRequestsList";
-import { OfferStatus } from "../../models/OfferStatus";
+import { OfferStatus } from "../../models/enums/OfferStatus";
 import { getOffers } from "../../apiFunctions/getOffers";
 
 function OfferRequests() {
