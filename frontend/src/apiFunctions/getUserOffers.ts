@@ -1,12 +1,12 @@
 import { axiosBase } from "../config/axiosConfig";
-// import { mockedMyOffers } from "../mocks/MockedMyOffers";
 import { OfferDto } from "../models/Offer";
+import { offerToNumber } from "../models/enums/OfferStatus";
 
 export function getUserOffers() {
-  // return new Promise<Offer[]>((resolve, _) => {
-  //   resolve(mockedMyOffers);
-  // });
   return axiosBase.get<OfferDto[]>(`/offers/all/user`).then((response) => {
-    return response.data;
+    return response.data.sort(
+      (offer1, offer2) =>
+        offerToNumber[offer2.state] - offerToNumber[offer1.state]
+    );
   });
 }

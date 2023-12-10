@@ -3,6 +3,8 @@ import { getCurrentUser } from "../apiFunctions/getCurrentUser";
 import { removeJwtToken } from "../auth/JwtToken";
 import { useNavigate } from "react-router-dom";
 import { checkIfConnectedToUsos } from "../apiFunctions/checkIfConnectedToUsos";
+import { getUserData } from "../apiFunctions/getUserData";
+import { UserData } from "../models/UserData";
 
 export function useCurrentUser() {
   const navigate = useNavigate();
@@ -25,7 +27,7 @@ export function useCurrentUser() {
 
     getCurrentUser()
       .then(() => {
-        setCurrentUser(localStorage.getItem("username"));
+        // setCurrentUser(userData);
         setAuthenticated(true);
       })
       .catch((err) => {
@@ -49,6 +51,17 @@ export function useCurrentUser() {
       });
   }, [authenticated, connectedToUsos]);
 
+  useEffect(() => {
+    if (!connectedToUsos) return;
+    getUserData().then((userData: UserData) => {
+      const user: UserData = {
+        username: localStorage.getItem("username")!,
+        avatar: userData.avatar,
+      };
+      setCurrentUser(user);
+      setLoading(false);
+    });
+  }, [connectedToUsos]);
 
   // Poprawie to później
 

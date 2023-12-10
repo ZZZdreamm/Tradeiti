@@ -7,16 +7,17 @@ interface Props {
 }
 
 export function OffersList({ offers }: Props) {
-
   return (
-    <div className="offersList">
+    <>
       {offers ? (
-        offers.map((offer) => (
-          <OfferComponent key={offer.offer_id} offer={offer} />
-        ))
+        <div className="offersList">
+          {offers.map((offer) => (
+            <OfferComponent key={offer.offer_id} offer={offer} />
+          ))}
+        </div>
       ) : (
         <Loader />
       )}
-    </div>
+    </>
   );
 }

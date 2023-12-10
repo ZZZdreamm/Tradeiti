@@ -1,4 +1,4 @@
-import { PrivateCourses } from "../pages/courses/Courses";
+import { PrivateFinalizedOffers } from "../pages/finalizedOffers/FinalizedOffers";
 import { PrivateHome } from "../pages/home/Home";
 import { Login } from "../pages/login/Login";
 import { PrivateMyOffers } from "../pages/myOffers/MyOffers";
@@ -22,7 +22,7 @@ export const privateRoutes = [
   { path: "/offers", element: <PrivateOffers /> },
   { path: "/myOffers", element: <PrivateMyOffers /> },
   { path: "/news", element: <PrivateNews /> },
-  { path: "/courses", element: <PrivateCourses /> },
+  { path: "/finalizedOffers", element: <PrivateFinalizedOffers /> },
   { path: "/offerRequests", element: <PrivateOfferRequests /> },
   { path: "/userPage", element: <PrivateUserPage /> },
   { path: "/modifyUser", element: <PrivateModifyUser /> },

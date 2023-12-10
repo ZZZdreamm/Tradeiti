@@ -1,10 +1,11 @@
 import { createContext, useContext, useMemo } from "react";
 import { useCurrentUser } from "../hooks/useCurrentUser";
+import { UserData } from "../models/UserData";
 
 interface AuthProps {
   mounted: boolean;
   authenticated: boolean | undefined;
-  currentUser: any;
+  currentUser: UserData | undefined;
   setAuthenticated: (value: boolean) => void;
   setCurrentUser: (value: any) => void;
   loading: boolean;
@@ -20,7 +21,7 @@ interface Props {
 const AuthContext = createContext<AuthProps>({
   mounted: false,
   authenticated: undefined,
-  currentUser: null,
+  currentUser: undefined,
   setAuthenticated: () => {},
   setCurrentUser: () => {},
   loading: true,

@@ -1,10 +1,15 @@
-.course{
-    background-color: var(--course-color);
-    margin: 5px;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    &-class{
-        color: var(--id-filter);
-    }
+.course {
+  background-color: var(--course-color);
+  margin: 5px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  &-class {
+    color: var(--id-filter);
+  }
+}
+
+.unavailable {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

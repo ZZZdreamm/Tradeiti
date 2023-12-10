@@ -37,17 +37,33 @@ export function FinalizeOffer() {
           </li>
           <div className="exchangeHours">
             <li>
-              <b>Oddajesz:</b> <br /> <br />
+              <b>Oddajesz:</b> <br />
               {values.myHour.weekday} <br />
               {values.myHour.start_time} - {values.myHour.end_time}
+              {values.myHour.lecturers.map((lecturer: string) => {
+                return (
+                  <>
+                    <br />
+                    {lecturer}
+                  </>
+                );
+              })}
             </li>
             <div className="arrowAnim"></div>
             <li>
-              <b>Otrzymasz:</b> <br />
+              <b>Otrzymasz:</b>
               <br />
               {values.opponentHour.weekday}
               <br />
               {values.opponentHour.start_time} - {values.opponentHour.end_time}
+              {values.opponentHour.lecturers.map((lecturer: string) => {
+                return (
+                  <>
+                    <br />
+                    {lecturer}
+                  </>
+                );
+              })}
             </li>
           </div>
         </ul>
