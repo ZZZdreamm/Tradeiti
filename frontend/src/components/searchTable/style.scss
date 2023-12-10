@@ -52,6 +52,9 @@
     margin-top: 5px;
     width: 100%;
     text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 7px;
     padding: 5px 10px;
     border-radius: 0 0 5px 5px;
     background-color: var(--course-color);
