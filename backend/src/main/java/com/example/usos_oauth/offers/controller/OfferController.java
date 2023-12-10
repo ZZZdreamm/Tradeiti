@@ -1,7 +1,7 @@
 package com.example.usos_oauth.offers.controller;
 
 import com.example.usos_oauth.offers.model.dao.OfferState;
-import com.example.usos_oauth.offers.model.dto.CreateOfferDTO;
+import com.example.usos_oauth.offers.model.dto.CreateOfferRequest;
 import com.example.usos_oauth.offers.model.dto.OfferDTO;
 import com.example.usos_oauth.offers.service.OfferService;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ public class OfferController {
     private OfferService offerService;
 
     @PostMapping("/create")
-    public ResponseEntity<Long> createOffer(@RequestBody CreateOfferDTO offer) {
+    public ResponseEntity<Long> createOffer(@RequestBody CreateOfferRequest offer) {
         return ResponseEntity.ok(offerService.createOffer(offer));
     }
 

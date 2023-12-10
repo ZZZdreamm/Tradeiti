@@ -2,7 +2,7 @@ package com.example.usos_oauth.offers.service;
 
 import com.example.usos_oauth.offers.model.dao.Offer;
 import com.example.usos_oauth.offers.model.dao.OfferState;
-import com.example.usos_oauth.offers.model.dto.CreateOfferDTO;
+import com.example.usos_oauth.offers.model.dto.CreateOfferRequest;
 import com.example.usos_oauth.offers.model.dto.OfferDTO;
 import com.example.usos_oauth.offers.repository.OfferRepository;
 import com.example.usos_oauth.offers.service.utils.OfferDTOMapper;
@@ -22,7 +22,7 @@ public class OfferService {
     private UserService userService;
     private UsosServiceAuthorizer usosServiceAuthorizer;
 
-    public Long createOffer(CreateOfferDTO createOffer) {
+    public Long createOffer(CreateOfferRequest createOffer) {
         Offer offer = new Offer();
         offer.setOwner(userService.getCurrentUser());
         offer.setMyCourse(OfferDTOMapper.mapToCourse(createOffer.getMyCourse()));
