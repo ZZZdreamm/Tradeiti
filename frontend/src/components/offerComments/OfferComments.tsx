@@ -26,7 +26,7 @@ export function OfferComments({ offerId }: Props) {
     const comment: Comment = {
       username: currentUser!.username,
       text: newComment,
-      offer_id: offerId,
+      offer_id: parseInt(offerId),
       Date: new Date().toString(),
     };
     createOfferComment(comment)
