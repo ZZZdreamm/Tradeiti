@@ -4,17 +4,29 @@ import "./style.scss";
 import { getOffers } from "../../apiFunctions/getOffers";
 import { OfferStatus } from "../../models/enums/OfferStatus";
 import { Loader } from "../../common/loader/Loader";
+import { FinalizedOffer } from "../../components/finalizedOffer/FinalizedOffer";
+import { useSearchParams } from "react-router-dom";
+import { OfferComments } from "../../components/offerComments/OfferComments";
 
 function FinalizedOffers() {
+  const [searchParams] = useSearchParams();
+  const offerId = searchParams.get("offer_id");
   const { data: finalizedOffers } = useQuery(["offers", "finalized"], () =>
     getOffers(OfferStatus.COMPLETED)
   );
+
   return (
     <section>
-      {finalizedOffers ? (
-        finalizedOffers.map((offer) => offer.my_course.course_name)
+      {!offerId ? (
+        <>
+          {finalizedOffers ? (
+            finalizedOffers.map((offer) => <FinalizedOffer offer={offer} />)
+          ) : (
+            <Loader />
+          )}
+        </>
       ) : (
-        <Loader />
+        <OfferComments offerId={offerId} />
       )}
     </section>
   );
