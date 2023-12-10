@@ -1,4 +1,4 @@
-package com.example.usos_oauth.security.model;
+package com.example.usos_oauth.security.auth.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UsernameRequest {
+
     private String username;
 }

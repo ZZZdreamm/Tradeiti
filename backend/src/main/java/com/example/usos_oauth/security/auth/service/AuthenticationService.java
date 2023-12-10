@@ -7,6 +7,7 @@ import com.example.usos_oauth.security.model.User;
 import com.example.usos_oauth.security.model.UsosAuth;
 import com.example.usos_oauth.security.repository.UserRepository;
 import com.example.usos_oauth.security.service.JwtService;
+import com.example.usos_oauth.security.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 public class AuthenticationService {
 
     private final UserRepository userRepository;
+    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -54,6 +56,18 @@ public class AuthenticationService {
         User user = userRepository.findByUsername(loginRequest.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         String jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
+    }
+
+        public AuthenticationResponse changeUsername(String newUsername) {
+        if (userService.isUsernameTaken(newUsername)) {
+            throw new UserAlreadyExistsException();
+        }
+        User user = userService.getCurrentUser();
+        userService.updateUserUsername(user.getId(), newUsername);
+        String jwtToken = jwtService.generateToken(userRepository.findByUsername(newUsername).get());
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
