@@ -11,12 +11,19 @@ export function OfferRequestsList({ offerRequests }: Props) {
     <>
       {offerRequests ? (
         <div className="requestList">
-          {offerRequests.map((offerRequest) => (
-            <OfferRequest
-              key={offerRequest.offer_id}
-              offerRequest={offerRequest}
-            />
-          ))}
+          {offerRequests.length > 0 ? (
+            offerRequests.map((offerRequest) => (
+              <OfferRequest
+                key={offerRequest.offer_id}
+                offerRequest={offerRequest}
+              />
+            ))
+          ) : (
+
+              <h6 className="noRequestsCom">
+                Brak ofert będących w trakcie procesu wymiany
+              </h6>
+          )}
         </div>
       ) : (
         <Loader />

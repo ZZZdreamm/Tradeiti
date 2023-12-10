@@ -3,13 +3,12 @@
     width: 100%;
     padding: 0px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
   }
 
   .menuTile {
     font-weight: bolder;
-    flex: 1;
     height: 100%;
     border: 5px transparent solid;
     padding: 4px;

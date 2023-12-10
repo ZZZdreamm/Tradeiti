@@ -11,9 +11,13 @@ export function OffersList({ offers }: Props) {
     <>
       {offers ? (
         <div className="offersList">
-          {offers.map((offer) => (
-            <OfferComponent key={offer.offer_id} offer={offer} />
-          ))}
+          {offers.length > 0 ? (
+            offers.map((offer) => (
+              <OfferComponent key={offer.offer_id} offer={offer} />
+            ))
+          ) : (
+            <h5 className="noOffersCom">Brak ofert pasujących do Twoich kryteriów</h5>
+          )}
         </div>
       ) : (
         <Loader />

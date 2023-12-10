@@ -1,8 +1,14 @@
 import { useState } from 'react';
 import { withPrivateRoute } from '../../common/withPrivateRoute/WithPrivateRoute';
 import './ModifyUser.scss';
+import { changeUserAvatar, changeUserLogin } from '../../apiFunctions/changeUserData';
+import { clearSessionStorage } from "../../common/sessionStorage";
+import { saveToken } from '../../auth/JwtToken';
+import { useNavigate } from 'react-router-dom';
+
 
 const ModifyUser = () => {
+  const navigate = useNavigate();
   const [selectedAvatar, setSelectedAvatar] = useState('man');
   const [userLogin, setUserLogin] = useState(localStorage.getItem('username') || '');
 
@@ -21,8 +27,21 @@ const ModifyUser = () => {
   ];
 
   const handleChange = () => {
-    alert(userLogin + ' ' + selectedAvatar);
-  };
+    changeUserLogin(userLogin)
+      .then((response) => {
+        saveToken(response.token);
+        changeUserAvatar(selectedAvatar.toUpperCase());
+        alert("Dane zmienione");
+        clearSessionStorage();
+        navigate("userPage");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Wystąpił błąd. Nazwa użytkownika zajęta.");
+        clearSessionStorage();
+        navigate("userPage");
+      });
+    };
 
   return (
     <>

@@ -18,21 +18,43 @@ export function FinalizedOffer({ offer }: Props) {
   };
 
   return (
-    <div onClick={onOfferClick}>
-      <h3>{offer.my_course.course_name}</h3>
-      <h5>{offer.my_course.course_id}</h5>
-      <h5>{offer.my_course.groups[0].weekday}</h5>
-      <h5>
-        {offer.my_course.groups[0].start_time} -{" "}
-        {offer.my_course.groups[0].end_time}
-      </h5>
-      <h5>
-        {offer.my_course.groups[0].lecturers.map(
-          (lecturer: string, index: number) => (
-            <span key={index}>{lecturer}</span>
-          )
-        )}
-      </h5>
+    <div className = "finishedDiv" onClick={onOfferClick}>
+      <h3>Przedmiot: {offer.my_course.course_name}</h3>
+      <h5>ID: {offer.my_course.course_id}</h5>
+      <div className="timeContainer">
+        <div className="leftSide">
+          <h4>Stara grupa:</h4>
+          <h5>
+          {offer.my_course.groups[0].lecturers.map(
+            (lecturer: string, index: number) => (
+              <span key={index}>{lecturer}</span>
+            )
+          )}
+        </h5>
+        <h5>{offer.my_course.groups[0].weekday}</h5>
+        <h5>
+          {offer.my_course.groups[0].start_time} -{" "}
+          {offer.my_course.groups[0].end_time}
+        </h5>
+        </div>
+        <button className="chatButton">Wyświetl czat</button>
+        <div className="rightSide">
+          <h4>Nowa grupa:</h4>
+        <h5>
+          {offer.wanted_course.groups[0].lecturers.map(
+            (lecturer: string, index: number) => (
+              <span key={index}>{lecturer}</span>
+            )
+          )}
+        </h5>
+        <h5>{offer.wanted_course.groups[0].weekday}</h5>
+        <h5>
+          {offer.wanted_course.groups[0].start_time} -{" "}
+          {offer.wanted_course.groups[0].end_time}
+        </h5>
+        </div>
+      </div>
+
     </div>
   );
 }

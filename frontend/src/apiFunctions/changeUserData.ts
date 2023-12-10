@@ -4,3 +4,13 @@ import { UserData } from "../models/UserData";
 export function changeUserData(userData: UserData){
     return axiosBase.put("/user/change-data", userData);
 }
+
+export async function changeUserLogin(userLogin: string){
+    const response = await axiosBase.post("/auth/login", userLogin);
+    console.log(response.data);
+    return response.data;
+}
+
+export async function changeUserAvatar(userAvatar: string){
+    await axiosBase.post("/auth/login", userAvatar);
+}

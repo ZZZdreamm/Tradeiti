@@ -19,6 +19,7 @@ const Offers = () => {
   const { data: allOffers } = useQuery(["offers", "pending"], () =>
     getOffers(OfferStatus.PENDING)
   );
+
   const [searchedOffers, setSearchedOffers] = useState<OfferDto[] | undefined>(
     undefined
   );

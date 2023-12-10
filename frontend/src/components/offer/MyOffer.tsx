@@ -50,8 +50,10 @@ export function MyOfferComponent({ offer }: Props) {
         <p>
           Status:{" "}
           {offer.state === OfferStatus.REQUEST_SENT
-            ? "Request sent ✔️"
-            : offer.state}
+            ? "Prośba wysłana ✔️"
+            : offer.state === OfferStatus.PENDING
+              ? "Oczekuje ⏰"
+              : offer.state}
         </p>
         <button
           className="approveButton"
