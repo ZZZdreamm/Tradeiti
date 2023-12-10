@@ -6,11 +6,11 @@ export function changeUserData(userData: UserData){
 }
 
 export async function changeUserLogin(userLogin: string){
-    const response = await axiosBase.post("/auth/login", userLogin);
+    const response = await axiosBase.post("/user/change-username", userLogin);
     console.log(response.data);
     return response.data;
 }
 
 export async function changeUserAvatar(userAvatar: string){
-    await axiosBase.post("/auth/login", userAvatar);
+    await axiosBase.post("/user/change-avatar", userAvatar);
 }
