@@ -1,6 +1,6 @@
 export interface Comment {
-  offerId: string;
+  offer_id: string;
   username: string;
   text: string;
-  Date: Date;
+  Date: string;
 }
