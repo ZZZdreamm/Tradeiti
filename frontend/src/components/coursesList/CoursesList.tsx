@@ -6,9 +6,10 @@ import { CourseComponent } from "../course/Course";
 interface Props {
   courses: CourseDto[] | undefined;
   handleOnClick?: (course: CourseDto, chooseGroup: GroupDto) => void;
+  inOffers: boolean;
 }
 
-export function CoursesList({ courses, handleOnClick }: Props) {
+export function CoursesList({ courses, handleOnClick, inOffers }: Props) {
   return (
     <>
       {courses ? (
@@ -18,6 +19,7 @@ export function CoursesList({ courses, handleOnClick }: Props) {
               key={index}
               course={course}
               handleOnClick={handleOnClick}
+              inOffers={inOffers}
             />
           ))}
         </div>
