@@ -9,6 +9,10 @@ interface CourseDateProps {
   hourType?: string;
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+
+});
+
 export function CourseDateComponent({
   date,
   handleChooseDate = () => {},
@@ -25,45 +29,23 @@ export function CourseDateComponent({
     handleChooseDate(date, hourType);
   };
 
+  const disableMyHour = () => {
+    const myHourID = document.querySelectorAll('.myHour')[0].id;
+    const indexOfMyHour = myHourID.indexOf("myHour");
+    const endOfId = myHourID.slice(indexOfMyHour + "myHour".length + 1);
+    const exclude = document.getElementById(`radioSpan/opponentHour/${endOfId}`);
+    exclude?.classList.add("unavailable");
+  }
+
   const handleSpanClick = (event: React.MouseEvent<HTMLSpanElement>) => {
-    if (
-      event.currentTarget &&
-      event.currentTarget.classList.contains("unavailable")
-    ) {
+    if(event.currentTarget.classList.contains("unavailable")){
       return;
-    }
-    const radioInput = event.currentTarget.querySelector('input[type="radio"]');
-    const spans = getAllElementsByClassName(event.currentTarget.classList[1]);
+    }const radioInput = event.currentTarget.querySelector('input[type="radio"]');
     if (radioInput) {
-      (radioInput as HTMLElement).click(); // Trigger a click on the radio input
-      for (let i = 0; i < spans.length; i++) {
+      (radioInput as HTMLElement).click();
+      const spans = getAllElementsByClassName("opponentHour");
+      for(let i = 0; i < spans.length; i++){
         (spans[i] as HTMLElement).style.borderRadius = "0px";
-        if (
-          spans[i] == event.currentTarget &&
-          event.currentTarget.classList.contains("myHour")
-        ) {
-          const oppSpans = getAllElementsByClassName("opponentHour");
-          for (let o = 0; o < oppSpans.length; o++) {
-            const opponentSpan = oppSpans[o] as HTMLElement;
-            const radioSpan =
-              opponentSpan.querySelectorAll(`.radioSpan-date`)[0];
-            const spanInput = radioSpan.firstChild as HTMLInputElement;
-            if (opponentSpan.classList.contains("unavailable")) {
-              opponentSpan.classList.remove("unavailable");
-              spanInput.disabled = false;
-            }
-          }
-          const op2Span = oppSpans[i] as HTMLElement;
-          const op2RadioSpan = op2Span.querySelectorAll(`.radioSpan-date`)[0];
-          const op2Input = op2RadioSpan.firstChild as HTMLInputElement;
-          op2Span.classList.add("unavailable");
-          op2Span.style.borderRadius = "0px";
-          if (op2Input.checked) {
-            op2Input.checked = false;
-            handleChooseDate(null, "opponentHour");
-          }
-          op2Input.disabled = true;
-        }
       }
       event.currentTarget.style.borderRadius = "15px";
       handleChooseDate(date, hourType);
@@ -71,8 +53,12 @@ export function CourseDateComponent({
   };
 
   useEffect(() => {
+    disableMyHour(); // Call disableMyHour after the component is rendered
+  }, []);
+
+  useEffect(() => {
     const span = document.getElementById(
-      `radioSpan/${hourType}/${date.weekday}/${date.start_time}`
+      `radioSpan/${hourType}/${date.weekday}/${date.start_time}/${date.lecturers}`
     ) as HTMLSpanElement;
     const input = span.querySelector('input[type="radio"]') as HTMLInputElement;
     if (input.checked) return;
@@ -88,16 +74,19 @@ export function CourseDateComponent({
     }
   }, [choosenHour]);
 
+
   return (
     <span
-      id={`radioSpan/${hourType}/${date.weekday}/${date.start_time}`}
+      id={`radioSpan/${hourType}/${date.weekday}/${date.start_time}/${date.lecturers}`}
       className={`radioSpan ${hourType}`}
       onClick={handleSpanClick}
     >
       <div className="radioSpan-date">
         <input type="radio" name={`hours/${hourType}`} onClick={handleChange} />{" "}
-        <div>
-          {date.weekday} {date.start_time} - {date.end_time}
+        <div className = "courseTime">
+          {date.weekday} <b>
+            <br />
+            {date.start_time} - {date.end_time}</b>
         </div>
       </div>
       <div className="lecturers">

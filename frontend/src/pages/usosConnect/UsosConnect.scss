@@ -1,0 +1,11 @@
+.usosButton {
+    border: 3px solid green;
+    border-radius: 50px;
+    transition: border 1s ease-in-out, background-color 1s ease-in-out, color 1s ease-in-out;
+}
+
+.usosButton:hover {
+    border: 3px greenyellow solid;
+    background-color: green;
+    color: white;
+}
