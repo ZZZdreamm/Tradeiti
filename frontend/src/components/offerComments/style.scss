@@ -1,7 +1,94 @@
 .comments {
+    overflow-y: auto;
+    max-height: 60vh;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.comments::-webkit-scrollbar {
+    display: none;
+  }
+
+
+.commentItem {
+    border-radius: 30px;
+    margin-bottom: 30px;
+    width: fit-content;
+    max-width: 50vw;
 }
 
 .myComment {
+    align-self: flex-start;
+    & > .author > h5 {
+        padding: 0px 30px;
+        color: gray;
+        text-align: left;
+    }
 }
 .opponentComment {
+    align-self: flex-end;
+    & > .author > h5 {
+        padding: 0px 30px;
+        color: gray;
+        text-align: right;
+    }
+    // margin-left: 300px;
+
+    & > content > p{
+        text-align: left;
+        border: 3px solid black;
+    }
+}
+
+.content {
+    border: 8px solid var(--course-color);
+    background-color: var(--course-color);
+    padding: 15px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.createComment {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    & > textarea {
+        resize: none;
+        width: 50vw;
+        max-height: 200px;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 15px;
+        border-radius: 20px;
+        border: 5px outset var(--bar-color)
+    }
+    & > p {
+        align-self: flex-end;
+        margin-right: 10vw;
+        font-weight: bold;
+        color: gray;
+    }
+}
+
+.commentButton {
+    border: 3px solid rgb(34, 76, 111);
+    background-color: var(--container-color);
+    transition: background-color 0.5s ease-in-out;
+    padding: 20px 30px;
+    border-radius: 30px;
+}
+
+.commentButton:not([disabled]):hover {
+    border: 3px solid var(--bar-color);
+    background-color: var(--course-color);
+}
+
+.commentButton:disabled {
+    cursor: not-allowed;
+    border: 3px solid steelblue;
 }
