@@ -2,7 +2,6 @@ import { withPrivateRoute } from "../../common/withPrivateRoute/WithPrivateRoute
 import { useNavigate } from "react-router-dom";
 import "./UserPage.scss";
 import { useAuthContext } from "../../providers/AuthProvider";
-import { avatarToUrl } from "../../models/enums/Avatar";
 
 const UserPage = () => {
   const navigate = useNavigate();
@@ -12,7 +11,8 @@ const UserPage = () => {
     <>
       <div className="userContainer">
         <div className="avatar">
-          <img src={currentUser?.avatar ? avatarToUrl[currentUser?.avatar] : "/avatars/man.png"} alt="Avatar" />
+          <img src={currentUser?.avatar ?
+            `avatars/${currentUser.avatar}.png` : "/avatars/man.png"} alt="Avatar" />
         </div>
         <div className="userData">
           <b>Nazwa użytkownika:</b>{" "}

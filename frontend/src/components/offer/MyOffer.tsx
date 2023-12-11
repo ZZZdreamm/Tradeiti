@@ -47,13 +47,14 @@ export function MyOfferComponent({ offer }: Props) {
         </span>
       </div>
       <div className="offer-right">
-        <p>
+        <p><b>
           Status:{" "}
           {offer.state === OfferStatus.REQUEST_SENT
             ? "Prośba wysłana ✔️"
             : offer.state === OfferStatus.PENDING
               ? "Oczekuje ⏰"
               : offer.state}
+        </b>
         </p>
         <button
           className="approveButton"

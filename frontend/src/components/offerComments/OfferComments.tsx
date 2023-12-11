@@ -3,7 +3,6 @@ import { getOfferComments } from "../../apiFunctions/getOfferComments";
 import { Comment } from "../../models/Comment";
 import { useAuthContext } from "../../providers/AuthProvider";
 import "./style.scss";
-import { Button } from "../../common/button/Button";
 import { useState } from "react";
 import { createOfferComment } from "../../apiFunctions/createOfferComment";
 
@@ -17,9 +16,15 @@ export function OfferComments({ offerId }: Props) {
     getOfferComments(offerId)
   );
   const [newComment, setNewComment] = useState<string>("");
-
   const onCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setNewComment(event.target.value);
+    const commentValue = event.target.value;
+    setNewComment(commentValue);
+
+    const charCountSpan = document.getElementById("charCount");
+    if (charCountSpan) {
+      charCountSpan.innerText = commentValue.length.toString();
+    }
+
   };
 
   const handleAddComment = () => {
@@ -40,30 +45,46 @@ export function OfferComments({ offerId }: Props) {
       });
   };
   return (
+    <>
     <div className="comments">
       {comments &&
         comments.map((comment: Comment) => (
           <>
             {currentUser && currentUser.username === comment.username ? (
-              <div className="myComment">
-                <h3>{comment.username}</h3>
+              <div className="commentItem myComment">
+                <div className="author">
+                <h5>{comment.username}</h5>
+                </div>
+                <div className="content">
                 <p>{comment.text}</p>
+                </div>
               </div>
             ) : (
-              <div className="opponentComment">
-                <h3>{comment.username}</h3>
+              <div className="commentItem opponentComment">
+                <div className="author">
+                <h5>{comment.username}</h5>
+                </div>
+                <div className="content">
                 <p>{comment.text}</p>
+                </div>
               </div>
             )}
           </>
         ))}
+      </div>
+      <div className = "createComment">
       <textarea
         placeholder="Dodaj komentarz"
         onChange={onCommentChange}
-      ></textarea>
-      <Button type="button" onClick={handleAddComment}>
+      >
+      </textarea>
+      <br />
+      <p>Ilość znaków: <span id="charCount">{newComment.length}</span>/255</p>
+      <br />
+      <button type="button" className = "commentButton" onClick={handleAddComment} disabled={newComment.length > 255}>
         Dodaj komentarz
-      </Button>
-    </div>
+      </button>
+      </div>
+    </>
   );
 }
