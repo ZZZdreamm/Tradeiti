@@ -35,20 +35,23 @@ const ModifyUser = () => {
         .then((response) => {
           saveToken(response.token);
           localStorage.setItem("username", userLogin);
-          alert("Dane zmienione");
-          navigate(0);
+            changeUserAvatar(selectedAvatar? selectedAvatar : "helicopter")
+              .then(() => {
+                alert("Dane zmienione.")
+                navigate("/userPage");
+              })
+              .catch((error) => {
+                console.log(error);
+                alert("Avatar didn't change.");
+                navigate("/userPage");
+              });
         })
         .catch((error) => {
           console.log(error);
           alert("Wystąpił błąd. Nazwa użytkownika zajęta.");
-          navigate(0);
+          navigate("/userPage");
         });
       }
-
-    if(selectedAvatar != currentUser?.avatar){
-
-      changeUserAvatar(selectedAvatar? selectedAvatar : "man");
-    }
     };
 
 

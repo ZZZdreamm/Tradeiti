@@ -20,6 +20,22 @@ export function SearchTable({
     return handleOnSubmit(values);
   };
 
+  const sortNew = () => {
+    console.log("sortNew");
+    const offersList = document.querySelector('.offersList');
+    if (offersList) {
+      (offersList as HTMLElement).style.flexDirection = 'column-reverse';
+    }
+  };
+
+  const sortOld = () => {
+    console.log("sortOld");
+    const offersList = document.querySelector('.offersList');
+    if (offersList) {
+      (offersList as HTMLElement).style.flexDirection = 'column';
+    }
+  };
+
   const handleReset = () => {
     handleOnReset();
   };
@@ -45,6 +61,12 @@ export function SearchTable({
           ))}
         </div>
         <div className="searchTable-footer">
+          <Button className="filterButton" onClick={sortNew}>
+            Od najnowszych
+          </Button>
+          <Button className="filterButton" onClick={sortOld}>
+            Od najstarszych
+          </Button>
           <Button className="filterButton" type="reset" onClick={handleReset}>
             Resetuj
           </Button>
