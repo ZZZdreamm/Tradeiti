@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { requestOffer } from "../../apiFunctions/requestOffer";
 import { Button } from "../../common/button/Button";
 import { OfferDto } from "../../models/Offer";
@@ -12,6 +12,8 @@ interface Props {
 export function OfferComponent({ offer }: Props) {
   const navigate = useNavigate();
   const { currentUser } = useAuthContext();
+
+  const location = useLocation();
 
   const handleAcceptOffer = () => {
     requestOffer(offer.offer_id)
@@ -92,7 +94,7 @@ export function OfferComponent({ offer }: Props) {
         </p>
       </div>
       <div className="offer-right">
-        {offer.owner_username !== currentUser?.username && (
+        {offer.owner_username !== currentUser?.username && (location.pathname === '/fittingOffers')  && (
           <Button className="acceptButton" onClick={handleAcceptOffer}>
             Akceptuj
           </Button>
