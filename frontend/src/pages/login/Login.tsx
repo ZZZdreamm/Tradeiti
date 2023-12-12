@@ -40,8 +40,8 @@ export const Login = () => {
       .catch((err) => {
         if (err.response && err.response.status === 503) {
           setErrorMessage("Komputer Artura zasypał śnieg.");
-        } else if (err.response && err.response.status === 409) {
-          setErrorMessage("Nazwa użytkownika lub hasło są niepoprawne.");
+        } else if (err.response && err.response.status === 403) {
+          setErrorMessage("Login lub hasło niepoprawne.");
         } else {
           setErrorMessage("Błąd logowania.");
         }

@@ -29,7 +29,7 @@ const authenticatedLabels = [
     navigation: "/",
   },
   {
-    title: "CONNECT USOS",
+    title: "Połącz z USOS",
     navigation: "usos-connect",
   },
 ];

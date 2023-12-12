@@ -11,6 +11,7 @@ import { UsosConnect } from "../pages/usosConnect/UsosConnect";
 import { PrivateUserPage } from "../pages/userPage/UserPage";
 import { PrivateModifyUser } from "../pages/modifyUser/ModifyUser";
 import { PrivateCourses } from "../pages/courses/Courses";
+import { PrivateFittingOffers } from "../pages/offers/FittingOffers";
 
 export const routes = [
   { path: "/register", element: <Register /> },
@@ -21,6 +22,7 @@ export const routes = [
 
 export const privateRoutes = [
   { path: "/offers", element: <PrivateOffers /> },
+  { path: "/fittingOffers", element: <PrivateFittingOffers /> },
   { path: "/myOffers", element: <PrivateMyOffers /> },
   { path: "/news", element: <PrivateNews /> },
   { path: "/finalizedOffers", element: <PrivateFinalizedOffers /> },

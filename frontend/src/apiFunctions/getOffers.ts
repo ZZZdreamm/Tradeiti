@@ -9,3 +9,9 @@ export async function getOffers(state: OfferStatus) {
     return response.data;
   });
 }
+
+export async function getFittingOffers(state: OfferStatus){
+  return axiosBase.get<OfferDto[]>(`/offers/user/${state}?filter_groups=true`).then((response) => {
+    return response.data;
+  });
+}

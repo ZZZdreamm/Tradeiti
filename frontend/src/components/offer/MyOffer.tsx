@@ -33,20 +33,38 @@ export function MyOfferComponent({ offer }: Props) {
       <div className="offer-left">
         <h6>{offer.my_course.course_id}</h6>
         <h6>{offer.my_course.course_name}</h6>
+        <hr />
+        <span><b>Oddajesz: </b></span>
+        <span>
+          {offer.my_course.groups[0].weekday}{" "}
+          {offer.my_course.groups[0].start_time}-
+          {offer.my_course.groups[0].end_time},{" "}
+          {offer.my_course.groups[0].class_type_name},{" "}
+          Grupa {offer.my_course.groups[0].group_number}
+        </span>
         <div className="offer-left-lecturers">
-          {offer.my_course.groups[0].lecturers.map(
+            {offer.my_course.groups[0].lecturers.map(
+              (lecturer: string, index: number) => (
+                <span key={index}>{lecturer}</span>
+              )
+            )}
+        </div>
+        <hr />
+        <span><b>Chcesz: </b></span>
+        <span>
+          {offer.wanted_course.groups[0].weekday}{" "}
+          {offer.wanted_course.groups[0].start_time}-
+          {offer.wanted_course.groups[0].end_time},{" "}
+          {offer.wanted_course.groups[0].class_type_name},{" "}
+          Grupa {offer.wanted_course.groups[0].group_number}
+        </span>
+        <div className="offer-left-lecturers">
+          {offer.wanted_course.groups[0].lecturers.map(
             (lecturer: string, index: number) => (
               <span key={index}>{lecturer}</span>
             )
           )}
         </div>
-        <span>
-          {offer.my_course.groups[0].weekday}{" "}
-          {offer.my_course.groups[0].start_time}-{" "}
-          {offer.my_course.groups[0].end_time},{" "}
-          {offer.wanted_course.groups[0].class_type_name},{" "}
-          {offer.wanted_course.groups[0].group_number}
-        </span>
       </div>
       <div className="offer-right">
         <p>

@@ -31,7 +31,12 @@
       color: var(--course-filter);
     }
 
-    p:nth-child(4) b {
+    p:nth-child(7) b {
+      color: var(--lecturer-filter);
+    }
+
+
+    p:nth-child(11) b {
       color: var(--lecturer-filter);
     }
   }
@@ -80,11 +85,13 @@ p {
 }
 
 .acceptButton {
-  padding: 10px 20px;
+  padding: 30px 40px;
+  border-radius: 50px;
+  margin-right: 30px;
 }
 .acceptButton:hover {
   border: 2px inset #758aad;
-  padding: 9px 19px;
+  padding: 28px 38px;
 }
 
 .offer-left-lecturers {

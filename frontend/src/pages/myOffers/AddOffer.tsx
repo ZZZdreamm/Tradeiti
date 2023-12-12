@@ -59,13 +59,13 @@ export function AddOffer() {
         console.log(response);
         alert("Oferta została dodana");
         clearSessionStorage();
-        navigate("/");
+        navigate("/myOffers");
       })
       .catch((error) => {
         console.log(error);
         alert("Wystąpił błąd");
         clearSessionStorage();
-        navigate("/");
+        navigate("/offers");
       });
   };
 
