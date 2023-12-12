@@ -12,6 +12,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.oauth1.OAuthToken;
 
 import java.util.Optional;
@@ -24,10 +27,39 @@ class UserServiceTest {
     private JwtService jwtService;
     @Mock
     private UserRepository userRepository;
+    private User mockUser;
+    private SecurityContext securityContext;
+    private Authentication authentication;
 
     @BeforeEach
     void setUp() {
         userService = new UserService(userRepository, jwtService);
+        mockUser = new User();
+        mockUser.setId(10L);
+        mockUser.setUsername("mockUser");
+        mockUser.setPassword("mockPassword");
+        mockUser.setRole(Role.ADMIN);
+        mockUser.setUsos_auth(new UsosAuth());
+        mockUser.getUsos_auth().setOauthKey("mockKey");
+        mockUser.getUsos_auth().setOauthSecret("mockSecret");
+        securityContext = Mockito.mock(SecurityContext.class);
+        authentication = Mockito.mock(Authentication.class);
+    }
+
+    @Test
+    void getCurrentUser() {
+        Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
+        Mockito.when(authentication.getPrincipal()).thenReturn(mockUser);
+        SecurityContextHolder.setContext(securityContext);
+
+        // Call the method to get the current user
+        User currentUser = userService.getCurrentUser();
+
+        // Assert the values
+        Assertions.assertEquals(10L, currentUser.getId());
+        Assertions.assertEquals("mockUser", currentUser.getUsername());
+        Assertions.assertEquals("mockPassword", currentUser.getPassword());
+        Assertions.assertEquals(Role.ADMIN, currentUser.getRole());
     }
 
     @Test
@@ -99,6 +131,21 @@ class UserServiceTest {
         Mockito.verify(userRepository, Mockito.times(1)).findById(1L);
     }
 
+    @Test
+    void getCurrentUserToken() {
+        Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
+        Mockito.when(authentication.getPrincipal()).thenReturn(mockUser);
+        SecurityContextHolder.setContext(securityContext);
+
+        Mockito.when(userRepository.findById(10L)).thenReturn(Optional.of(mockUser));
+
+        // Call the method to get the OAuthToken
+        OAuthToken oAuthToken = userService.getCurrentUserToken();
+
+        // Assert the values
+        Assertions.assertEquals("mockKey", oAuthToken.getValue());
+        Assertions.assertEquals("mockSecret", oAuthToken.getSecret());
+    }
 
     @Test
     void updateUserToken() {
@@ -166,5 +213,22 @@ class UserServiceTest {
         // Test with a non-existing avatar
         validAvatar = userService.checkAvatar("nonExistingAvatar");
         Assertions.assertFalse(validAvatar);
+    }
+
+    @Test
+    void changeAvatar() {
+        Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
+        Mockito.when(authentication.getPrincipal()).thenReturn(mockUser);
+        SecurityContextHolder.setContext(securityContext);
+
+        // Call the method to change the avatar
+        userService.changeAvatar("woman");
+
+        Mockito.when(userRepository.findById(10L)).thenReturn(Optional.of(mockUser));
+
+        // Verify that the avatar is updated
+        User result = userService.loadUserById(10L);
+
+        Assertions.assertEquals("woman", result.getAvatar());
     }
 }
