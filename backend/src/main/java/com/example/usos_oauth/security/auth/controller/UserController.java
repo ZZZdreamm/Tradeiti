@@ -3,9 +3,10 @@ package com.example.usos_oauth.security.auth.controller;
 import com.example.usos_oauth.security.auth.model.AuthenticationResponse;
 import com.example.usos_oauth.security.auth.model.AvatarRequest;
 import com.example.usos_oauth.security.auth.model.UserDataResponse;
-import com.example.usos_oauth.security.auth.service.AuthenticationService;
 import com.example.usos_oauth.security.auth.model.UsernameRequest;
+import com.example.usos_oauth.security.auth.service.AuthenticationService;
 import com.example.usos_oauth.security.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user")
+@Tag(name = "Managing user info")
 public class UserController {
 
     private final AuthenticationService authenticationService;

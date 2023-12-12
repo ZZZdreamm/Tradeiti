@@ -8,18 +8,18 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "course")
+@IdClass(CourseId.class)
 public class Course {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "course_seq")
-    @SequenceGenerator(name = "course_seq", allocationSize = 1)
-    private long courseId;
+    private String courseId;
+    @Id
     private int groupNumber;
+
     private String name;
     private String weekDay;
     private String startHour;
     private String endHour;
-    private String usosCourseId;
     private String classTypeName;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Lecturer> lecturers;
