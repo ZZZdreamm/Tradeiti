@@ -21,9 +21,9 @@ public class Offer {
     private User receiver;
     @Enumerated(EnumType.STRING)
     private OfferState state = OfferState.PENDING;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private Course myCourse;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private Course wantedCourse;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Comment> comments;

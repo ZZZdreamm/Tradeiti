@@ -10,7 +10,7 @@ import java.util.Map;
 
 class JwtServiceTest {
 
-    private final JwtService jwtService = new JwtService();
+    private final JwtService jwtService = new JwtService("123123123123123123138274fgupw0bt7v32yt47n320572365t72312312312312312312312");
 
     @Test
     void generateToken_ValidUserDetails_ReturnsToken() {

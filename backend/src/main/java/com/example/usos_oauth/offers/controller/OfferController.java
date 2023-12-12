@@ -21,7 +21,7 @@ public class OfferController {
 
     @PostMapping("/create")
     public ResponseEntity<Long> createOffer(@RequestBody CreateOfferRequest offer) {
-        return ResponseEntity.ok(offerService.createOffer(offer));
+        return ResponseEntity.ok(offerService.createOfferForCurrentUser(offer));
     }
 
     @DeleteMapping("/delete/{id}")
