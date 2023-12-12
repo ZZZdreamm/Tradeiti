@@ -9,7 +9,9 @@ import com.example.usos_oauth.offers.service.exception.OperationForbiddenExcepti
 import com.example.usos_oauth.offers.service.utils.OfferDTOMapper;
 import com.example.usos_oauth.security.model.User;
 import com.example.usos_oauth.security.service.UserService;
+import com.example.usos_oauth.usos.model.dto.CourseDTO;
 import com.example.usos_oauth.usos.service.connect.UsosServiceAuthorizer;
+import com.example.usos_oauth.usos.service.usos.UsosService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -59,11 +61,27 @@ public class OfferService {
                 .toList();
     }
 
-    public List<OfferDTO> getOffersMatchingUserCourses(OfferState state) {
-        List<String> userCoursesIds = usosServiceAuthorizer.getUsosService().getCurrentUserCoursesIds();
+    public List<OfferDTO> getOffersMatchingUserCourses(OfferState state, boolean areGroupsFiltered) {
+        UsosService usosService = usosServiceAuthorizer.getUsosService();
+        List<CourseDTO> userCourses = usosService.getCurrentUserCourses();
         List<OfferDTO> offers = getOffersOfState(state);
         return offers.stream()
-                .filter(offer -> userCoursesIds.contains(offer.getMyCourse().getCourseId()))
+                .filter(offer -> {
+                    String courseId = offer.getWantedCourse().getCourseId();
+                    return userCourses.stream()
+                            .anyMatch(course -> course.getCourseId().equals(courseId));
+                })
+                .filter(offer -> {
+                    if (areGroupsFiltered) {
+                        String wantedCourseId = offer.getWantedCourse().getCourseId();
+                        int wantedGroupNumber = offer.getWantedCourse().getGroups().get(0).getGroupNumber();
+                        return userCourses.stream()
+                                .filter(course -> course.getCourseId().equals(wantedCourseId))
+                                .anyMatch(course -> course.getGroups().stream()
+                                        .anyMatch(group -> group.getGroupNumber() == wantedGroupNumber));
+                    }
+                    return true;
+                })
                 .toList();
     }
 
