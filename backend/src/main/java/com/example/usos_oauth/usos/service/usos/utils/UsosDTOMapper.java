@@ -32,7 +32,7 @@ public class UsosDTOMapper {
                     .filter(activity -> activity.getCourseId().equals(courseId))
                     .toList();
             CourseDTO courseDTO = CourseDTO.builder()
-                    .usosCourseId(courseId)
+                    .courseId(courseId)
                     .courseName(courseActivities.get(0).getCourseName().getPl())
                     .groups(courseActivities.stream()
                             .map(UsosDTOMapper::mapToGroupDTO)
