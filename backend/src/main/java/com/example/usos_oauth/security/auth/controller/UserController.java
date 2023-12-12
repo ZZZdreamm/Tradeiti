@@ -39,6 +39,13 @@ public class UserController {
         String newUsername = usernameRequest.getUsername();
         return ResponseEntity.ok(authenticationService.changeUsername(newUsername));
     }
+
+    /**
+     * Changes the avatar for the authenticated user.
+     *
+     * @param avatarRequest The request object containing the new avatar information.
+     * @return ResponseEntity containing a success message upon changing the avatar.
+     */
     @PostMapping("/change-avatar")
     public ResponseEntity<String> changeAvatar(@RequestBody AvatarRequest avatarRequest) {
         String newAvatar = avatarRequest.getAvatar();
@@ -46,6 +53,11 @@ public class UserController {
         return ResponseEntity.ok("Avatar changed");
     }
 
+    /**
+     * Retrieves information about the authenticated user.
+     *
+     * @return ResponseEntity containing a UserDataResponse with information about the user.
+     */
     @GetMapping("/get-user-info")
     public ResponseEntity<UserDataResponse> getUserInfo() {
         return ResponseEntity.ok(userService.getUserInfo());
