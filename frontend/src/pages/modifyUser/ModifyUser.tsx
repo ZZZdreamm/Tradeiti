@@ -33,30 +33,34 @@ const ModifyUser = () => {
 
   const handleChange = () => {
     if (!userLogin) return;
-    if (userLogin != localStorage.getItem("username")) {
-      changeUserAvatar(selectedAvatar ? selectedAvatar : "helicopter")
-        .then(() => {
-          localStorage.setItem("username", userLogin);
-          changeUserLogin(userLogin)
-            .then((response) => {
-              saveToken(response.token);
-              alert("Dane zmienione.");
-              navigate("/userPage");
-              navigate(0);
-            })
-            .catch((error) => {
-              console.log(error);
-              alert("Avatar didn't change.");
-              navigate("/userPage");
-              navigate(0);
-            });
-        })
-        .catch((error) => {
-          console.log(error);
-          alert("Wystąpił błąd. Nazwa użytkownika zajęta.");
+    changeUserAvatar(selectedAvatar ? selectedAvatar : "helicopter")
+      .then(() => {
+        if (userLogin != localStorage.getItem("username")) {
+        changeUserLogin(userLogin)
+          .then((response) => {
+            saveToken(response.token);
+            localStorage.setItem("username", userLogin);
+            alert("Dane zmienione.");
+            navigate("/userPage");
+            navigate(0);
+          })
+          .catch((error) => {
+            console.log(error);
+            alert("Wystąpił błąd. Nazwa użytkownika zajęta.");
+            navigate("/userPage");
+            navigate(0);
+          });
+        } else {
           navigate("/userPage");
-        });
-    }
+          navigate(0);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Wystąpił błąd, dane nie zostały zmienione");
+        navigate("/userPage");
+      });
+
   };
 
   return (
