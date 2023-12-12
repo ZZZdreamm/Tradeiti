@@ -12,7 +12,7 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class CourseDTO {
 
-    private String courseId;
+    private String usosCourseId;
     private String courseName;
     private List<GroupDTO> groups;
 }

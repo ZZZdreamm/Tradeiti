@@ -26,9 +26,14 @@ public class OfferService {
     private UserService userService;
     private UsosServiceAuthorizer usosServiceAuthorizer;
 
-    public Long createOffer(CreateOfferRequest createOffer) {
+    public Long createOfferForCurrentUser(CreateOfferRequest createOffer) {
+        User owner = userService.getCurrentUser();
+        return createOffer(createOffer, owner);
+    }
+
+    public Long createOffer(CreateOfferRequest createOffer, User owner) {
         Offer offer = new Offer();
-        offer.setOwner(userService.getCurrentUser());
+        offer.setOwner(owner);
         offer.setMyCourse(OfferDTOMapper.mapToCourse(createOffer.getMyCourse()));
         offer.setWantedCourse(OfferDTOMapper.mapToCourse(createOffer.getWantedCourse()));
         offerRepository.save(offer);
@@ -67,16 +72,16 @@ public class OfferService {
         List<OfferDTO> offers = getOffersOfState(state);
         return offers.stream()
                 .filter(offer -> {
-                    String courseId = offer.getWantedCourse().getCourseId();
+                    String courseId = offer.getWantedCourse().getUsosCourseId();
                     return userCourses.stream()
-                            .anyMatch(course -> course.getCourseId().equals(courseId));
+                            .anyMatch(course -> course.getUsosCourseId().equals(courseId));
                 })
                 .filter(offer -> {
                     if (areGroupsFiltered) {
-                        String wantedCourseId = offer.getWantedCourse().getCourseId();
+                        String wantedCourseId = offer.getWantedCourse().getUsosCourseId();
                         int wantedGroupNumber = offer.getWantedCourse().getGroups().get(0).getGroupNumber();
                         return userCourses.stream()
-                                .filter(course -> course.getCourseId().equals(wantedCourseId))
+                                .filter(course -> course.getUsosCourseId().equals(wantedCourseId))
                                 .anyMatch(course -> course.getGroups().stream()
                                         .anyMatch(group -> group.getGroupNumber() == wantedGroupNumber));
                     }
@@ -115,7 +120,7 @@ public class OfferService {
 
     private void assertCurrentUserHasRequiredGroup(Long id) {
         Offer offer = offerRepository.findById(id).orElseThrow();
-        String wantedCourseId = offer.getWantedCourse().getCourseId();
+        String wantedCourseId = offer.getWantedCourse().getUsosCourseId();
         int wantedGroupNumber = offer.getWantedCourse().getGroupNumber();
         if (!usosServiceAuthorizer.getUsosService().IsCurrentUserInGroup(wantedCourseId, wantedGroupNumber)) {
             throw new OperationForbiddenException();
