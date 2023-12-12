@@ -4,6 +4,7 @@ import { GroupDto } from "../../models/GroupDto";
 import "./Course.scss";
 import { getUserOffers } from "../../apiFunctions/getUserOffers";
 import { checkIfOfferExistsAlready } from "./checkIfOfferExistsAlready";
+import { useLocation } from 'react-router-dom';
 
 interface Props {
   course: CourseDto;
@@ -17,6 +18,8 @@ export function CourseComponent({
   inOffers,
 }: Props) {
   const { data: myOffers } = useQuery("offers", getUserOffers);
+  const location = useLocation();
+  const isMyOffersPage = location.pathname.includes('/myOffers');
   const groupsToShow = inOffers
     ? course.groups.filter((group) =>
         checkIfOfferExistsAlready(
@@ -31,10 +34,14 @@ export function CourseComponent({
       <h6>{course.course_name}</h6>
       <p>{course.course_id}</p>
       {groupsToShow.map((group, index) => (
-        <div key={index} onClick={() => handleOnClick(course, group)}>
+      <div key={index} >
+        {isMyOffersPage ? (
+          <button className="course-class classButton" onClick={() => handleOnClick(course, group)}>{group.class_type_name}</button>
+        ) : (
           <p className="course-class">{group.class_type_name}</p>
-        </div>
-      ))}
+        )}
+      </div>
+    ))}
     </div>
   );
 }

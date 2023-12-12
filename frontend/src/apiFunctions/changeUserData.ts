@@ -12,5 +12,7 @@ export async function changeUserLogin(userLogin: string){
 }
 
 export async function changeUserAvatar(userAvatar: string){
-    await axiosBase.post("/user/change-avatar", userAvatar);
+    const response = await axiosBase.post("/user/change-avatar", userAvatar);
+    console.log(response.data);
+    return response.data;
 }

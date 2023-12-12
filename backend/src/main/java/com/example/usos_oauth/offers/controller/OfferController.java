@@ -39,8 +39,11 @@ public class OfferController {
     }
 
     @GetMapping("/user/{state}")
-    public List<OfferDTO> getOffersOfState(@PathVariable OfferState state) {
-        return offerService.getOffersMatchingUserCourses(state);
+    public List<OfferDTO> getOffersOfState(
+            @PathVariable OfferState state,
+            @RequestParam(value = "filter_groups", required = false, defaultValue = "false") boolean filterGroups
+    ) {
+        return offerService.getOffersMatchingUserCourses(state, filterGroups);
     }
 
     @GetMapping("/user/present/{state}")

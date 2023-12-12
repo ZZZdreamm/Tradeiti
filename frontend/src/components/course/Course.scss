@@ -12,3 +12,14 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.classButton {
+  color: white;
+  border: 3px outset wheat;
+  background-color: var(--bar-color);
+  margin-top: 10px;
+}
+
+.classButton:hover {
+  border: 3px inset wheat;
+}

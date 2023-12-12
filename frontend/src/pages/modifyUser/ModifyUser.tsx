@@ -1,16 +1,27 @@
-import { useState } from 'react';
-import { withPrivateRoute } from '../../common/withPrivateRoute/WithPrivateRoute';
-import './ModifyUser.scss';
-import { changeUserAvatar, changeUserLogin } from '../../apiFunctions/changeUserData';
-import { clearSessionStorage } from "../../common/sessionStorage";
-import { saveToken } from '../../auth/JwtToken';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { withPrivateRoute } from "../../common/withPrivateRoute/WithPrivateRoute";
+import "./ModifyUser.scss";
+import {
+  changeUserAvatar,
+  changeUserLogin,
+} from "../../apiFunctions/changeUserData";
+import { saveToken } from "../../auth/JwtToken";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../providers/AuthProvider";
 
+const avatars = [
+  { name: "man", path: "/avatars/man.png" },
+  { name: "woman", path: "/avatars/woman.png" },
+  { name: "helicopter", path: "/avatars/helicopter.png" },
+];
 
 const ModifyUser = () => {
   const navigate = useNavigate();
-  const [selectedAvatar, setSelectedAvatar] = useState('man');
-  const [userLogin, setUserLogin] = useState(localStorage.getItem('username') || '');
+  const { currentUser } = useAuthContext();
+  const [selectedAvatar, setSelectedAvatar] = useState(currentUser?.avatar);
+  const [userLogin, setUserLogin] = useState(
+    localStorage.getItem("username") || ""
+  );
 
   const checkRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedAvatar(e.target.value);
@@ -20,28 +31,33 @@ const ModifyUser = () => {
     setSelectedAvatar(avatarName);
   };
 
-  const avatars = [
-    { name: 'man', path: '/avatars/man.png' },
-    { name: 'woman', path: '/avatars/woman.png' },
-    { name: 'helicopter', path: '/avatars/helicopter.png' },
-  ];
-
   const handleChange = () => {
-    changeUserLogin(userLogin)
-      .then((response) => {
-        saveToken(response.token);
-        changeUserAvatar(selectedAvatar.toUpperCase());
-        alert("Dane zmienione");
-        clearSessionStorage();
-        navigate("userPage");
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Wystąpił błąd. Nazwa użytkownika zajęta.");
-        clearSessionStorage();
-        navigate("userPage");
-      });
-    };
+    if (!userLogin) return;
+    if (userLogin != localStorage.getItem("username")) {
+      changeUserLogin(userLogin)
+        .then((response) => {
+          saveToken(response.token);
+          localStorage.setItem("username", userLogin);
+          changeUserAvatar(selectedAvatar ? selectedAvatar : "helicopter")
+            .then(() => {
+              alert("Dane zmienione.");
+              navigate("/userPage");
+              navigate(0);
+            })
+            .catch((error) => {
+              console.log(error);
+              alert("Avatar didn't change.");
+              navigate("/userPage");
+              navigate(0);
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+          alert("Wystąpił błąd. Nazwa użytkownika zajęta.");
+          navigate("/userPage");
+        });
+    }
+  };
 
   return (
     <>
@@ -65,12 +81,12 @@ const ModifyUser = () => {
           ))}
         </div>
         <div className="userData">
-          <b>Nowa nazwa użytkownika:</b>{' '}
+          <b>Nowa nazwa użytkownika:</b>{" "}
           <input
             type="text"
             name="userLogin"
             id="userLogin"
-            placeholder={'Old login: ' + userLogin}
+            placeholder={"Old login: " + userLogin}
             onChange={(e) => setUserLogin(e.target.value)}
           />
           <br />

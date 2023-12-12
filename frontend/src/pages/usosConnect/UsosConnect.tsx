@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { connectUsos } from "../../apiFunctions/connectUsos";
 import { removeJwtToken } from "../../auth/JwtToken";
+import "./UsosConnect.scss";
 
 export function UsosConnect() {
   const navigate = useNavigate();
@@ -16,8 +17,10 @@ export function UsosConnect() {
   };
   return (
     <div>
-      <h1>UsosConnect</h1>
-      <button onClick={getToken}>Connect account to USOS</button>
+      <h1>Połącz z USOS</h1>
+      <img src="/plug.png" alt="plug" width="200px"/>
+      <br />
+      <button className = "usosButton" onClick={getToken}>Połącz konto</button>
     </div>
   );
 }
