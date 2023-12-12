@@ -15,16 +15,44 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class responsible for authentication-related operations such as registration, login, and username changes.
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
 
+    /**
+     * Repository for managing User entities.
+     */
     private final UserRepository userRepository;
+
+    /**
+     * Service for handling user-related operations.
+     */
     private final UserService userService;
+
+    /**
+     * Password encoder for encrypting and verifying passwords.
+     */
     private final PasswordEncoder passwordEncoder;
+
+    /**
+     * Service for handling JWT-related operations.
+     */
     private final JwtService jwtService;
+
+    /**
+     * Authentication manager for user authentication.
+     */
     private final AuthenticationManager authenticationManager;
 
+    /**
+     * Registers a new user with the provided registration request.
+     *
+     * @param registerRequest The request object containing registration information.
+     * @return AuthenticationResponse containing the JWT token for the registered user.
+     */
     public AuthenticationResponse register(AuthenticationRequest registerRequest) {
         String username = registerRequest.getUsername();
         if (userRepository.findByUsername(username).isPresent()) {
@@ -47,6 +75,12 @@ public class AuthenticationService {
                 .build();
     }
 
+    /**
+     * Authenticates a user with the provided login request.
+     *
+     * @param loginRequest The request object containing login credentials.
+     * @return AuthenticationResponse containing the JWT token for the authenticated user.
+     */
     public AuthenticationResponse login(AuthenticationRequest loginRequest) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -62,6 +96,12 @@ public class AuthenticationService {
                 .build();
     }
 
+    /**
+     * Changes the username for the currently authenticated user.
+     *
+     * @param newUsername The new username to be set for the user.
+     * @return AuthenticationResponse containing the JWT token for the user with the new username.
+     */
     public AuthenticationResponse changeUsername(String newUsername) {
         if (userService.isUsernameTaken(newUsername)) {
             throw new UserAlreadyExistsException();
