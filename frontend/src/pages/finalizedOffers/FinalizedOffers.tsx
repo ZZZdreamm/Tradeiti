@@ -1,19 +1,15 @@
-import { useQuery } from "react-query";
 import { withPrivateRoute } from "../../common/withPrivateRoute/WithPrivateRoute";
 import "./style.scss";
-import { OfferStatus } from "../../models/enums/OfferStatus";
 import { Loader } from "../../common/loader/Loader";
 import { FinalizedOffer } from "../../components/finalizedOffer/FinalizedOffer";
 import { useSearchParams } from "react-router-dom";
 import { OfferComments } from "../../components/offerComments/OfferComments";
-import { getOffersAndOfferRequests } from "../../apiFunctions/getOffersAndOfferRequests";
+import { useFetchFinalizedOffers } from "../../hooks/useFetchFinalizedOffers";
 
 function FinalizedOffers() {
   const [searchParams] = useSearchParams();
   const offerId = searchParams.get("offer_id");
-  const { data: finalizedOffers } = useQuery(["offers", "finalized"], () =>
-    getOffersAndOfferRequests(OfferStatus.COMPLETED)
-  );
+  const { finalizedOffers } = useFetchFinalizedOffers();
 
   return (
     <section>
