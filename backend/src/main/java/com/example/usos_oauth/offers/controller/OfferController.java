@@ -4,6 +4,7 @@ import com.example.usos_oauth.offers.model.dao.OfferState;
 import com.example.usos_oauth.offers.model.dto.CreateOfferRequest;
 import com.example.usos_oauth.offers.model.dto.OfferDTO;
 import com.example.usos_oauth.offers.service.OfferService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/offers")
+@Tag(name = "Operations on offers")
 public class OfferController {
 
     private OfferService offerService;

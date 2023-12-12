@@ -115,7 +115,7 @@ public class OfferService {
 
     private void assertCurrentUserHasRequiredGroup(Long id) {
         Offer offer = offerRepository.findById(id).orElseThrow();
-        String wantedCourseId = offer.getWantedCourse().getUsosCourseId();
+        String wantedCourseId = offer.getWantedCourse().getCourseId();
         int wantedGroupNumber = offer.getWantedCourse().getGroupNumber();
         if (!usosServiceAuthorizer.getUsosService().IsCurrentUserInGroup(wantedCourseId, wantedGroupNumber)) {
             throw new OperationForbiddenException();

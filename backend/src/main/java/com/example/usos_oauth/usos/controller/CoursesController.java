@@ -1,8 +1,9 @@
 package com.example.usos_oauth.usos.controller;
 
-import com.example.usos_oauth.usos.service.connect.UsosServiceAuthorizer;
 import com.example.usos_oauth.usos.model.dto.CourseDTO;
 import com.example.usos_oauth.usos.model.dto.GroupDTO;
+import com.example.usos_oauth.usos.service.connect.UsosServiceAuthorizer;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("api/courses")
+@Tag(name = "User courses from USOS")
 public class CoursesController {
 
     private UsosServiceAuthorizer usosServiceAuthorizer;

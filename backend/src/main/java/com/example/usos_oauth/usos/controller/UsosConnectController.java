@@ -4,6 +4,7 @@ import com.example.usos_oauth.usos.service.connect.UsosConnectService;
 import com.example.usos_oauth.usos.service.connect.UsosServiceAuthorizer;
 import com.example.usos_oauth.usos.service.usos.UsosService;
 import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/usos")
+@Tag(name = "Managing connection with USOS")
 public class UsosConnectController {
 
     private final UsosConnectService usosConnectService;

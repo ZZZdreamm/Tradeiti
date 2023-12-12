@@ -15,7 +15,7 @@ public class OfferDTOMapper {
     public static Course mapToCourse(CourseDTO courseDTO) {
         Course course = new Course();
         GroupDTO groupDTO = courseDTO.getGroups().get(0);
-        course.setUsosCourseId(courseDTO.getCourseId());
+        course.setCourseId(courseDTO.getCourseId());
         course.setName(courseDTO.getCourseName());
         course.setGroupNumber(groupDTO.getGroupNumber());
         course.setWeekDay(groupDTO.getWeekday());
@@ -34,7 +34,7 @@ public class OfferDTOMapper {
 
     public static CourseDTO mapToCourseDTO(Course course) {
         return CourseDTO.builder()
-                .courseId(course.getUsosCourseId())
+                .courseId(course.getCourseId())
                 .courseName(course.getName())
                 .groups(List.of(GroupDTO.builder()
                         .groupNumber(course.getGroupNumber())
