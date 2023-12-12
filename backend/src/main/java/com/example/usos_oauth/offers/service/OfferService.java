@@ -72,16 +72,16 @@ public class OfferService {
         List<OfferDTO> offers = getOffersOfState(state);
         return offers.stream()
                 .filter(offer -> {
-                    String courseId = offer.getWantedCourse().getUsosCourseId();
+                    String courseId = offer.getWantedCourse().getCourseId();
                     return userCourses.stream()
-                            .anyMatch(course -> course.getUsosCourseId().equals(courseId));
+                            .anyMatch(course -> course.getCourseId().equals(courseId));
                 })
                 .filter(offer -> {
                     if (areGroupsFiltered) {
-                        String wantedCourseId = offer.getWantedCourse().getUsosCourseId();
+                        String wantedCourseId = offer.getWantedCourse().getCourseId();
                         int wantedGroupNumber = offer.getWantedCourse().getGroups().get(0).getGroupNumber();
                         return userCourses.stream()
-                                .filter(course -> course.getUsosCourseId().equals(wantedCourseId))
+                                .filter(course -> course.getCourseId().equals(wantedCourseId))
                                 .anyMatch(course -> course.getGroups().stream()
                                         .anyMatch(group -> group.getGroupNumber() == wantedGroupNumber));
                     }

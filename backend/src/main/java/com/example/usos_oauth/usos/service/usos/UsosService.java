@@ -55,7 +55,7 @@ public class UsosService {
         assertUserIsConnected();
         List<CourseDTO> courses = getCurrentUserCourses();
         return courses.stream()
-                .map(CourseDTO::getUsosCourseId)
+                .map(CourseDTO::getCourseId)
                 .toList();
     }
 
@@ -63,7 +63,7 @@ public class UsosService {
         assertUserIsConnected();
         List<CourseDTO> courses = getCurrentUserCourses();
         return courses.stream()
-                .filter(course -> course.getUsosCourseId().equals(wantedCourseId))
+                .filter(course -> course.getCourseId().equals(wantedCourseId))
                 .anyMatch(course -> course.getGroups().stream()
                         .anyMatch(group -> group.getGroupNumber() == wantedGroupNumber));
     }
