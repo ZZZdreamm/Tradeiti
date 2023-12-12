@@ -3,3 +3,25 @@
     flex-direction: column;
     gap: 2rem;
 }
+
+.offersPot {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.pot {
+    padding: 20px;
+    font-weight: bolder;
+    background-color: var(--bar-color);
+    color: white;
+    width: 100%;
+    margin: 0px 10px;
+    border-radius: 20px;
+}
+
+.pot:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

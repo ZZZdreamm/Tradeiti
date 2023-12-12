@@ -3,7 +3,7 @@ import { withPrivateRoute } from "../../common/withPrivateRoute/WithPrivateRoute
 import { OffersList } from "../../components/offer/OffersList";
 import { SearchTable } from "../../components/searchTable/SearchTable";
 import "./style.scss";
-import { getOffers } from "../../apiFunctions/getOffers";
+import { getFittingOffers } from "../../apiFunctions/getOffers";
 import { useState } from "react";
 import { OfferDto } from "../../models/Offer";
 import { filterOffers } from "./filterOffers";
@@ -15,12 +15,11 @@ import {
 } from "./extractValuesFromOffers";
 import { OfferStatus } from "../../models/enums/OfferStatus";
 import { useNavigate } from "react-router-dom";
-const Offers = () => {
-  const { data: allOffers } = useQuery(["offers", "pending"], () =>
-    getOffers(OfferStatus.PENDING)
-  );
 
-  const navigate = useNavigate();
+const FittingOffers = () => {
+  const { data: allOffers } = useQuery(["offers", "pending"], () =>
+    getFittingOffers(OfferStatus.PENDING)
+  );
 
   const [searchedOffers, setSearchedOffers] = useState<OfferDto[] | undefined>(
     undefined
@@ -48,6 +47,9 @@ const Offers = () => {
     },
   ];
 
+
+  const navigate = useNavigate();
+
   const handleSearch = async (searchValues: SearchOfferOptions) => {
     const offers = filterOffers(searchValues, allOffers ?? []);
     setSearchedOffers(offers);
@@ -63,8 +65,8 @@ const Offers = () => {
       <div className="pot" onClick={() => navigate("/offers")}>WSZYSTKIE OFERTY</div>
       <div className="pot" onClick={() => navigate("/fittingOffers")}>OFERTY DLA MNIE</div>
     </div>
+    <div className="offers"></div>
     <div className="offers">
-
       <SearchTable
         inputsLabels={searchTableInputsLabels}
         handleOnSubmit={handleSearch}
@@ -76,4 +78,4 @@ const Offers = () => {
   );
 };
 
-export const PrivateOffers = withPrivateRoute(Offers);
+export const PrivateFittingOffers = withPrivateRoute(FittingOffers);
