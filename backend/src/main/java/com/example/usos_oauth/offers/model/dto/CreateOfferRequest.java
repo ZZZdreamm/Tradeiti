@@ -10,7 +10,6 @@ import lombok.Data;
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class CreateOfferRequest {
-
     private CourseDTO myCourse;
     private CourseDTO wantedCourse;
 }
