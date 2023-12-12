@@ -49,7 +49,7 @@ class OfferServiceTest {
                 .build();
 
         CourseDTO myCourseDTO = CourseDTO.builder()
-                .usosCourseId("123")
+                .courseId("123")
                 .courseName("courseName")
                 .groups(List.of(myGroupDTO))
                 .build();
