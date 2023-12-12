@@ -3,7 +3,7 @@ import { getOfferComments } from "../../apiFunctions/getOfferComments";
 import { Comment } from "../../models/Comment";
 import { useAuthContext } from "../../providers/AuthProvider";
 import "./style.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createOfferComment } from "../../apiFunctions/createOfferComment";
 
 interface Props {
@@ -24,7 +24,6 @@ export function OfferComments({ offerId }: Props) {
     if (charCountSpan) {
       charCountSpan.innerText = commentValue.length.toString();
     }
-
   };
 
   const handleAddComment = () => {
@@ -44,46 +43,66 @@ export function OfferComments({ offerId }: Props) {
         window.location.reload();
       });
   };
+
+  useEffect(() => {
+    if (!comments) return;
+    const lastComment = document.getElementById("lastComment");
+    if (lastComment) {
+      lastComment.scrollIntoView();
+    }
+  }, [comments]);
   return (
     <>
-    <div className="comments">
-      {comments &&
-        comments.map((comment: Comment) => (
-          <>
-            {currentUser && currentUser.username === comment.username ? (
-              <div className="commentItem myComment">
-                <div className="author">
-                <h5>{comment.username}</h5>
+      <div className="comments">
+        {comments &&
+          comments.map((comment: Comment, index) => (
+            <>
+              {currentUser && currentUser.username === comment.username ? (
+                <div
+                  id={index == comments.length - 1 ? "lastComment" : ""}
+                  className="commentItem myComment"
+                >
+                  <div className="author">
+                    <h5>{comment.username}</h5>
+                  </div>
+                  <div className="content">
+                    <p>{comment.text}</p>
+                  </div>
                 </div>
-                <div className="content">
-                <p>{comment.text}</p>
+              ) : (
+                <div
+                  id={index == comments.length - 1 ? "lastComment" : ""}
+                  className="commentItem opponentComment"
+                >
+                  <div className="author">
+                    <h5>{comment.username}</h5>
+                  </div>
+                  <div className="content">
+                    <p>{comment.text}</p>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div className="commentItem opponentComment">
-                <div className="author">
-                <h5>{comment.username}</h5>
-                </div>
-                <div className="content">
-                <p>{comment.text}</p>
-                </div>
-              </div>
-            )}
-          </>
-        ))}
+              )}
+            </>
+          ))}
       </div>
-      <div className = "createComment">
-      <textarea
-        placeholder="Dodaj komentarz"
-        onChange={onCommentChange}
-      >
-      </textarea>
-      <br />
-      <p>Ilość znaków: <span id="charCount">{newComment.length}</span>/255</p>
-      <br />
-      <button type="button" className = "commentButton" onClick={handleAddComment} disabled={newComment.length > 255}>
-        Dodaj komentarz
-      </button>
+      <div className="createComment">
+        <textarea
+          placeholder="Dodaj komentarz"
+          onChange={onCommentChange}
+        ></textarea>
+        <br />
+        <p>
+          Ilość znaków: <span id="charCount">{newComment.length}</span>/255
+        </p>
+        <br />
+        <button
+          type="button"
+          className="commentButton"
+          onClick={handleAddComment}
+          disabled={newComment.length > 255}
+        >
+          Dodaj komentarz
+        </button>
       </div>
     </>
   );
