@@ -48,6 +48,17 @@ export function OfferComponent({ offer }: Props) {
         <p>
           Przedmiot: <b>{offer.my_course.course_name}</b>
         </p>
+        <hr />
+        <p><b>Oddaję:</b></p>
+        <p>
+
+            {offer.my_course.groups[0].weekday},{" "}
+            {offer.my_course.groups[0].start_time}-
+            {offer.my_course.groups[0].end_time},{" "}
+            {offer.my_course.groups[0].class_type_name}, {" "}
+            {offer.my_course.groups[0].group_number}
+
+        </p>
         <p>
           Prowadzący:{" "}
           <b>
@@ -58,24 +69,25 @@ export function OfferComponent({ offer }: Props) {
             ))}
           </b>
         </p>
+        <hr />
+        <p><b>Chcę:</b></p>
         <p>
-          Oddaję:{" "}
-          <b>
-            {offer.my_course.groups[0].weekday},{" "}
-            {offer.my_course.groups[0].start_time}-
-            {offer.my_course.groups[0].end_time},{" "}
-            {offer.my_course.groups[0].class_type_name}, {" "}
-            {offer.my_course.groups[0].group_number}
-          </b>
-        </p>
-        <p>
-          Chcę:{" "}
-          <b>
+
             {offer.wanted_course.groups[0].weekday},{" "}
             {offer.wanted_course.groups[0].start_time}-
             {offer.wanted_course.groups[0].end_time},{" "}
             {offer.wanted_course.groups[0].class_type_name}, {" "}
             {offer.wanted_course.groups[0].group_number}
+
+        </p>
+        <p>
+          Prowadzący:{" "}
+          <b>
+            {offer.wanted_course.groups[0].lecturers.map((lecturer, index, array) => (
+              <span key={index}>{lecturer}
+              {index < array.length - 1 && ', '}
+              </span>
+            ))}
           </b>
         </p>
       </div>
