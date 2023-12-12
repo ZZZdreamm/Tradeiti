@@ -34,12 +34,12 @@ const ModifyUser = () => {
   const handleChange = () => {
     if (!userLogin) return;
     if (userLogin != localStorage.getItem("username")) {
-      changeUserLogin(userLogin)
-        .then((response) => {
-          saveToken(response.token);
+      changeUserAvatar(selectedAvatar ? selectedAvatar : "helicopter")
+        .then(() => {
           localStorage.setItem("username", userLogin);
-          changeUserAvatar(selectedAvatar ? selectedAvatar : "helicopter")
-            .then(() => {
+          changeUserLogin(userLogin)
+            .then((response) => {
+              saveToken(response.token);
               alert("Dane zmienione.");
               navigate("/userPage");
               navigate(0);

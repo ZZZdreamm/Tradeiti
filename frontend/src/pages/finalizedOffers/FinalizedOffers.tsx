@@ -16,7 +16,14 @@ function FinalizedOffers() {
       {!offerId ? (
         <>
           {finalizedOffers ? (
-            finalizedOffers.map((offer) => <FinalizedOffer offer={offer} />)
+            <>
+            {finalizedOffers.length > 0 ? (
+              finalizedOffers.map((offer) => <FinalizedOffer offer={offer} />)) :
+              <h6 className="noRequestsCom">
+              Brak ofert będących w trakcie procesu wymiany
+              </h6>
+            }
+            </>
           ) : (
             <Loader />
           )}
