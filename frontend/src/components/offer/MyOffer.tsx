@@ -43,18 +43,21 @@ export function MyOfferComponent({ offer }: Props) {
         <span>
           {offer.my_course.groups[0].weekday}{" "}
           {offer.my_course.groups[0].start_time}-{" "}
-          {offer.my_course.groups[0].end_time}
+          {offer.my_course.groups[0].end_time},{" "}
+          {offer.wanted_course.groups[0].class_type_name},{" "}
+          {offer.wanted_course.groups[0].group_number}
         </span>
       </div>
       <div className="offer-right">
-        <p><b>
-          Status:{" "}
-          {offer.state === OfferStatus.REQUEST_SENT
-            ? "Prośba wysłana ✔️"
-            : offer.state === OfferStatus.PENDING
+        <p>
+          <b>
+            Status:{" "}
+            {offer.state === OfferStatus.REQUEST_SENT
+              ? "Prośba wysłana ✔️"
+              : offer.state === OfferStatus.PENDING
               ? "Oczekuje ⏰"
               : offer.state}
-        </b>
+          </b>
         </p>
         <button
           className="approveButton"

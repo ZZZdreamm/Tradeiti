@@ -63,7 +63,9 @@ export function OfferComponent({ offer }: Props) {
           <b>
             {offer.my_course.groups[0].weekday},{" "}
             {offer.my_course.groups[0].start_time}-
-            {offer.my_course.groups[0].end_time}
+            {offer.my_course.groups[0].end_time},{" "}
+            {offer.my_course.groups[0].class_type_name}, {" "}
+            {offer.my_course.groups[0].group_number}
           </b>
         </p>
         <p>
@@ -71,7 +73,9 @@ export function OfferComponent({ offer }: Props) {
           <b>
             {offer.wanted_course.groups[0].weekday},{" "}
             {offer.wanted_course.groups[0].start_time}-
-            {offer.wanted_course.groups[0].end_time}
+            {offer.wanted_course.groups[0].end_time},{" "}
+            {offer.wanted_course.groups[0].class_type_name}, {" "}
+            {offer.wanted_course.groups[0].group_number}
           </b>
         </p>
       </div>
