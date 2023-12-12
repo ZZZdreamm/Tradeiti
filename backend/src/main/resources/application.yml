@@ -3,8 +3,11 @@ server:
 
 usos:
     consumer:
-      key: "BvK4hkc6RfeRxnHHbmy6"
-      secret: "VxhuAFJrcakrXBamjtfafaZ44k8hnw7ZtZxxtYh3"
+      key: ${CONSUMER_KEY}
+      secret: ${CONSUMER_SECRET}
+
+jwt:
+  key: ${JWT_KEY}
 
 app:
   url:

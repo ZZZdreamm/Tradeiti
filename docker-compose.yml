@@ -22,6 +22,9 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - BACKEND_URL=http://localhost:8090
       - FRONTEND_URL=http://localhost:5173
+      - CONSUMER_KEY=${CONSUMER_KEY}
+      - CONSUMER_SECRET=${CONSUMER_SECRET}
+      - JWT_KEY=${JWT_KEY}
 
   db:
     image: 'postgres:13.1-alpine'
