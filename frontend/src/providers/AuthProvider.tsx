@@ -30,6 +30,8 @@ const AuthContext = createContext<AuthProps>({
   setLoading: () => {},
 });
 
+
+// Provider for authentication and user data
 export function AuthProvider({ children }: Props) {
   const {
     mounted,

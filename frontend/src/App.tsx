@@ -9,6 +9,7 @@ import { Providers } from "./providers/Providers";
 import { RoutesProvider } from "./providers/RoutesProvider";
 import { HashRouter } from "react-router-dom";
 
+// Main entrance to the application
 function App() {
   return (
     <HashRouter>
