@@ -17,7 +17,7 @@ import { OfferStatus } from "../../models/enums/OfferStatus";
 import { useNavigate } from "react-router-dom";
 
 const FittingOffers = () => {
-  const { data: allOffers } = useQuery(["offers", "pending"], () =>
+  const { data: allOffers } = useQuery(["fitting_offers", "pending"], () =>
     getFittingOffers(OfferStatus.PENDING)
   );
 
