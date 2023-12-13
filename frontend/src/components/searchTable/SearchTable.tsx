@@ -14,7 +14,7 @@ export function SearchTable({
   handleOnSubmit,
   handleOnReset,
 }: Props) {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit: SubmitHandler<any> = (values) => {
     return handleOnSubmit(values);
@@ -22,22 +22,23 @@ export function SearchTable({
 
   const sortNew = () => {
     console.log("sortNew");
-    const offersList = document.querySelector('.offersList');
+    const offersList = document.querySelector(".offersList");
     if (offersList) {
-      (offersList as HTMLElement).style.flexDirection = 'column-reverse';
+      (offersList as HTMLElement).style.flexDirection = "column-reverse";
     }
   };
 
   const sortOld = () => {
     console.log("sortOld");
-    const offersList = document.querySelector('.offersList');
+    const offersList = document.querySelector(".offersList");
     if (offersList) {
-      (offersList as HTMLElement).style.flexDirection = 'column';
+      (offersList as HTMLElement).style.flexDirection = "column";
     }
   };
 
   const handleReset = () => {
     handleOnReset();
+    reset();
   };
 
   return (
