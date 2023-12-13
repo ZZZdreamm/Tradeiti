@@ -1,6 +1,7 @@
 import { axiosBase } from "../config/axiosConfig";
 import { JWT_TOKEN } from "../config/constants";
 
+// Request to backend endpoint which checks if user is connected to USOS
 export function checkIfConnectedToUsos() {
   return axiosBase
     .get(`/usos/check-connection`, {

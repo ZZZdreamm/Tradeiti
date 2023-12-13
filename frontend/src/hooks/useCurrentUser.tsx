@@ -6,6 +6,9 @@ import { checkIfConnectedToUsos } from "../apiFunctions/checkIfConnectedToUsos";
 import { getUserData } from "../apiFunctions/getUserData";
 import { UserData } from "../models/UserData";
 
+
+// Hook for fetching current user data and checking if user is authenticated
+// and connected to USOS
 export function useCurrentUser() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<any>(null);
@@ -62,19 +65,6 @@ export function useCurrentUser() {
       setLoading(false);
     });
   }, [connectedToUsos]);
-
-  // Poprawie to później
-
-  // useEffect(() => {
-  //   if (!authenticated) return;
-  //   axiosBase.interceptors.request.use((config) => {
-  //     if (!config.headers.Authorization) {
-  //       config.headers.Authorization =
-  //         "Bearer " + localStorage.getItem(JWT_TOKEN);
-  //     }
-  //     return config;
-  //   });
-  // }, [authenticated]);
 
   return {
     mounted,

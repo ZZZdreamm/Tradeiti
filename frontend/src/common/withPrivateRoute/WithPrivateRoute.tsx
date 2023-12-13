@@ -5,6 +5,7 @@ import { useAuthContext } from "../../providers/AuthProvider";
 const login = "/login?redirected=true";
 const usosConnect = "/usos-connect";
 
+// HOC component for rendering page only if user is connected to usos
 export const withPrivateRoute = (WrappedComponent: any) => {
   const hocComponent = ({ ...props }) => {
     const navigate = useNavigate();

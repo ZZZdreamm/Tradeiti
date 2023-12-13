@@ -10,6 +10,10 @@ export const TopBar = () => {
     removeJwtToken();
     window.location.reload();
   };
+
+  const easteregg = () => {
+    window.open("https://www.ptoszek.pl/");
+  };
   return (
     <>
       <div className="topBar">
@@ -17,7 +21,10 @@ export const TopBar = () => {
           <b>Politechnikum Warszawskie</b> - Poboczny system uwierzytelniania
         </span>
         <span>
-          <a onClick={() => navigate('userPage')}><b>Mój profil</b></a> | 🏴‍☠️ |{" "}
+          <a onClick={() => navigate("userPage")}>
+            <b>Mój profil</b>
+          </a>{" "}
+          | <span onClick={easteregg}>🏴‍☠️</span> |{" "}
           {authenticated ? (
             <a className="logout" onClick={logout}>
               Wyloguj się
