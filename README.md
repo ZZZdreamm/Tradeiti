@@ -6,6 +6,7 @@ TradEITI to aplikacja webowa, która ma na celu ułatwienie studentom wymiany go
 
 ## Wersja online
 <a href="https://www.tradeiti.com/">https://www.tradeiti.com/</a>
+Zalogowanie się pełne jest tylko możliwe dla osób posiadających konto w domenie USOS PW ze względu na to, że jest to aplikacja dla studentów.
 
 ## Technologie
 
