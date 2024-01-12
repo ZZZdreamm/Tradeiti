@@ -2,6 +2,9 @@
 ## Project Description
 TradEITI is a web application designed to facilitate the exchange of class hours among students. The problem we encountered during our first year of studies was the lack of an available platform for students to exchange class hours. Currently, students often have to resort to primitive solutions, such as Google Docs. Our goal is to create an exchange platform that enables students to more efficiently address this issue.
 
+## Preview
+https://youtu.be/R8D1NDAYnvI
+
 ## Online Version
 <a href="https://www.tradeiti.com/">https://www.tradeiti.com/</a>
 
