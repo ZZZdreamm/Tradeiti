@@ -1,48 +1,41 @@
-# TradEITI - Aplikacja do Wymiany Godzinami Zajęć dla Studentów
+# TradEITI - Application for Exchange of Class Hours for Students
+## Project Description
+TradEITI is a web application designed to facilitate the exchange of class hours among students. The problem we encountered during our first year of studies was the lack of an available platform for students to exchange class hours. Currently, students often have to resort to primitive solutions, such as Google Docs. Our goal is to create an exchange platform that enables students to more efficiently address this issue.
 
-## Opis projektu
-
-TradEITI to aplikacja webowa, która ma na celu ułatwienie studentom wymiany godzinami zajęć. Problemem, z którym zetknęliśmy się podczas pierwszego roku studiów, jest brak dostępnej platformy do wymiany godzinami zajęć pomiędzy studentami. Obecnie studenci często muszą korzystać z prymitywnych rozwiązań, takich jak dokumenty typu Google Docs. Naszym celem jest stworzenie giełdy wymiany, która umożliwi studentom bardziej efektywne rozwiązywanie tego problemu.
-
-## Wersja online
+## Online Version
 <a href="https://www.tradeiti.com/">https://www.tradeiti.com/</a>
-<div>Zalogowanie się pełne jest tylko możliwe dla osób posiadających konto w domenie USOS PW ze względu na to, że jest to aplikacja dla studentów.</div>
 
-## Technologie
+<div>Full login is only possible for individuals with an account in the USOS PW domain, as this is an application for students.</div>
 
-- Backend oparty na frameworku Spring
-- Frontend w technologii React
-- Baza danych PostgreSQL
-- Kontenery Docker
+## Technologies
 
-## Integracja z API USOS
+- Backend based on the Spring framework
+- Frontend using React technology
+- PostgreSQL database
+- Docker containers
+- Integration with USOS API
+We want to allow students to use their own data from the USOS system. Through integration with the USOS API, each user will be able to log in using their existing data.
 
-Chcemy umożliwić studentom korzystanie z własnych danych z systemu USOS. Dzięki integracji z API USOS, każdy użytkownik będzie mógł zalogować się używając swoich istniejących danych.
+## Application Features
+The TradEITI application will offer the following features:
 
-## Funkcje aplikacji
-
-Aplikacja TradEITI będzie oferować następujące funkcje:
-
-- Dodawanie nowych ofert wymiany godzinami zajęć.
-- Wyszukiwanie ofert na stronie głównej za pomocą różnych filtrów.
-- Zarządzanie własnymi ofertami wymiany.
-- Akceptacja ofert wymiany z innymi studentami.
-
-## Autorzy
+- Adding new offers for the exchange of class hours.
+- Searching for offers on the homepage using various filters.
+- Managing one's own exchange offers.
+- Accepting exchange offers from other students.
+## Authors
+- Kacper Multan
 - Oliwier Szypczyn
 - Artur Kempiński
-- Kacper Multan
 - Jakub Kryczka
+## My Role in the Project
+My role primarily involved creating the user interface of the application and integrating the user layer with the server layer, including:
 
-## Moja rola w projekcie
-
-Moja rola polegała głównie na tworzeniu aplikacji po stronie użytkownika i scalanie warstwy użytkownika z warstwą serwera, m.in. :
-- utworzeniem struktury projektu po stronie frontendowej
-- utworzenie połączenia z backendem
-- wszystkie operacje logiczne po stronie frontendowej (np. cachowanie danych w formularzu po odświeżeniu strony, filtrowanie ofert itp.)
-- częściowo budowa szkieletu strony i jej stylowanie
-- dodanie aplikacji frontendowej do kontenera Docker
-- pomoc w konfiguracji połączenia z USOS przez USOS OAUTH 1.0
-
-## Licencja
-Ten projekt jest dostępny na zamkniętej licencji. Wszelkie prawa autorskie zastrzeżone.
+- Creating the project structure on the frontend
+- Establishing the connection with the backend
+- Handling all logical operations on the frontend (e.g., data caching in the form after page refresh, offer filtering, etc.)
+- Partially building the page structure and styling
+- Adding the frontend application to the Docker container
+- Assisting in configuring the connection with USOS through USOS OAUTH 1.0
+## License
+This project is available under a closed license. All rights reserved.
