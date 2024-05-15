@@ -6,7 +6,6 @@ TradEITI is a web application designed to facilitate the exchange of class hours
 https://youtu.be/R8D1NDAYnvI
 
 ## Online Version
-<a href="https://www.tradeiti.com/">https://www.tradeiti.com/</a>
 
 <div>Full login is only possible for individuals with an account in the USOS PW domain, as this is an application for students.</div>
 
